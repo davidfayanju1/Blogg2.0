@@ -7,6 +7,8 @@ import Signup from './pages/Signup';
 import './index.css'
 import Nav from './components/Nav';
 import { Details } from './pages/Details';
+import Footer from './components/footer/Footer';
+import TopicDetails from './pages/TopicDetails';
 
 function App() {
 
@@ -37,7 +39,9 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/details/:id" element={<Details />} />          
+          <Route path="/topicDetails/:name" element={<TopicDetails />} />
         </Routes>
+        { pathname !== '/login' && pathname !== '/signup' && <Footer />}
     </div>
   );
 }

@@ -1,0 +1,39 @@
+.slick-dots li button {
+
+    color: black !important;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    border: 0;
+    outline: none;
+    border-radius: 100%;
+    background: white !important;
+
+}
+
+.dark .slick-dots li  {
+
+    color: white !important;
+    width: 20px;
+    height: 20px;
+    padding: 0px !important;
+    cursor: pointer;
+    border: 0;
+    outline: none;
+    border-radius: 100%;
+    background: white !important;
+}
+
+.dark .slick-dots .slick-active  {
+    border-radius: 100%;
+    background-color: transparent !important;
+    color: white !important;
+    border: white 2px solid;
+}
+
+.blogs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 3.6rem;
+}
+

@@ -7,6 +7,7 @@ import form from '../../img/form.jpg';
 import formPicture from '../../img/formPicture.png';
 import beauty from '../../img/beauty.jpg';
 import family from '../../img/family.jpg';
+import './HomeStyles.css';
 
 
 const Carousel = () => {
@@ -74,20 +75,20 @@ const Carousel = () => {
   ]
 
   return (
-    <div className="bg-slate-400 w-full h-96 mt-[4.25rem]">
+    <div className="bg-slate-400 w-full h-96 mt-[4.5rem]">
         <Slider {...settings}>
           {
 
             blogs.map((blog) => (
 
 
-              <Link to={`/details/${blog.id}`}>
-                <div className="image-card h-96 w-full text-center relative" key={blog.id}>
+              <Link to={`/details/${blog.id}`} key={blog.id}>
+                <div className="image-card h-96 w-full text-center relative">
                   <div className="absolute top-0 left-0 opacity-70 h-full w-full bg-gray-900 ">
                     <img src={ blog.image } alt="girl-glasses" className='w-full h-full object-cover'/>
                     <div className='absolute top-32 left-3 text-white' styled={{zIndex: '10000'}}>
                       <h2 className='blog-category mb-4'>{blog.categories}</h2>
-                      <h1 className="blog-title font-serif text-3xl mb-4 font-bold">{ blog.title }</h1>
+                      <h1 className="hover:underline blog-title font-serif text-3xl mb-4 font-bold">{ blog.title }</h1>
                       <small>{ blog.date }</small>
                     </div>
                   </div>

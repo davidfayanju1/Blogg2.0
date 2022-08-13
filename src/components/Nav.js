@@ -8,26 +8,24 @@ import { GrLogin } from 'react-icons/gr';
 
 const Nav = ({toggleTheme, darkTheme}) => {
 
-    const isLoggedIn = true;
+    const isLoggedIn = false;
 
   return (
-    <div className="w-full dark:bg-slate-900 bg-slate-100 dark:text-white flex justify-between items-center md:py-4 md:px-24 fixed top-0 z-50">
-        <div className="nav-title text-3xl font-bold">
+    <div className="w-full dark:bg-slate-900 bg-slate-200 dark:text-white flex justify-between items-center md:px-24 fixed top-0 z-50 h-[4.5rem]">
+        <div className="nav-title text-3xl font-bold font-serif">
             <Link to='/'>BLOGG.</Link>
         </div>
         <nav className="desktop-nav md:block hidden">
             <ul className='flex items-center'>
                 <li className="ml-7 text-lg"><Link to='/'>Home</Link></li>
                 <li className="ml-7 text-lg"><Link to='/'>Blog</Link></li>
-                <li className="ml-7 text-lg"><Link to='/'>About</Link></li>
-                <li className='ml-7 text-lg'><Link to='/'>Contact</Link></li>
             </ul>
         </nav>
 
         <div className="desktop-icons hidden md:flex items-center">
             <div>
                 {
-                    isLoggedIn ? <Link to="/dashboard"><FaUserAlt/></Link> : <Link to="/login"><MdLogin className='text-2xl'/></Link>
+                    isLoggedIn ? <Link to="/dashboard"><FaUserAlt title='Login'/></Link> : <Link to="/login"><MdLogin className='text-2xl' title="Login"/></Link>
                 }
             </div>
 
@@ -52,8 +50,6 @@ const Nav = ({toggleTheme, darkTheme}) => {
             <ul>
                 <li><Link to='/'>Home</Link></li>
                 <li><Link to='/'>Blog</Link></li>
-                <li><Link to='/'>About</Link></li>
-                <li><Link to='/'>Contact</Link></li>
                 <li>
                     <div className="theme-toggle" onClick={toggleTheme}>
                         { darkTheme ? <HiSun /> : <BsFillMoonFill />}
