@@ -31,9 +31,10 @@
     border: white 2px solid;
 }
 
-.blogs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-gap: 3.6rem;
-}
-
+/* .blog-text {
+    display: -webkit-box;
+    --webkit-line-clamp: 2;
+    --webkit-box-orient: vertical;
+    width: 100%;
+    overflow: hidden;
+} */

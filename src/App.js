@@ -9,6 +9,7 @@ import Nav from './components/Nav';
 import { Details } from './pages/Details';
 import Footer from './components/footer/Footer';
 import TopicDetails from './pages/TopicDetails';
+import ScrollToTop from './ScrollToTop';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
   const { pathname } = useLocation();
   return (
     <div className={ darkTheme ? 'dark' : ''}>
+        <ScrollToTop />
         { pathname !== '/login' && pathname !== '/signup' && <Nav toggleTheme={ toggleTheme } darkTheme={ darkTheme }/>}
         <Routes>
           <Route path="/" element={<Home />} />
