@@ -10,6 +10,7 @@ import { Details } from './pages/Details';
 import Footer from './components/footer/Footer';
 import TopicDetails from './pages/TopicDetails';
 import ScrollToTop from './ScrollToTop';
+import UserDetails from './pages/UserDetails';
 
 function App() {
 
@@ -20,8 +21,6 @@ function App() {
     localStorage.setItem('theme', JSON.stringify(darkTheme))
   }
   
-  
-
   useEffect(() => {
 
     const recoverTheme = !JSON.parse(localStorage.getItem('theme'));
@@ -42,8 +41,9 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/details/:id" element={<Details />} />          
           <Route path="/topicDetails/:name" element={<TopicDetails />} />
+          <Route path="/userDetails/:user" element={<UserDetails />} />
         </Routes>
-        { pathname !== '/login' && pathname !== '/signup' && <Footer />}
+        {/* { pathname !== '/login' && pathname !== '/signup' && <Footer />} */}
     </div>
   );
 }

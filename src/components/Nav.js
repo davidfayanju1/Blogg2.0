@@ -11,7 +11,7 @@ const Nav = ({toggleTheme, darkTheme}) => {
     const isLoggedIn = false;
 
   return (
-    <div className="w-full dark:bg-slate-900 bg-slate-200 dark:text-white flex justify-between items-center md:px-24 fixed top-0 z-50 h-[4.5rem]">
+    <div className="w-full dark:bg-slate-900 bg-slate-200 dark:text-white flex justify-between items-center md:px-24 fixed top-0 z-50 h-[4.5rem] border-solid border-b border-gray-300">
         <div className="nav-title text-3xl font-bold font-serif">
             <Link to='/'>BLOGG.</Link>
         </div>

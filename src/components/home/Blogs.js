@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import beauty from '../../img/beauty.jpg';
 import football from '../../img/football.jpg';
 import family from '../../img/family.jpg';
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
-import { BiMessageRounded } from 'react-icons/bi';
 import { MdOutlineBookmarkAdd } from 'react-icons/md';
 import './HomeStyles.css';
 
@@ -18,7 +16,7 @@ const Blogs = () => {
     {
       title: 'First Trip To Ibiza',
       id: 1,
-      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae',
+      body: 'Ok, Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae',
       author: 'James Tonly',
       date: 'Feb 23',
       img: beauty,
@@ -42,7 +40,7 @@ const Blogs = () => {
     {
       title: 'Beginning of new Season',
       id: 3,
-      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae',
+      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima nostrum inventore dolorem labore aliquid est eos dicta natus quae quia, officia quos rem iste eveniet, eligendi ex. Quis, rerum asperiores reprehenderit, delectus maxime, veritatis alias quisquam ipsum error ducimus obcaecati.',
       author: 'Patrick Vierra',
       date: 'Aug 3',
       img: football,
@@ -125,11 +123,13 @@ const Blogs = () => {
             blogPosts.map((blogPost, index) => (
               <div className="blog flex items-top mb-[4rem] justify-between md:min-h-[10rem] h-[8rem] " key={blogPost.id}>
                 <div className="blog-text w-[68.3%]">
-                  <div className="blog-author flex">
-                    <img src={ blogPost.img} alt={ blogPost.id}  className=" h-[1.65rem] w-[1.65rem] rounded-[100%] object-cover"/>
-                    <p className='author-name ml-[0.2rem]'>{ blogPost.author }</p>
-                  </div>
-                  <Link to={`details/${blogPost.id}`} >
+                  <Link to={`/userDetails/${blogPost.author}`}>
+                    <div className="blog-author flex">
+                      <img src={ blogPost.img} alt={ blogPost.id}  className=" h-[1.65rem] w-[1.65rem] rounded-[100%] object-cover"/>
+                      <p className='author-name ml-[0.2rem]'>{ blogPost.author }</p>
+                    </div>
+                  </Link>
+                  <Link to={`/details/${blogPost.id}`}>
                     <div className="blog-body w-[100%] mb-[1.2rem]">
                       <h1 className="blog-title md:text-[1.44rem] text-[1.2rem] font-bold">{ blogPost.title }</h1>
                       <p className="blog-text text-gray-700 dark:text-gray-200 text-[1.05rem] md:line-clamp-2 hidden">{ blogPost.body }</p>
@@ -150,7 +150,9 @@ const Blogs = () => {
                 </div>
 
                 <div className="blog-image w-[30%] object-cover min-h-[8rem]">
-                  <img src={ blogPost.img} alt={ blogPost.id} className="w-[100%] h-[100%]" />
+                  <Link to={`details/${blogPost.id}`}>
+                    { blogPost.img && <img src={ blogPost.img} alt={ blogPost.id} className="w-[100%] h-[100%]" /> }
+                  </Link>
                 </div>
               </div>
             ))

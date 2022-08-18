@@ -38,10 +38,32 @@ export const Details = () => {
     {
       title: 'Beginning of new Season',
       id: 3,
-      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae',
+      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima nostrum inventore dolorem labore aliquid est eos dicta natus quae quia, officia quos rem iste eveniet, eligendi ex. Quis, rerum asperiores reprehenderit, delectus maxime, veritatis alias quisquam ipsum error ducimus obcaecati.',
       author: 'Patrick Vierra',
       date: 'Aug 3',
       img: football,
+      category: 'Sports',
+      likes: 2,
+      isLiked: false
+    },
+
+    {
+      title: 'Beginning of new Season',
+      id: 5,
+      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima nostrum inventore dolorem labore aliquid est eos dicta natus quae quia, officia quos rem iste eveniet, eligendi ex. Quis, rerum asperiores reprehenderit, delectus maxime, veritatis alias quisquam ipsum error ducimus obcaecati.',
+      author: 'Patrick Vierra',
+      date: 'Aug 3',
+      category: 'Sports',
+      likes: 2,
+      isLiked: false
+    },
+
+    {
+      title: 'Beginning of new Season',
+      id: 4,
+      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima nostrum inventore dolorem labore aliquid est eos dicta natus quae quia, officia quos rem iste eveniet, eligendi ex. Quis, rerum asperiores reprehenderit, delectus maxime, veritatis alias quisquam ipsum error ducimus obcaecati.',
+      author: 'Darla Martins',
+      date: 'Aug 3',
       category: 'Sports',
       likes: 2,
       isLiked: false
@@ -61,14 +83,14 @@ export const Details = () => {
 
 
   return (
-    <div className='mt-[4.5rem] md:px-[4rem] md:py-[4rem] dark:bg-slate-900 bg-gray-200 w-[100%] min-h-[100vh]'>
+    <div className='mt-[4.5rem] dark:bg-slate-900 bg-gray-200 w-[100%] min-h-[100vh]'>
       {
         blogsArray.map((blog) => (
           <div className="flex justify-between" key={ blog.id }>
-            <div className="main-article">
+            <div className="main-article md:w-[75%] w-[100%]">
               <MainArticle blog={ blog }/>
             </div>
-            <div className="article-sidebar">
+            <div className="article-sidebar md:w-[25%] hidden md:block">
               <Aside blog={ blog }/>
             </div>
           </div>
