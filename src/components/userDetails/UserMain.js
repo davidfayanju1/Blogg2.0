@@ -44,7 +44,7 @@ const UserMain = ({person}) => {
                   </div>  
                 </div>
 
-                <div className="blog-image w-[30%] object-cover min-h-[8rem]">
+                <div className="blog-image w-[30%] object-cover md:min-h-[8rem] min-h-[6rem]">
                   <Link to={`details/${blogPost.id}`}>
                     { blogPost.img && <img src={ blogPost.img} alt={ blogPost.id} className="w-[100%] h-[100%]" /> }
                   </Link>

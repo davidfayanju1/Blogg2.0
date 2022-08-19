@@ -31,7 +31,7 @@ const Signup = () => {
           </div>
         </div>
         <div className="form-btn mt-11 w-100 mb-4">
-          <button type="submit" className='bg-stone-900 p-3.5 w-32 text-white hover:bg-slate-800'>Sign Up</button>
+          <button type="submit" className='bg-stone-900 py-[.45rem] w-32 text-white hover:bg-slate-800 rounded-[25px] text-[1.1rem]'>Sign Up</button>
         </div>            
       </form>   
     </div>

@@ -29,7 +29,7 @@ const Login = () => {
             </div>
           </div>
           <div className="form-btn mt-6 w-100">
-            <button type="submit" className='bg-stone-900 p-3.5 w-32 text-white hover:bg-slate-800'>Login</button> or <Link to="/signup">Sign Up</Link>
+            <button type="submit" className='bg-stone-900 py-[.45rem] w-32 text-white hover:bg-slate-800 rounded-[25px] text-[1.1rem]'>Login</button> or <Link to="/signup">Sign Up</Link>
           </div>
         </form>
       </div>

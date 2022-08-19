@@ -11,6 +11,7 @@ import Footer from './components/footer/Footer';
 import TopicDetails from './pages/TopicDetails';
 import ScrollToTop from './ScrollToTop';
 import UserDetails from './pages/UserDetails';
+import { AuthProvider } from './authContext';
 
 function App() {
 
@@ -31,20 +32,22 @@ function App() {
 
   const { pathname } = useLocation();
   return (
-    <div className={ darkTheme ? 'dark' : ''}>
-        <ScrollToTop />
-        { pathname !== '/login' && pathname !== '/signup' && <Nav toggleTheme={ toggleTheme } darkTheme={ darkTheme }/>}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/details/:id" element={<Details />} />          
-          <Route path="/topicDetails/:name" element={<TopicDetails />} />
-          <Route path="/userDetails/:user" element={<UserDetails />} />
-        </Routes>
-        {/* { pathname !== '/login' && pathname !== '/signup' && <Footer />} */}
-    </div>
+    <AuthProvider>
+      <div className={ darkTheme ? 'dark' : ''}>
+          <ScrollToTop />
+          { pathname !== '/login' && pathname !== '/signup' && <Nav toggleTheme={ toggleTheme } darkTheme={ darkTheme }/>}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/details/:id" element={<Details />} />          
+            <Route path="/topicDetails/:name" element={<TopicDetails />} />
+            <Route path="/userDetails/:user" element={<UserDetails />} />
+          </Routes>
+          {/* { pathname !== '/login' && pathname !== '/signup' && <Footer />} */}
+      </div>
+    </AuthProvider>
   );
 }
 

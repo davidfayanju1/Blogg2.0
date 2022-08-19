@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HiSun } from 'react-icons/hi';
 import { BsFillMoonFill } from 'react-icons/bs';
@@ -8,55 +8,70 @@ import { GrLogin } from 'react-icons/gr';
 
 const Nav = ({toggleTheme, darkTheme}) => {
 
-    const isLoggedIn = false;
+    const isLoggedIn = true;
+
+    const[ navToggle, setNavToggle] = useState(false);
+
+
 
   return (
-    <div className="w-full dark:bg-slate-900 bg-slate-200 dark:text-white flex justify-between items-center md:px-24 fixed top-0 z-50 h-[4.5rem] border-solid border-b border-gray-300">
-        <div className="nav-title text-3xl font-bold font-serif">
-            <Link to='/'>BLOGG.</Link>
+    <div className="w-full dark:bg-slate-900 bg-slate-200 dark:text-white flex justify-between items-center md:px-24 px-[1rem] fixed top-0 z-50 h-[4.5rem] border-solid border-b border-gray-300">
+        <div className="nav-title md:text-3xl text-[1.3rem] font-bold font-serif">
+            <Link to='/' onClick={() => setNavToggle(false)}>ECONOTES.</Link>
         </div>
-        <nav className="desktop-nav md:block hidden">
-            <ul className='flex items-center'>
-                <li className="ml-7 text-lg"><Link to='/'>Home</Link></li>
-                <li className="ml-7 text-lg"><Link to='/'>Blog</Link></li>
-            </ul>
-        </nav>
-
         <div className="desktop-icons hidden md:flex items-center">
-            <div>
+
+            <nav>
                 {
-                    isLoggedIn ? <Link to="/dashboard"><FaUserAlt title='Login'/></Link> : <Link to="/login"><MdLogin className='text-2xl' title="Login"/></Link>
+                isLoggedIn ? 
+                <ul className='flex items-center gap-[2rem] mr-[3rem] text-[1.1rem]'>
+                    <li><Link to="/" >Home</Link></li>
+                    <li><Link to="/write">Write</Link></li>
+                    <li><Link to="/list" title='Reading List'>List</Link></li>
+                </ul>
+            
+            : 
+            null
                 }
+            </nav>
+
+            <div>
+                {isLoggedIn ? <Link to="/dashboard"><FaUserAlt title='Login'/></Link> : <Link to="/login"><button className="bg-black text-white rounded-[30px] w-[8rem] h-[2.4rem] dark:bg-white dark:text-black">Get Started</button></Link>}
             </div>
 
             <div className="theme-toggle ml-4 cursor-pointer text-lg" onClick={toggleTheme}>
                 { darkTheme ? <HiSun /> : <BsFillMoonFill />}
             </div>
         </div>
-        <div className="mobile-icons md:hidden flex">
-            <div className='text-3xl'>
+        <div className="mobile-icons md:hidden flex items-center">
+            <div>
                 {
-                    isLoggedIn ? <Link to="/dashboard"><FaUserAlt /></Link> : <Link to="/login"><MdLogin /></Link>
+                    isLoggedIn ? <Link to="/dashboard"><FaUserAlt /></Link> : <Link to="/login"><button className="bg-black text-white rounded-[30px] text-[1rem] w-[8rem] h-[2rem] dark:bg-white dark:text-black">Get Started</button></Link>
                 }
             </div>
-            <div className="hamburger d-block">
-                <span className="burger"></span>
-                <span className="burger"></span>
-                <span className="burger"></span>
-            </div>
+            {
+                isLoggedIn && 
+                <div className="hamburger d-block h-[2rem] w-[2rem] flex flex-col justify-center gap-[0.35rem] ml-[1rem] cursor-pointer" onClick={() => setNavToggle(!navToggle)}>
+                    <span className="burger w-[100%] bg-black dark:bg-white h-[.15rem] rounded-[23px]"></span>
+                    <span className="burger w-[100%] bg-black dark:bg-white h-[.15rem] rounded-[23px]"></span>
+                    <span className="burger w-[100%] bg-black dark:bg-white h-[.15rem] rounded-[23px]"></span>
+                </div>
+            }
         </div>
 
-        <nav className="mobile-nav md:hidden bg-red-500">     
+        {
+        navToggle && 
+        <nav className="mobile-nav md:hidden bg-gray-400 dark:bg-slate-600 absolute top-[100%] left-[0] w-[100%] px-[1rem] py-[2rem] min-h-[16rem] text-[1.2rem] font-semibold">     
             <ul>
-                <li><Link to='/'>Home</Link></li>
-                <li><Link to='/'>Blog</Link></li>
-                <li>
-                    <div className="theme-toggle" onClick={toggleTheme}>
-                        { darkTheme ? <HiSun /> : <BsFillMoonFill />}
-                    </div>
+                <li className='mb-[.85rem]' onClick={() => setNavToggle(false)}><Link to="/">Home</Link></li>
+                <li className='mb-[.85rem]' onClick={() => setNavToggle(false)}><Link to="/write">Write</Link></li>
+                <li className='mb-[1.5rem] ' onClick={() => setNavToggle(false)}><Link to="/list">List</Link></li>
+                <li className="theme-toggle w-[100%] border-t-[.1rem] border-gray-500 dark:border-gray-700 pt-[.75rem] cursor-pointer" onClick={toggleTheme}>
+                    { darkTheme ? <HiSun /> : <BsFillMoonFill />}
                 </li>
             </ul>
         </nav>
+        }
     </div>
   )
 }
