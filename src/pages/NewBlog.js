@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { BsPlusCircle } from 'react-icons/bs';
+import { useForm } from 'react-hook-form';
 
 
 const NewBlog = () => {
@@ -10,10 +11,19 @@ const NewBlog = () => {
     const user = {
         name: 'Billie Will',
     }
+    const [ open, setOpen ] = useState(false);
+    const [ blogData, setBlogData ] = useState({})
+
+    const openInput = (e) => {
+
+        e.preventDefault();
+        setOpen(true);
+
+    }
     
   return (
-    <div className='new-blog'>
-        <nav className='flex justify-between items-center md:px-[6.2rem] px-[2rem] h-[4.5rem]'>
+    <div className='new-blog min-h-[100vh] dark:bg-slate-800 bg-white dark:text-white'>
+        <nav className='flex justify-between items-center md:px-[12rem] px-[2rem] h-[4.5rem]'>
             <div className="title">
                 <Link to='/'>
                     <h1 className='font-serif text-[1.5rem]'>ECONOTES</h1>
@@ -27,24 +37,21 @@ const NewBlog = () => {
             </div>
         </nav>
 
-        <div className="blog-post-body md:px-[12rem] mt-[2rem] px-[4rem]">
-            <form>
-                <div className="form-group mb-[2rem]">
-                    <label htmlFor="title" className='font-serif md:text-[3.1rem] text-[2.2rem] opacity-[.3] mb-[2rem]'>Title</label>
-                    <input type="text"  className='w-[100%] h-[3rem] placeholder:font-serif placeholder:text-[1.5rem] text-[1.5rem] outline-none border-none font-serif' placeholder='Tell your story...'/>
+        <div className="blog-post-body md:px-[22rem] mt-[1.5rem] px-[2.3rem]">
+            <form onSubmit={ openInput }>
+                <div className="form-group mb-[.75rem]">
+                    <input type="text"  autoFocus className='w-[100%] dark:bg-slate-800 h-[4.5rem] placeholder:font-serif md:placeholder:text-[2.6rem] placeholder:text-[1.8rem] md:text-[2.6rem] text-[1.8rem] outline-none border-none font-serif text-gray-700 dark:text-white' placeholder='Title'/>
                 </div>
 
-                <div className="form-group mb-[2rem]">
-                    <label htmlFor="title" className='font-serif md:text-[3.1rem] text-[2.2rem] opacity-[.3] mb-[2rem]'>Body</label>
-                    <div className="container flex items-center">
-                        <BsPlusCircle className=" text-[2rem] font-extralight text-gray-500 cursor-pointer" /><input type="text"  className='w-[100%] h-[3rem] placeholder:font-serif placeholder:text-[1.5rem] text-[1.5rem] outline-none border-none font-serif' placeholder='Tell your story...'/>
+                {
+                    open &&
+
+                    <div className="form-group">
+                        <div className="container flex items-center relative">
+                            <BsPlusCircle className="md:text-[2rem] text-[1.4rem] absolute top-[0%] md:top-[0%] left-[-7%] font-extralight text-gray-800 cursor-pointer dark:text-white" title="Upload Image"/><textarea type="text"  className='resize-none dark:text-gray-300 dark:bg-slate-800 w-[100%] min-h-[70vh] overflow-hidden overflow-y-auto text-gray-700 placeholder:font-serif md:placeholder:text-[1.29rem] placeholder:text-[1.1rem] md:text-[1.29rem] text-[1.1rem] outline-none border-none font-serif' placeholder='Tell your story...'></textarea>
+                        </div>
                     </div>
-                </div>
-
-                <div className="form-group mb-[2rem]">
-                    <label htmlFor="title" className='font-serif md:text-[3.1rem] text-[2.2rem] opacity-[.3] mb-[2rem]'>Title</label>
-                    <input type="text"  className='w-[100%] h-[3rem] placeholder:font-serif placeholder:text-[1.5rem] text-[1.5rem] outline-none border-none font-serif' placeholder='Tell your story...'/>
-                </div>
+                }
             </form>
         </div>
     </div>
