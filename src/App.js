@@ -12,6 +12,7 @@ import TopicDetails from './pages/TopicDetails';
 import ScrollToTop from './ScrollToTop';
 import UserDetails from './pages/UserDetails';
 import { AuthProvider } from './authContext';
+import NewBlog from './pages/NewBlog';
 
 function App() {
 
@@ -35,7 +36,7 @@ function App() {
     <AuthProvider>
       <div className={ darkTheme ? 'dark' : ''}>
           <ScrollToTop />
-          { pathname !== '/login' && pathname !== '/signup' && <Nav toggleTheme={ toggleTheme } darkTheme={ darkTheme }/>}
+          { pathname !== '/newBlog' && pathname !== '/login' && pathname !== '/signup' && <Nav toggleTheme={ toggleTheme } darkTheme={ darkTheme }/>}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -44,6 +45,7 @@ function App() {
             <Route path="/details/:id" element={<Details />} />          
             <Route path="/topicDetails/:name" element={<TopicDetails />} />
             <Route path="/userDetails/:user" element={<UserDetails />} />
+            <Route path="/newBlog" element={ <NewBlog />} />
           </Routes>
           {/* { pathname !== '/login' && pathname !== '/signup' && <Footer />} */}
       </div>

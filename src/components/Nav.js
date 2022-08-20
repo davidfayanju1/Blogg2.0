@@ -26,7 +26,7 @@ const Nav = ({toggleTheme, darkTheme}) => {
                 isLoggedIn ? 
                 <ul className='flex items-center gap-[2rem] mr-[3rem] text-[1.1rem]'>
                     <li><Link to="/" >Home</Link></li>
-                    <li><Link to="/write">Write</Link></li>
+                    <li><Link to="/newBlog">Write</Link></li>
                     <li><Link to="/list" title='Reading List'>List</Link></li>
                 </ul>
             
@@ -64,7 +64,7 @@ const Nav = ({toggleTheme, darkTheme}) => {
         <nav className="mobile-nav md:hidden bg-gray-400 dark:bg-slate-600 absolute top-[100%] left-[0] w-[100%] px-[1rem] py-[2rem] min-h-[16rem] text-[1.2rem] font-semibold">     
             <ul>
                 <li className='mb-[.85rem]' onClick={() => setNavToggle(false)}><Link to="/">Home</Link></li>
-                <li className='mb-[.85rem]' onClick={() => setNavToggle(false)}><Link to="/write">Write</Link></li>
+                <li className='mb-[.85rem]' onClick={() => setNavToggle(false)}><Link to="/newBlog">Write</Link></li>
                 <li className='mb-[1.5rem] ' onClick={() => setNavToggle(false)}><Link to="/list">List</Link></li>
                 <li className="theme-toggle w-[100%] border-t-[.1rem] border-gray-500 dark:border-gray-700 pt-[.75rem] cursor-pointer" onClick={toggleTheme}>
                     { darkTheme ? <HiSun /> : <BsFillMoonFill />}
