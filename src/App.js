@@ -45,7 +45,7 @@ function App() {
             <Route path="/details/:id" element={<Details />} />          
             <Route path="/topicDetails/:name" element={<TopicDetails />} />
             <Route path="/userDetails/:user" element={<UserDetails />} />
-            <Route path="/newBlog" element={ <NewBlog />} />
+            <Route path="/newBlog" element={ <NewBlog toggleTheme={ toggleTheme } darkTheme={ darkTheme } />} />
           </Routes>
           {/* { pathname !== '/login' && pathname !== '/signup' && <Footer />} */}
       </div>

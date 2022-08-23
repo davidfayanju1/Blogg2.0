@@ -5,8 +5,10 @@ import { BsPlusCircle } from 'react-icons/bs';
 import { useForm } from 'react-hook-form';
 import PopupPost from '../components/postBlog/PopupPost';
 // import { Editor, EditorState } from 'draft-js';
+import { HiSun } from 'react-icons/hi';
+import { BsFillMoonFill } from 'react-icons/bs';
 
-const NewBlog = () => {
+const NewBlog = ({toggleTheme, darkTheme}) => {
 
     // write your posts here
     const user = {
@@ -74,9 +76,12 @@ const NewBlog = () => {
                 </Link>
             </div>
             <div className="newblog-controls flex items-center gap-[1rem]">
-                <button className='bg-green-800 hover:bg-green-900 h-[2rem] w-[6rem] text-white font-semibold rounded-[20px] disabled:opacity-[.6]' disabled={ !newBlog } onClick={ postBlog }>Publish</button>
+                <button className='bg-green-700 hover:bg-green-800 h-[2rem] w-[5rem] text-white font-semibold rounded-[20px] disabled:opacity-[.6]' disabled={ !newBlog } onClick={ postBlog }>Publish</button>
                 <div className="user">
-                    {user.img ? <img src={user.img} alt="user" /> : <p className='bg-red-800 w-[2.2rem] h-[2.2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-white'> { user.name.charAt(0) }</p>}
+                    {user.img ? <img src={user.img} alt="user" /> : <p className='bg-red-800 w-[2.1rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-white'> { user.name.charAt(0) }</p>}
+                </div>
+                <div className="theme-toggle cursor-pointer text-lg" onClick={toggleTheme}>
+                    {darkTheme ? <HiSun /> : <BsFillMoonFill />}
                 </div>
             </div>
         </nav>
@@ -96,7 +101,7 @@ const NewBlog = () => {
         {
             openPostPage &&
 
-            <div className="pop-up-component h-[100vh] absolute top-[0] left-[0] w-[100%] bg-gray-100 dark:bg-slate-800">
+            <div className="pop-up-component min-h-[100vh] absolute top-[0] left-[0] w-[100%] bg-gray-100 dark:bg-slate-800">
                 <PopupPost setOpenPostPage={ setOpenPostPage }/>
             </div>
         }
