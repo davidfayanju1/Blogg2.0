@@ -96,7 +96,7 @@ const NewBlog = () => {
         {
             openPostPage &&
 
-            <div className="pop-up-component h-[100vh] absolute top-[0] left-[0] w-[100%] bg-gray-200">
+            <div className="pop-up-component h-[100vh] absolute top-[0] left-[0] w-[100%] bg-gray-100 dark:bg-slate-800">
                 <PopupPost setOpenPostPage={ setOpenPostPage }/>
             </div>
         }
