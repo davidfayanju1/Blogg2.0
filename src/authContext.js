@@ -35,6 +35,17 @@ export const AuthProvider = ({children}) => {
 
     }
 
+    const loginUser = async (email, password) => {
+
+        try{
+            await auth.signInWithEmailAndPassword(email, password);
+        }catch (err){
+            console.log(err);
+            // setLoginError('You do not have an account with us');
+        }
+        
+    }
+
     const [userData, setUserData] = useState(null);
     const[displayError, setDisplayError] = useState('');
 
@@ -49,7 +60,7 @@ export const AuthProvider = ({children}) => {
             const data = query.docs[0].data();
             
             setUserData(data.name);
-            
+
         }catch (err){
             setDisplayError('Error! Inavlid Data');  
             console.log(err);         
@@ -74,7 +85,8 @@ export const AuthProvider = ({children}) => {
         registerUser,
         currentUser,
         fetchUserData,
-        userData
+        userData,
+        loginUser
     }
 
     return (

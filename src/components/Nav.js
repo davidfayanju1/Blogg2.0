@@ -10,17 +10,14 @@ import { useAuth } from '../authContext';
 const Nav = ({toggleTheme, darkTheme}) => {
 
     const { currentUser, fetchUserData, userData } = useAuth();
-
-    const isLoggedIn = false;
-
     const[ navToggle, setNavToggle] = useState(false);
 
+    // if(userData === null) {
+    //     console.log(true);
+    // }else{
+    //     console.log(userData)
+    // }
     
-    if(userData === null) {
-        console.log(true);
-    }else{
-        console.log(userData)
-    }
 
     useEffect(() => {
 
@@ -38,21 +35,25 @@ const Nav = ({toggleTheme, darkTheme}) => {
 
             <nav>
                 {
-                currentUser ? 
-                <ul className='flex items-center gap-[2rem] mr-[3rem] text-[1.1rem]'>
-                    <li><Link to="/" >Home</Link></li>
-                    <li><Link to="/newBlog">Write</Link></li>
-                    <li><Link to="/list" title='Reading List'>List</Link></li>
-                    <li><Link to='/stories'></Link></li>
-                </ul>
+                    currentUser ? 
+                    <ul className='flex items-center gap-[2rem] mr-[3rem] text-[1.1rem]'>
+                        <li><Link to="/" >Home</Link></li>
+                        <li><Link to="/newBlog">Write</Link></li>
+                        <li><Link to="/list" title='Reading List'>List</Link></li>
+                        <li><Link to='/stories'></Link></li>
+                    </ul>
             
-            : 
-            null
+                    : 
+                    null
                 }
             </nav>
 
             <div>
-                {currentUser ? <Link to="/dashboard"><p className='bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-gray-200'>{ userData[0] }</p></Link> : <Link to="/login"><button className="bg-black text-white rounded-[30px] w-[8rem] h-[2.4rem] dark:bg-white dark:text-black">Get Started</button></Link>}
+                {currentUser ? 
+                
+                userData && <Link to="/dashboard"><p className='bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-gray-200'>{ userData[0] }</p></Link> 
+                : 
+                <Link to="/login"><button className="bg-black text-white rounded-[30px] w-[8rem] h-[2.4rem] dark:bg-white dark:text-black">Get Started</button></Link>}
             </div>
 
             <div className="theme-toggle ml-4 cursor-pointer text-lg" onClick={toggleTheme}>
@@ -62,7 +63,7 @@ const Nav = ({toggleTheme, darkTheme}) => {
         <div className="mobile-icons md:hidden flex items-center">
             <div>
                 {
-                    currentUser ? <Link to="/dashboard"><p className='bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-gray-200'>{ userData[0] }</p></Link> : <Link to="/login"><button className="bg-black text-white rounded-[30px] text-[1rem] w-[8rem] h-[2rem] dark:bg-white dark:text-black">Get Started</button></Link>
+                    currentUser ?  userData && <Link to="/dashboard"><p className='bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-gray-200'>{ userData[0] }</p></Link> : <Link to="/login"><button className="bg-black text-white rounded-[30px] text-[1rem] w-[8rem] h-[2rem] dark:bg-white dark:text-black">Get Started</button></Link>
                 }
             </div>
             {
