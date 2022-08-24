@@ -46,6 +46,16 @@ export const AuthProvider = ({children}) => {
         
     }
 
+    const logout = async () => {
+
+        try{
+             await auth.signOut();
+        } catch(err){
+            console.log(err);
+        }
+
+    }
+
     const [userData, setUserData] = useState(null);
     const[displayError, setDisplayError] = useState('');
 

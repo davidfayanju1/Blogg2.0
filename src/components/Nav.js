@@ -17,7 +17,8 @@ const Nav = ({toggleTheme, darkTheme}) => {
     // }else{
     //     console.log(userData)
     // }
-    
+
+    console.log(userData);
 
     useEffect(() => {
 
