@@ -28,6 +28,7 @@ const Nav = ({toggleTheme, darkTheme}) => {
                     <li><Link to="/" >Home</Link></li>
                     <li><Link to="/newBlog">Write</Link></li>
                     <li><Link to="/list" title='Reading List'>List</Link></li>
+                    <li><Link to='/stories'></Link></li>
                 </ul>
             
             : 

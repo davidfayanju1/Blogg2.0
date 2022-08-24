@@ -102,7 +102,7 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
             openPostPage &&
 
             <div className="pop-up-component min-h-[100vh] absolute top-[0] left-[0] w-[100%] bg-gray-100 dark:bg-slate-800">
-                <PopupPost setOpenPostPage={ setOpenPostPage }/>
+                <PopupPost setOpenPostPage={ setOpenPostPage } blogPost={ blogPost }/>
             </div>
         }
     </div>
