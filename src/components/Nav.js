@@ -1,19 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { HiSun } from 'react-icons/hi';
 import { BsFillMoonFill } from 'react-icons/bs';
 import { MdLogin } from 'react-icons/md';
 import { FaUserAlt } from 'react-icons/fa';
 import { GrLogin } from 'react-icons/gr';
+import { useAuth } from '../authContext';
 
 const Nav = ({toggleTheme, darkTheme}) => {
 
-    const isLoggedIn = true;
+    const { currentUser, fetchUserData, userData } = useAuth();
+
+    const isLoggedIn = false;
 
     const[ navToggle, setNavToggle] = useState(false);
 
+    
+    if(userData === null) {
+        console.log(true);
+    }else{
+        console.log(userData)
+    }
 
+    useEffect(() => {
 
+        fetchUserData();
+
+    }, []);
+
+   
   return (
     <div className="w-full dark:bg-slate-900 bg-slate-200 dark:text-white flex justify-between items-center md:px-24 px-[1rem] fixed top-0 z-50 h-[4.5rem] border-solid border-b border-gray-300">
         <div className="nav-title md:text-3xl text-[1.3rem] font-bold font-serif">
@@ -23,7 +38,7 @@ const Nav = ({toggleTheme, darkTheme}) => {
 
             <nav>
                 {
-                isLoggedIn ? 
+                currentUser ? 
                 <ul className='flex items-center gap-[2rem] mr-[3rem] text-[1.1rem]'>
                     <li><Link to="/" >Home</Link></li>
                     <li><Link to="/newBlog">Write</Link></li>
@@ -37,7 +52,7 @@ const Nav = ({toggleTheme, darkTheme}) => {
             </nav>
 
             <div>
-                {isLoggedIn ? <Link to="/dashboard"><FaUserAlt title='Login'/></Link> : <Link to="/login"><button className="bg-black text-white rounded-[30px] w-[8rem] h-[2.4rem] dark:bg-white dark:text-black">Get Started</button></Link>}
+                {currentUser ? <Link to="/dashboard"><p className='bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-gray-200'>{ userData[0] }</p></Link> : <Link to="/login"><button className="bg-black text-white rounded-[30px] w-[8rem] h-[2.4rem] dark:bg-white dark:text-black">Get Started</button></Link>}
             </div>
 
             <div className="theme-toggle ml-4 cursor-pointer text-lg" onClick={toggleTheme}>
@@ -47,11 +62,11 @@ const Nav = ({toggleTheme, darkTheme}) => {
         <div className="mobile-icons md:hidden flex items-center">
             <div>
                 {
-                    isLoggedIn ? <Link to="/dashboard"><FaUserAlt /></Link> : <Link to="/login"><button className="bg-black text-white rounded-[30px] text-[1rem] w-[8rem] h-[2rem] dark:bg-white dark:text-black">Get Started</button></Link>
+                    currentUser ? <Link to="/dashboard"><p className='bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-gray-200'>{ userData[0] }</p></Link> : <Link to="/login"><button className="bg-black text-white rounded-[30px] text-[1rem] w-[8rem] h-[2rem] dark:bg-white dark:text-black">Get Started</button></Link>
                 }
             </div>
             {
-                isLoggedIn && 
+                currentUser && 
                 <div className="hamburger d-block h-[2rem] w-[2rem] flex flex-col justify-center gap-[0.35rem] ml-[1rem] cursor-pointer" onClick={() => setNavToggle(!navToggle)}>
                     <span className="burger w-[100%] bg-black dark:bg-white h-[.15rem] rounded-[23px]"></span>
                     <span className="burger w-[100%] bg-black dark:bg-white h-[.15rem] rounded-[23px]"></span>
