@@ -63,12 +63,23 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
         }
     }
 
+    const blogImage = useRef();
+
     useEffect(() => {
 
         fetchUserData();
 
     }, []);
 
+    const [ blogImg, setBlogImg ] = useState('');
+
+    const uploadBlogImage = (e) => {
+
+         setBlogImg(URL.createObjectURL(e.target.files[0]))
+
+        // console.log(e.target.files[0]);
+    }
+    
 
 
     
@@ -97,12 +108,24 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
                     <input type="text" name='title' onChange = { updatePostBtn } autoFocus  ref={ titleRef } className='w-[100%] dark:bg-slate-800 h-[4.5rem] placeholder:font-serif md:placeholder:text-[2.6rem] placeholder:text-[1.8rem] md:text-[2.6rem] text-[1.8rem] outline-none border-none font-serif text-gray-700 dark:text-white' placeholder='Title' required/>
                 </div>
                 <div className="form-group">
-                    <div className="container flex items-center relative">
+                    <div className="container relative">
+                        
                         {open &&
+                            <label htmlFor='uploadImage' >  
+                                <input type="file" id="uploadImage" className='hidden' accept='.jpeg, .png' onChange={ uploadBlogImage }/>
+                                <BsPlusCircle className="md:text-[2rem] text-[1.4rem] absolute top-[0%] md:top-[0%] left-[-7%] font-extralight text-gray-800 cursor-pointer dark:text-white" title="Upload Image"/>
+                            </label> 
+                        }
                         <>
-                            <BsPlusCircle className="md:text-[2rem] text-[1.4rem] absolute top-[0%] md:top-[0%] left-[-7%] font-extralight text-gray-800 cursor-pointer dark:text-white" title="Upload Image"/>
-                        </> 
-                        }<textarea type="text" ref={bodyRef} onChange={(e) => e.target.value ? setOpen(false) : setOpen(true)} name='body' className='resize-none dark:text-gray-300 dark:bg-slate-800 w-[100%] min-h-[70vh] overflow-hidden overflow-y-auto text-gray-700 placeholder:font-serif md:placeholder:text-[1.29rem] placeholder:text-[1.1rem] md:text-[1.29rem] text-[1.1rem] outline-none border-none font-serif' placeholder='Tell your story...'></textarea>
+                            {
+                                blogImg &&
+
+                                <div className="image-container mb-[.95rem] h-[28rem] w-[100%]">
+                                    <img src={ blogImg } alt="" className='block w-[100%] h-[100%] object-cover' />
+                                </div>
+                            }
+                        </>
+                        <textarea type="text" ref={bodyRef} onChange={(e) => e.target.value ? setOpen(false) : setOpen(true)} name='body' className='resize-none dark:text-gray-200 dark:bg-slate-800 w-[100%] min-h-[70vh] overflow-hidden overflow-y-auto text-gray-700 placeholder:font-serif md:placeholder:text-[1.29rem] placeholder:text-[1.1rem] md:text-[1.29rem] text-[1.1rem] outline-none border-none font-serif' placeholder='Tell your story...'></textarea>
                     </div>
                 </div>
             </form>
