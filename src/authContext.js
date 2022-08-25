@@ -31,8 +31,6 @@ export const AuthProvider = ({children}) => {
             console.log(error)
 
         }
-
-
     }
 
     const loginUser = async (email, password) => {
@@ -46,7 +44,7 @@ export const AuthProvider = ({children}) => {
         
     }
 
-    const logout = async () => {
+    const logoutUser = async () => {
 
         try{
              await auth.signOut();
