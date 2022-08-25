@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import { auth, db } from './firebase';
+import { v4 as uuidv4 } from 'uuid';
+
 
 const authContext = createContext();
 
@@ -56,7 +58,6 @@ export const AuthProvider = ({children}) => {
 
     const [userData, setUserData] = useState(null);
     const[displayError, setDisplayError] = useState('');
-
     const fetchUserData = async () => {
 
         try{
@@ -69,11 +70,70 @@ export const AuthProvider = ({children}) => {
             
             setUserData(data.name);
 
+            
         }catch (err){
             setDisplayError('Error! Inavlid Data');  
             console.log(err);         
         }
+        
+    }
+    
+    console.log(userData);
 
+    // blogs
+
+    const postBlog = async (title, blog, category, clap) => {
+
+        try{
+             
+             await db.collection('posts')
+             .add({
+                 uid: currentUser.uid, 
+                 author: userData,
+                 title,
+                 blog,
+                 createdAt: new Date(),
+                 id: uuidv4(),
+                 category,
+                 clap
+                //  photo: currentUser.photoURL
+             })
+             
+ 
+        }catch(err){
+            console.log(err);
+            // setBlogError('Error With Blog')  
+        }
+    }
+
+    const [ blogs, setBlogs ] = useState([])
+
+    const fetchBlogpost = async () => {
+
+        try{
+            const response = db.collection('posts').orderBy('createdAt', 'desc')
+
+            const data = await response.get()
+
+            setBlogs([])
+
+            data.docs.forEach(blogItem => {
+
+                if(blogItem.data().uid ===  currentUser.uid){
+                    
+                    setLoading(false)
+                    setBlogs(item => [...item, blogItem.data()])
+
+                }else{
+                    return null
+                }
+
+            })
+                                
+        }catch(error) {
+            console.log(error)
+        }
+            
     }
 
 
@@ -89,12 +149,14 @@ export const AuthProvider = ({children}) => {
     }, [])
 
 
+
     const value = {
         registerUser,
         currentUser,
         fetchUserData,
         userData,
-        loginUser
+        loginUser,
+        postBlog
     }
 
     return (

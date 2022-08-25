@@ -1,20 +1,36 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react';
+import { useAuth } from '../../authContext';
 
 const PopupPost = ({setOpenPostPage, blogPost}) => {
 
+  // const title = useRef();
+  const category = useRef();
+
+  const { postBlog, userData, fetchUserData } = useAuth();
+
   const noImage = true;
+  const clap = 0;
+
+  const publishBlog = () => {
+
+    postBlog(blogPost.title, blogPost.body, category.current.value, clap);
+  }
+
+
+  console.log(userData);
 
   useEffect(() => {
 
-    blogPost && console.log(blogPost)
+    // blogPost && console.log(blogPost)
+    fetchUserData();
 
-  }, []);
+  }, [userData]);
 
   return (
     <div className='container md:w-[75%] mx-auto md:py-[2rem] pb-[4rem] w-[85%]'>
       <div className="cancel-page-btn text-right">
-        <div className="cancel-icon md:mb-[4rem] mb-[2rem] text-[1.2rem] dark:text-gray-300 text-gray-500  cursor-pointer" onClick={() => setOpenPostPage(false)}>
-          X
+        <div className="cancel-icon md:mb-[4rem] mb-[2rem] text-[1.2rem] dark:text-gray-300 text-gray-500  cursor-pointer flex justify-end" onClick={() => setOpenPostPage(false)}>
+          <svg className="svgIcon-use dark:fill-white" width="29" height="29"><path d="M20.13 8.11l-5.61 5.61-5.609-5.61-.801.801 5.61 5.61-5.61 5.61.801.8 5.61-5.609 5.61 5.61.8-.801-5.609-5.61 5.61-5.61"></path></svg>
         </div>
       </div>
       {/* flex-container */}
@@ -22,7 +38,7 @@ const PopupPost = ({setOpenPostPage, blogPost}) => {
           <div className="story-preview md:w-[48%] w-full mb-[4rem] md:mb-[0rem]">
             <h1 className='font-bold mb-[1rem] text-gray-700 dark:text-gray-200'>Story Preview</h1>
             <div className="image-preview-container mb-[1rem]">
-              {noImage ? <div className="image-container rounded-[3px] h-[14rem] w-[100%] bg-gray-200  dark:bg-slate-500 flex items-center justify-center text-center"><small className='text-gray-600 dark:text-gray-300'>Include a high quality image in your story to make it pop!</small></div> : <img src="" alt="" />}
+              {noImage ? userData && <div className="image-container rounded-[3px] h-[14rem] w-[100%] bg-gray-200  dark:bg-slate-500 flex items-center justify-center text-center"><small className='text-gray-600 dark:text-gray-300'>Include a high quality image in your story to make it pop!</small></div> : <img src="" alt="" />}
             </div>
             <h1 className='font-bold text-[1.1rem] text-gray-700 mb-[.27rem] dark:text-gray-200'>New Title</h1>
             <div className='mb-[.55rem]'>
@@ -35,13 +51,13 @@ const PopupPost = ({setOpenPostPage, blogPost}) => {
 
           <div className="publish-section md:w-[44%] w-full">
             <div className="publiser mb-[.8rem] text-gray-600 dark:text-gray-100">
-              <p>Publishing to : <span className='font-bold'>Adebayo</span></p>
+              <p>Publishing to : <span className='font-bold'>{ userData }</span></p>
             </div>
             <div className="body">
               <p className='text-[.85rem] mb-[1rem]'>Add a topic so readers know what your story is about</p>
 
               <div className="topics-update">
-                <select name="topics" className='w-full text-black py-[1.2rem] px-[.9rem] outline-none border-solid border-[0.1rem] rounded-[5px] border-gray-300 mb-[2rem] bg-transparent dark:bg-slate-500 dark:text-gray-200' required>
+                <select name="topics" ref={category} className='w-full text-black py-[1.2rem] px-[.9rem] outline-none border-solid border-[0.1rem] rounded-[5px] border-gray-300 mb-[2rem] bg-transparent dark:bg-slate-500 dark:text-gray-200' required>
                   <option value="" disabled>Add a topic...</option>
                   <option value="relationship">Relationship</option>
                   <option value="lifestyle">Lifestyle</option>
@@ -53,7 +69,7 @@ const PopupPost = ({setOpenPostPage, blogPost}) => {
             </div>
 
             <div className="publish-btn">
-              <button className='bg-green-800 hover:bg-green-900 h-[2rem] w-[6rem] text-white font-semibold rounded-[20px] disabled:opacity-[.6]'>Publish</button>
+              <button className='bg-green-800 hover:bg-green-900 h-[2rem] w-[6rem] text-white font-semibold rounded-[20px] disabled:opacity-[.6]' onClick={ publishBlog }>Publish</button>
             </div>
           </div>
       </div>

@@ -9,7 +9,7 @@ import { useAuth } from '../authContext';
 
 const Nav = ({toggleTheme, darkTheme}) => {
 
-    const { fetchUserData, userData } = useAuth();
+    const {currentUser, fetchUserData, userData } = useAuth();
     const[ navToggle, setNavToggle] = useState(false);
 
     // if(userData === null) {
@@ -18,7 +18,7 @@ const Nav = ({toggleTheme, darkTheme}) => {
     //     console.log(userData)
     // }
 
-    const currentUser = false;
+    // const currentUser = false;
 
     useEffect(() => {
 

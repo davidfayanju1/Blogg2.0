@@ -7,10 +7,14 @@ import PopupPost from '../components/postBlog/PopupPost';
 // import { Editor, EditorState } from 'draft-js';
 import { HiSun } from 'react-icons/hi';
 import { BsFillMoonFill } from 'react-icons/bs';
+import { useAuth } from '../authContext';
+
 
 const NewBlog = ({toggleTheme, darkTheme}) => {
 
     // write your posts here
+    const { userData, fetchUserData } = useAuth();
+
     const user = {
         name: 'Billie Will',
     }
@@ -40,31 +44,32 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
     const[openPostPage, setOpenPostPage] = useState(false);
 
     const postBlog = () => {
-
         // hit the publish button
         setOpenPostPage(true);
         setBlogPost({
             title:titleRef.current.value,
             body:bodyRef.current.value
-        })
-
-            
+        })            
     }
 
     
 
     const updatePostBtn = (e) => {
-
         // title input
         if(e.target.value){
             
             setNewBlog(true);
 
         }
-
     }
 
-    const { register, getValues } = useForm();
+    useEffect(() => {
+
+        fetchUserData();
+
+    }, []);
+
+
 
     
   return (
@@ -78,7 +83,7 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
             <div className="newblog-controls flex items-center gap-[1rem]">
                 <button className='bg-green-700 hover:bg-green-800 h-[2rem] w-[5rem] text-white font-semibold rounded-[20px] disabled:opacity-[.6]' disabled={ !newBlog } onClick={ postBlog }>Publish</button>
                 <div className="user">
-                    {user.img ? <img src={user.img} alt="user" /> : <p className='bg-red-800 w-[2.1rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-white'> { user.name.charAt(0) }</p>}
+                    {user.img ? <img src={user.img} alt="user" /> : userData && <p className='bg-red-800 w-[2.1rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-white'> { userData[0] }</p>}
                 </div>
                 <div className="theme-toggle cursor-pointer text-lg" onClick={toggleTheme}>
                     {darkTheme ? <HiSun /> : <BsFillMoonFill />}
@@ -93,7 +98,11 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
                 </div>
                 <div className="form-group">
                     <div className="container flex items-center relative">
-                        {open && <BsPlusCircle className="md:text-[2rem] text-[1.4rem] absolute top-[0%] md:top-[0%] left-[-7%] font-extralight text-gray-800 cursor-pointer dark:text-white" title="Upload Image"/>}<textarea type="text" ref={bodyRef} onChange={(e) => e.target.value ? setOpen(false) : setOpen(true)} name='body' className='resize-none dark:text-gray-300 dark:bg-slate-800 w-[100%] min-h-[70vh] overflow-hidden overflow-y-auto text-gray-700 placeholder:font-serif md:placeholder:text-[1.29rem] placeholder:text-[1.1rem] md:text-[1.29rem] text-[1.1rem] outline-none border-none font-serif' placeholder='Tell your story...'></textarea>
+                        {open &&
+                        <>
+                            <BsPlusCircle className="md:text-[2rem] text-[1.4rem] absolute top-[0%] md:top-[0%] left-[-7%] font-extralight text-gray-800 cursor-pointer dark:text-white" title="Upload Image"/>
+                        </> 
+                        }<textarea type="text" ref={bodyRef} onChange={(e) => e.target.value ? setOpen(false) : setOpen(true)} name='body' className='resize-none dark:text-gray-300 dark:bg-slate-800 w-[100%] min-h-[70vh] overflow-hidden overflow-y-auto text-gray-700 placeholder:font-serif md:placeholder:text-[1.29rem] placeholder:text-[1.1rem] md:text-[1.29rem] text-[1.1rem] outline-none border-none font-serif' placeholder='Tell your story...'></textarea>
                     </div>
                 </div>
             </form>
