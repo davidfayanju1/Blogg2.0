@@ -8,6 +8,7 @@ import PopupPost from '../components/postBlog/PopupPost';
 import { HiSun } from 'react-icons/hi';
 import { BsFillMoonFill } from 'react-icons/bs';
 import { useAuth } from '../authContext';
+import { getStorage, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 
 const NewBlog = ({toggleTheme, darkTheme}) => {
@@ -48,7 +49,8 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
         setOpenPostPage(true);
         setBlogPost({
             title:titleRef.current.value,
-            body:bodyRef.current.value
+            body:bodyRef.current.value,
+            img:file
         })            
     }
 
@@ -63,26 +65,51 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
         }
     }
 
-    const blogImage = useRef();
+    const [ file, setFile ] = useState(null);
 
+    const uploadBlogPicture = (e) => {
+
+    const blogImage = e.target.files[0]
+    // setShowLoading(false)
+    const storage = getStorage()
+    const storageRef = ref(storage, `image/${blogImage.name}`)
+
+    uploadBytes(storageRef, blogImage)
+    .then((snapshot) => {
+        getDownloadURL(storageRef)
+        .then((url) => {
+            setFile(url)
+        })
+        .catch((err)=> {
+            console.log(err)
+        })
+
+    }).catch((err) => {
+        console.log(err)
+    })
+    }
+
+    
+    
+    const blogImage = useRef();
+    
     useEffect(() => {
 
         fetchUserData();
-
-    }, []);
+        
+        console.log(file);  
+    
+    }, [file]);
 
     const [ blogImg, setBlogImg ] = useState('');
 
-    const uploadBlogImage = (e) => {
+    // const uploadBlogImage = (e) => {
 
-         setBlogImg(URL.createObjectURL(e.target.files[0]))
+    //      setBlogImg(URL.createObjectURL(e.target.files[0]))
 
-        // console.log(e.target.files[0]);
-    }
-    
-
-
-    
+    //     // console.log(e.target.files[0]);
+    // }
+        
   return (
     <div className='new-blog min-h-[100vh] dark:bg-slate-800 bg-white dark:text-white relative'>
         <nav className='flex justify-between items-center md:px-[12rem] px-[2rem] h-[4.5rem]'>
@@ -110,18 +137,18 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
                 <div className="form-group">
                     <div className="container relative">
                         
-                        {open &&
+                        {open && !file &&
                             <label htmlFor='uploadImage' >  
-                                <input type="file" id="uploadImage" className='hidden' accept='.jpeg, .png' onChange={ uploadBlogImage }/>
+                                <input type="file" id="uploadImage" className='hidden' accept='.jpeg, .png' onChange={ uploadBlogPicture }/>
                                 <BsPlusCircle className="md:text-[2rem] text-[1.4rem] absolute top-[0%] md:top-[0%] left-[-7%] font-extralight text-gray-800 cursor-pointer dark:text-white" title="Upload Image"/>
                             </label> 
                         }
                         <>
                             {
-                                blogImg &&
+                                file &&
 
                                 <div className="image-container mb-[.95rem] h-[28rem] w-[100%]">
-                                    <img src={ blogImg } alt="" className='block w-[100%] h-[100%] object-cover' />
+                                    <img src={ file } alt="" className='block w-[100%] h-[100%] object-cover' />
                                 </div>
                             }
                         </>
@@ -133,7 +160,7 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
         {
             openPostPage &&
 
-            <div className="pop-up-component min-h-[100vh] absolute top-[0] left-[0] w-[100%] bg-gray-100 dark:bg-slate-800">
+            <div className="pop-up-component min-h-[100%] absolute top-[0] left-[0] w-[100%] bg-gray-100 dark:bg-slate-800">
                 <PopupPost setOpenPostPage={ setOpenPostPage } blogPost={ blogPost }/>
             </div>
         }

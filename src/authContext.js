@@ -82,7 +82,7 @@ export const AuthProvider = ({children}) => {
 
     // blogs
 
-    const postBlog = async (title, blog, category, clap) => {
+    const postBlog = async (title, blog, category, clap, img) => {
 
         try{
              
@@ -95,7 +95,8 @@ export const AuthProvider = ({children}) => {
                  createdAt: new Date(),
                  id: uuidv4(),
                  category,
-                 clap
+                 clap,
+                 img
                 //  photo: currentUser.photoURL
              })
              

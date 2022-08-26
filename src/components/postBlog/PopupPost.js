@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../authContext';
 
 const PopupPost = ({setOpenPostPage, blogPost}) => {
@@ -13,16 +13,19 @@ const PopupPost = ({setOpenPostPage, blogPost}) => {
 
   const publishBlog = () => {
 
-    postBlog(blogPost.title, blogPost.body, category.current.value, clap);
+    postBlog(blogPost.title, blogPost.body, category.current.value, clap, blogPost.img);
+  
   }
 
-
+  
   console.log(userData);
 
   useEffect(() => {
 
     // blogPost && console.log(blogPost)
     fetchUserData();
+
+    console.log(blogPost.img);
 
   }, [userData]);
 
@@ -38,7 +41,7 @@ const PopupPost = ({setOpenPostPage, blogPost}) => {
           <div className="story-preview md:w-[48%] w-full mb-[4rem] md:mb-[0rem]">
             <h1 className='font-bold mb-[1rem] text-gray-700 dark:text-gray-200'>Story Preview</h1>
             <div className="image-preview-container mb-[1rem]">
-              {noImage ? userData && <div className="image-container rounded-[3px] h-[14rem] w-[100%] bg-gray-200  dark:bg-slate-500 flex items-center justify-center text-center"><small className='text-gray-600 dark:text-gray-300'>Include a high quality image in your story to make it pop!</small></div> : <img src="" alt="" />}
+              {blogPost.img ? <div className="image-container rounded-[3px] h-[14rem] w-[100%]"><img src={ blogPost.img } alt="" className='h-full w-full object-cover'/></div> : <div className="image-container rounded-[3px] h-[14rem] w-[100%] bg-gray-200  dark:bg-slate-500 flex items-center justify-center text-center"><small className='text-gray-600 dark:text-gray-300'>Include a high quality image in your story to make it pop!</small></div> }
             </div>
             <h1 className='font-bold text-[1.1rem] text-gray-700 mb-[.27rem] dark:text-gray-200'>New Title</h1>
             <div className='mb-[.55rem]'>
