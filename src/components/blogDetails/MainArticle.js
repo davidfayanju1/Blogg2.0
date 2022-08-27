@@ -5,6 +5,7 @@ import { BiMessageRounded } from 'react-icons/bi';
 import { IoIosHeartEmpty } from 'react-icons/io';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee, faHandsClapping } from '@fortawesome/free-solid-svg-icons'
+import moment from 'moment';
 
 const MainArticle = ({ blog }) => {
 
@@ -29,17 +30,18 @@ const MainArticle = ({ blog }) => {
         
       <div className='blog-author-details flex justify-between items-center mb-[1rem]'>
         <div className="flex items-center">
-            {!blog.img ? <p className='bg-red-800 w-[3rem] h-[3rem] rounded-[100%] text-[1.9rem] flex items-center justify-center font-semibold text-gray-200'> { blog.author.charAt(0) }</p> : <img src={ blog.img } alt={ blog.category} className="w-[3rem] h-[3rem] rounded-[100%]"/> }
+            {!blog.img ? <p className='bg-red-800 w-[3rem] h-[3rem] rounded-[100%] text-[1.9rem] flex items-center justify-center font-semibold text-gray-200'> { blog.author[0] }</p> : <img src={ blog.img } alt={ blog.category} className="w-[3rem] h-[3rem] rounded-[100%]"/> }
             <div className="info ml-[0.8rem]">
               <p className='text-gray-900 dark:text-gray-200 text-[1.15rem] mb-[.2rem]'>{ blog.author }</p>
               <div className="inner-flex flex items-center text-gray-700 dark:text-gray-200 text-[0.9rem]">
-                <p className='flex items-center'>{ blog.date }.</p>
+                <p className='flex items-center'>{ moment(blog.createdAt.toDate().toString()).format('ll').substring(0, 6) }.</p>
                 <p className="read-time ml-[0.4rem]">7 min read</p>
               </div>
             </div>
         </div>
         <div className="user-icons">
-          <MdOutlineBookmarkAdd  className='text-[1.8rem] cursor-pointer' title="Save"/>
+          {/* <MdOutlineBookmarkAdd  className='text-[1.8rem] cursor-pointer' /> */}
+          <svg width="25" height="25"  className="dark:fill-white cursor-pointer" title="Save"><path d="M18 2.5a.5.5 0 0 1 1 0V5h2.5a.5.5 0 0 1 0 1H19v2.5a.5.5 0 1 1-1 0V6h-2.5a.5.5 0 0 1 0-1H18V2.5zM7 7a1 1 0 0 1 1-1h3.5a.5.5 0 0 0 0-1H8a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-8.5a.5.5 0 0 0-1 0v7.48l-5.2-4a.5.5 0 0 0-.6 0l-5.2 4V7z"></path></svg>
         </div>
       </div>
       
@@ -62,7 +64,8 @@ const MainArticle = ({ blog }) => {
         </div>
 
         <div className={ stuck ? 'hidden' : '' }>
-          <MdOutlineBookmarkAdd  className='text-[1.8rem] cursor-pointer' title="Save"/>
+          {/* <MdOutlineBookmarkAdd  className='text-[1.8rem] cursor-pointer' title="Save"/> */}
+          <svg width="25" height="25"  className="dark:fill-white cursor-pointer" title="Save"><path d="M18 2.5a.5.5 0 0 1 1 0V5h2.5a.5.5 0 0 1 0 1H19v2.5a.5.5 0 1 1-1 0V6h-2.5a.5.5 0 0 1 0-1H18V2.5zM7 7a1 1 0 0 1 1-1h3.5a.5.5 0 0 0 0-1H8a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-8.5a.5.5 0 0 0-1 0v7.48l-5.2-4a.5.5 0 0 0-.6 0l-5.2 4V7z"></path></svg>
         </div>
       </div>
     </main>

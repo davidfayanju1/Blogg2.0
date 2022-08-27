@@ -5,6 +5,9 @@ import football from '../img/football.jpg';
 import family from '../img/family.jpg';
 import MainArticle from '../components/blogDetails/MainArticle';
 import Aside from '../components/blogDetails/Aside';
+import { useAuth } from '../authContext';
+import { db } from '../firebase';
+
 
 export const Details = () => {
 
@@ -75,9 +78,44 @@ export const Details = () => {
     
     const blogsArray = blogs.filter((blog) => blog.id.toString() === id)
 
+    
+    const [ blogItems, setBlogItems ] = useState([]);
+    const [ loading, setLoading ] = useState(true)
+
+    const fetchPost = async () => {
+
+      try{
+          const response = db.collection('posts')
+
+          const data = await response.get()
+
+          setBlogItems([])
+
+          data.docs.forEach(blogItem => {
+
+              if(blogItem.data().id.toString() ===   id ){
+                  setBlogItems(item => [...item, blogItem.data() ])
+              }else{
+                  return null;
+              }
+
+              setLoading(false)    
+          })
+          
+                      
+      }catch(error) {
+          console.log(error)
+      }
+          
+  }
+    
+    
     useEffect(() =>{
 
-      setDetails(blogsArray);
+      // setDetails(blogsArray);
+      fetchPost();
+
+      console.log(blogItems);
 
     }, [])
 
@@ -85,7 +123,7 @@ export const Details = () => {
   return (
     <div className='mt-[4.5rem] dark:bg-slate-900 bg-gray-200 w-[100%] min-h-[100vh]'>
       {
-        blogsArray.map((blog) => (
+        blogItems.map((blog) => (
           <div className="flex justify-between" key={ blog.id }>
             <div className="main-article md:w-[75%] w-[100%]">
               <MainArticle blog={ blog }/>

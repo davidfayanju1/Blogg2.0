@@ -52,7 +52,7 @@ const Nav = ({toggleTheme, darkTheme}) => {
             <div>
                 {currentUser ? 
                 
-                userData && <Link to="/dashboard"><p className='bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-gray-200'>{ userData[0] }</p></Link> 
+                userData && <Link to="/dashboard"><p className='bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-gray-200'>{ userData.name[0] }</p></Link> 
                 : 
                 <Link to="/login"><button className="bg-black text-white rounded-[30px] w-[8rem] h-[2.4rem] dark:bg-white dark:text-black">Get Started</button></Link>}
             </div>

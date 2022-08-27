@@ -68,7 +68,8 @@ export const AuthProvider = ({children}) => {
 
             const data = query.docs[0].data();
             
-            setUserData(data.name);
+
+            setUserData(data);
 
             
         }catch (err){
@@ -86,7 +87,7 @@ export const AuthProvider = ({children}) => {
              await db.collection('posts')
              .add({
                  uid: currentUser.uid, 
-                 author: userData,
+                 author: userData.name,
                  title,
                  blog,
                  createdAt: new Date(),
@@ -104,7 +105,35 @@ export const AuthProvider = ({children}) => {
         }
     }
 
+    
+    const [ blogItems, setBlogItems ] = useState([]);
+    
+    const fetchAllPosts = async () => {
+        
+        try{
+            const response = db.collection('posts')
+            .orderBy('createdAt', 'desc')
+
+            const data = await response.get()
+
+            
+            // data.docs.forEach(blogItem => setBlogItems(item => [...item, blogItem.data() ]))
+            setBlogItems([]);
+            data.docs.forEach(blog => { setBlogItems(item => [...item, blog.data()])});
+            
+            
+        }catch(error) {
+            console.log(error)
+        }
+            
+    }
+
+
+    
+    
     const [ blogs, setBlogs ] = useState([])
+
+    const [ number, setNumber ] = useState(0)
 
     const fetchUserBlogposts = async () => {
 
@@ -113,20 +142,34 @@ export const AuthProvider = ({children}) => {
 
             const data = await response.get()
 
-            setBlogs([])
+            setBlogs([]);
 
-            data.docs.forEach(blogItem => {
+            // data.docs.forEach(blogItem => {
 
-                if(blogItem.data().uid ===  currentUser.uid){
+            //     // console.log(blogItem.data());
+
+            //     if(blogItem.data().uid ===  userData.uid){
                     
-                    setLoading(false)
-                    setBlogs(item => [...item, blogItem.data()])
+            //         // setLoading(false)
+            //         console.log([blogItem.data()].length)
 
-                }else{
-                    return null
-                }
+            //     }else{
+            //         return null;
+            //     }
+                
+            //     // console.log(blogs)
+            // })
 
-            })
+            // console.log(userData.uid);
+
+            
+            const filter = data.docs.filter((blogItem => (blogItem.data().uid === userData.uid)))    
+            console.log(filter.length);
+            setNumber(filter.length);
+            console.log(number);
+            
+
+
                                 
         }catch(error) {
             console.log(error)
@@ -134,38 +177,25 @@ export const AuthProvider = ({children}) => {
             
     }
 
-    const [ blogItems, setBlogItems ] = useState([]);
     
-    const fetchAllPosts = async () => {
+    useEffect(() => {
 
-        try{
-            const response = db.collection('posts')
-            .orderBy('createdAt', 'desc')
+        // fetchUserData()
 
-            const data = await response.get()
+        fetchUserBlogposts();
 
-
-            // data.docs.forEach(blogItem => setBlogItems(item => [...item, blogItem.data() ]))
-            setBlogItems([]);
-            data.docs.forEach(blog => { setBlogItems(item => [...item, blog.data()])});
-
-            console.log(blogItems);
-                        
-        }catch(error) {
-            console.log(error)
-        }
-            
-    }
-
-
+    }, [userData, number])
+    
+    
     useEffect(()=> {
-
+        
         const unsubscribe = auth.onAuthStateChanged( user => {
             setCurrentUser(user);
             setLoading(false);
         })
         
         return unsubscribe;
+        
 
     }, [])
 
@@ -181,7 +211,8 @@ export const AuthProvider = ({children}) => {
         fetchUserBlogposts,
         fetchAllPosts,
         setBlogItems,
-        blogItems
+        blogItems,
+        number
     }
 
     return (
