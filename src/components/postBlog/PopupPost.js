@@ -17,8 +17,6 @@ const PopupPost = ({setOpenPostPage, blogPost}) => {
   
   }
 
-  
-  console.log(userData);
 
   useEffect(() => {
 
@@ -38,6 +36,8 @@ const PopupPost = ({setOpenPostPage, blogPost}) => {
       </div>
       {/* flex-container */}
       <div className="blog-content flex justify-between items-start md:flex-row flex-col">
+          
+          {/* story preview  */}
           <div className="story-preview md:w-[48%] w-full mb-[4rem] md:mb-[0rem]">
             <h1 className='font-bold mb-[1rem] text-gray-700 dark:text-gray-200'>Story Preview</h1>
             <div className="image-preview-container mb-[1rem]">
@@ -60,13 +60,13 @@ const PopupPost = ({setOpenPostPage, blogPost}) => {
               <p className='text-[.85rem] mb-[1rem]'>Add a topic so readers know what your story is about</p>
 
               <div className="topics-update">
-                <select name="topics" ref={category} className='w-full text-black py-[1.2rem] px-[.9rem] outline-none border-solid border-[0.1rem] rounded-[5px] border-gray-300 mb-[2rem] bg-transparent dark:bg-slate-500 dark:text-gray-200' required>
+                <select name="topics" ref={category} onChange={() => console.log(category)} className='w-full text-black py-[1.2rem] px-[.9rem] outline-none border-solid border-[0.1rem] rounded-[5px] border-gray-300 mb-[2rem] bg-transparent dark:bg-slate-500 dark:text-gray-200' required>
                   <option value="" disabled>Add a topic...</option>
-                  <option value="relationship">Relationship</option>
-                  <option value="lifestyle">Lifestyle</option>
-                  <option value="sports">Sports</option>
-                  <option value="entertainment">Entertainment</option>
-                  <option value="gaming">Gaming</option>
+                  <option value="Relationship">Relationship</option>
+                  <option value="Lifestyle">Lifestyle</option>
+                  <option value="Sports">Sports</option>
+                  <option value="Entertainment">Entertainment</option>
+                  <option value="Gaming">Gaming</option>
                 </select>
               </div>
             </div>

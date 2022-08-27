@@ -78,10 +78,7 @@ export const AuthProvider = ({children}) => {
         
     }
     
-    console.log(userData);
-
     // blogs
-
     const postBlog = async (title, blog, category, clap, img) => {
 
         try{
@@ -109,7 +106,7 @@ export const AuthProvider = ({children}) => {
 
     const [ blogs, setBlogs ] = useState([])
 
-    const fetchBlogpost = async () => {
+    const fetchUserBlogposts = async () => {
 
         try{
             const response = db.collection('posts').orderBy('createdAt', 'desc')
@@ -137,6 +134,29 @@ export const AuthProvider = ({children}) => {
             
     }
 
+    const [ blogItems, setBlogItems ] = useState([]);
+    
+    const fetchAllPosts = async () => {
+
+        try{
+            const response = db.collection('posts')
+            .orderBy('createdAt', 'desc')
+
+            const data = await response.get()
+
+
+            // data.docs.forEach(blogItem => setBlogItems(item => [...item, blogItem.data() ]))
+            setBlogItems([]);
+            data.docs.forEach(blog => { setBlogItems(item => [...item, blog.data()])});
+
+            console.log(blogItems);
+                        
+        }catch(error) {
+            console.log(error)
+        }
+            
+    }
+
 
     useEffect(()=> {
 
@@ -157,7 +177,11 @@ export const AuthProvider = ({children}) => {
         fetchUserData,
         userData,
         loginUser,
-        postBlog
+        postBlog,
+        fetchUserBlogposts,
+        fetchAllPosts,
+        setBlogItems,
+        blogItems
     }
 
     return (

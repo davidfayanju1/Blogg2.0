@@ -5,11 +5,14 @@ import football from '../../img/football.jpg';
 import family from '../../img/family.jpg';
 import { MdOutlineBookmarkAdd } from 'react-icons/md';
 import './HomeStyles.css';
+import { useAuth } from '../../authContext';
+import moment from 'moment';
 
 
 const Blogs = () => {
 
   // latest, family, lifestyle,sports,travel,beauty
+  const { fetchAllPosts, setBlogItems, blogItems } = useAuth()
 
   const [likes, setLikes] = useState(false);
   const [blogPosts, setBlogPosts] = useState([
@@ -22,53 +25,6 @@ const Blogs = () => {
       img: beauty,
       category: 'Lifestyle',
       likes: 1,
-      isLiked: false
-    },
-
-    {
-      title: 'Fun Part of Having Kids',
-      id: 2,
-      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae',
-      author: 'James Tonly',
-      date: 'Feb 23',
-      img: beauty,
-      category: 'Relationship',
-      likes: 10,
-      isLiked: false
-    },
-
-    {
-      title: 'Beginning of new Season',
-      id: 3,
-      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima nostrum inventore dolorem labore aliquid est eos dicta natus quae quia, officia quos rem iste eveniet, eligendi ex. Quis, rerum asperiores reprehenderit, delectus maxime, veritatis alias quisquam ipsum error ducimus obcaecati.',
-      author: 'Patrick Vierra',
-      date: 'Aug 3',
-      img: football,
-      category: 'Sports',
-      likes: 2,
-      isLiked: false
-    },
-
-    {
-      title: 'The Northern Irelands and its peace',
-      id: 4,
-      body: 'Lorem, Ipsum dolor hamet. sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae',
-      author: 'James Tonly',
-      date: 'Feb 23',
-      img: family,
-      category: 'Lifestyle',
-      likes: 3,
-      isLiked: false
-    },
-    {
-      title: 'The Northern Irelands and its peace',
-      id: 5,
-      body: 'Lorem, Ipsum dolor hamet sit amet consectetur adipisicing elit. Eius quasi dicta aperiam',
-      author: 'James Tonly',
-      date: 'Feb 23',
-      img: family,
-      category: 'Lifestyle',
-      likes: 3,
       isLiked: false
     }
   ])
@@ -83,7 +39,7 @@ const Blogs = () => {
         
         setBlogPosts(likedPost);     
       
-    }
+  }
     
     
     
@@ -114,46 +70,59 @@ const Blogs = () => {
     },
   ]
 
+  useEffect(() => {
+
+    fetchAllPosts();
+
+
+  }, []);
+
   return (
-    <section className='dark:bg-slate-900 dark:text-white bg-slate-200 min-w-[22.6rem] lg:px-[4.75rem] lg:py-[8rem] px-[1.8rem] py-[6rem] '>
+    <section className='dark:bg-slate-900 dark:text-white bg-slate-200 min-w-[22.6rem] min-h-[100vh] lg:px-[4.75rem] lg:py-[8rem] px-[1.8rem] py-[6rem] '>
       <h1 className='md:text-[4.75rem] text-[2.5rem] font-bold text-center font-serif mb-[2rem]'>BLOGS</h1>
       <div className="flex-container flex items-start justify-between flex-col-reverse md:flex-row md:min-w-[27rem]">
         <div className="blogs-grid min-h-full md:w-[60%] w-[100%] md:min-w-[21rem]">
           {
-            blogPosts.map((blogPost, index) => (
-              <div className="blog flex items-top mb-[4rem] justify-between md:min-h-[10rem] h-[8rem] " key={blogPost.id}>
-                <div className="blog-text w-[68.3%]">
+            blogItems.map((blogPost, index) => (
+              <div className="blog flex items-top mb-[4rem] justify-between md:min-h-[10rem] h-[8rem]" key={ blogPost.id }>
+                <div className={`blog-text ${ blogPost.img === null ? 'w-[100%]' : 'w-[63.1%]'}`}>
                   <Link to={`/userDetails/${blogPost.author}`}>
                     <div className="blog-author flex">
-                      <img src={ blogPost.img} alt={ blogPost.id}  className=" h-[1.65rem] w-[1.65rem] rounded-[100%] object-cover"/>
+                      {
+                       blogPost.img ?  <img src={ blogPost.img} alt={ blogPost.id}  className=" h-[1.65rem] w-[1.65rem] rounded-[100%] object-cover"/> : <p className='bg-red-800 h-[1.65rem] w-[1.65rem] rounded-[100%] text-[1.1rem] flex items-center justify-center font-semibold text-white'> { blogPost.author[0] }</p>
+                      }
                       <p className='author-name ml-[0.2rem]'>{ blogPost.author }</p>
                     </div>
                   </Link>
                   <Link to={`/details/${blogPost.id}`}>
                     <div className="blog-body w-[100%] mb-[1.2rem]">
                       <h1 className="blog-title md:text-[1.44rem] text-[1.2rem] font-bold">{ blogPost.title }</h1>
-                      <p className="blog-text text-gray-700 dark:text-gray-200 text-[1.05rem] md:line-clamp-2 hidden">{ blogPost.body }</p>
+                      <p className="blog-text text-gray-700 dark:text-gray-200 text-[1.05rem] md:line-clamp-2 hidden">{ blogPost.blog }</p>
                     </div>
                   </Link>
                   <div className="blog-date-data flex justify-between items-center">
                     <div className='flex text-gray-700 dark:text-gray-200 text-[0.9rem]'>
-                      <p className="blog-time  mr-[0.6rem]">{ blogPost.date}</p>
+                      <p className="blog-time  mr-[0.6rem]">{ moment(blogPost.createdAt.toDate().toString()).format('ll').substring(0, 6)}</p>
                       <p className="mr-[0.6rem]">7min read</p>
                       <Link to={`/topicDetails/${ blogPost.category }`}>
                         <div className="blog-category mr-[0.6rem] bg-gray-300 h-[1.5rem] px-[0.7rem] rounded-[13px] hidden md:block dark:text-gray-800">{ blogPost.category }</div>
                       </Link>
                     </div>
                     <div className="save-icon ml-[2rem]">
-                      <MdOutlineBookmarkAdd  className='text-[1.4rem]' title="Save"/>
+                      {/* <MdOutlineBookmarkAdd  className='text-[1.4rem]' title="Save"/> */}
+                      <svg width="25" height="25"  className="dark:fill-white"><path d="M18 2.5a.5.5 0 0 1 1 0V5h2.5a.5.5 0 0 1 0 1H19v2.5a.5.5 0 1 1-1 0V6h-2.5a.5.5 0 0 1 0-1H18V2.5zM7 7a1 1 0 0 1 1-1h3.5a.5.5 0 0 0 0-1H8a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-8.5a.5.5 0 0 0-1 0v7.48l-5.2-4a.5.5 0 0 0-.6 0l-5.2 4V7z"></path></svg>
                     </div>
                   </div>  
                 </div>
+                {
+                  blogPost.img && 
 
-                <div className="blog-image w-[30%] object-cover min-h-[8rem]">
-                  <Link to={`details/${blogPost.id}`}>
-                    { blogPost.img && <img src={ blogPost.img} alt={ blogPost.id} className="w-[100%] h-[100%]" /> }
-                  </Link>
-                </div>
+                  <div className="blog-image w-[30%] min-h-[8rem]">
+                    <Link to={`details/${blogPost.id}`}>
+                      <img src={ blogPost.img} alt={ blogPost.id} className="object-cover w-[100%] h-[100%]" />
+                    </Link>
+                  </div>
+                }  
               </div>
             ))
           }
