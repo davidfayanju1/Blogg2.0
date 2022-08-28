@@ -133,7 +133,8 @@ export const AuthProvider = ({children}) => {
     
     const [ blogs, setBlogs ] = useState([])
 
-    const [ number, setNumber ] = useState(0)
+    const [ number, setNumber ] = useState([])
+    const [ userBlogs, setUserBlogs ] = useState([]);
 
     const fetchUserBlogposts = async () => {
 
@@ -142,7 +143,7 @@ export const AuthProvider = ({children}) => {
 
             const data = await response.get()
 
-            setBlogs([]);
+            setNumber([]);
 
             // data.docs.forEach(blogItem => {
 
@@ -162,11 +163,18 @@ export const AuthProvider = ({children}) => {
 
             // console.log(userData.uid);
 
-            
+            setUserBlogs([])
+
             const filter = data.docs.filter((blogItem => (blogItem.data().uid === userData.uid)))    
-            console.log(filter.length);
-            setNumber(filter.length);
-            console.log(number);
+            
+            filter.forEach(item => {
+
+                setUserBlogs(item.data())
+
+            })
+            
+            setNumber(filter);
+            console.log(userBlogs);
             
 
 
@@ -178,13 +186,14 @@ export const AuthProvider = ({children}) => {
     }
 
     
+    
     useEffect(() => {
-
+        
         // fetchUserData()
 
-        fetchUserBlogposts();
+       userData && fetchUserBlogposts();
 
-    }, [userData, number])
+    }, [userData])
     
     
     useEffect(()=> {
@@ -212,7 +221,7 @@ export const AuthProvider = ({children}) => {
         fetchAllPosts,
         setBlogItems,
         blogItems,
-        number
+        number,
     }
 
     return (

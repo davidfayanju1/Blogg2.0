@@ -78,7 +78,7 @@ const Blogs = () => {
   }, []);
 
   return (
-    <section className='dark:bg-slate-900 dark:text-white bg-slate-200 min-w-[22.6rem] min-h-[100vh] lg:px-[4.75rem] lg:py-[8rem] px-[1.8rem] py-[6rem] '>
+    <section className='dark:bg-slate-900 dark:text-white bg-gray-50 min-w-[22.6rem] min-h-[100vh] lg:px-[4.75rem] lg:py-[8rem] px-[1.8rem] py-[6rem] '>
       <h1 className='md:text-[4.75rem] text-[2.5rem] font-bold text-center font-serif mb-[2rem]'>BLOGS</h1>
       <div className="flex-container flex items-start justify-between flex-col-reverse md:flex-row md:min-w-[27rem]">
         <div className="blogs-grid min-h-full md:w-[60%] w-[100%] md:min-w-[21rem]">

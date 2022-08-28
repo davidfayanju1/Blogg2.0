@@ -3,12 +3,21 @@ import { useParams, Link } from 'react-router-dom'
 import UserAside from '../components/userDetails/UserAside';
 import UserMain from '../components/userDetails/UserMain';
 import beauty from '../img/beauty.jpg';
-
+import { useAuth } from '../authContext';
 
 
 const UserDetails = () => {
 
     const { user } = useParams();
+    const { number } = useAuth();
+    const [ userBlogs, setUserBlogs ] = useState([]);
+
+      // number.forEach(item => {
+
+      //   console.log(b => [...b, item.data()])
+        
+      //   console.log(userBlogs);
+      // });
 
     const data = [
       {
