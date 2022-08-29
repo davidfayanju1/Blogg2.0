@@ -9,16 +9,11 @@ import { useAuth } from '../authContext';
 const UserDetails = () => {
 
     const { user } = useParams();
-    const { number } = useAuth();
-    const [ userBlogs, setUserBlogs ] = useState([]);
+    const { number, userBlogs } = useAuth();
+    // const [ userBlogs, setUserBlogs ] = useState([]);
 
-      // number.forEach(item => {
-
-      //   console.log(b => [...b, item.data()])
-        
-      //   console.log(userBlogs);
-      // });
-
+    console.log(userBlogs);
+      
     const data = [
       {
         name: user,
@@ -58,17 +53,18 @@ const UserDetails = () => {
 
   return (
     <div className='mt-[4.5rem] dark:bg-slate-900 bg-gray-200 min-h-[100vh] w-[100%]'>
+                
         {
-          data.map((person) => (
-            <div className="flex justify-between" key={ person.id }>
+        
+            <div className="flex justify-between">
               <div className="main-article md:w-[75%] w-[100%]">
-                <UserMain person={ person }/>
+                <UserMain user={ user }/>
               </div>
               <div className="article-sidebar md:w-[25%] hidden md:block">
-                <UserAside person={ person }/>
+                <UserAside user={ user }/>
               </div>
             </div>
-          ))
+          
         }
     </div>
   )

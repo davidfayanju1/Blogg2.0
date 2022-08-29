@@ -7,8 +7,6 @@ const authContext = createContext();
 
 export const useAuth = () => useContext(authContext);
 
-
-
 export const AuthProvider = ({children}) => {
     const [ loading, setLoading ] = useState(true);
     const [currentUser, setCurrentUser ] = useState(null);
@@ -169,16 +167,13 @@ export const AuthProvider = ({children}) => {
             
             filter.forEach(item => {
 
-                setUserBlogs(item.data())
+                setUserBlogs(b => [...b, item.data()])
 
+                console.log(item.data().author);
             })
             
             setNumber(filter);
-            console.log(userBlogs);
-            
-
-
-                                
+                                            
         }catch(error) {
             console.log(error)
         }
@@ -222,6 +217,7 @@ export const AuthProvider = ({children}) => {
         setBlogItems,
         blogItems,
         number,
+        userBlogs
     }
 
     return (

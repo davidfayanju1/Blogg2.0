@@ -48,7 +48,7 @@ const MainArticle = ({ blog }) => {
       <div className="blog-details mb-[3rem]">
         <h1 className="blog-title font-bold md:text-[2.4rem] text-[1.8rem] mb-[2rem] dark:text-white ">{ blog.title}</h1>
         { blog.img &&  <img src={ blog.img } alt={ blog.title }  className="w-[100%] md:h-[60vh] h-[50vh] object-cover mb-[2rem]"/> }
-        <article className='font-serif md:text-[1.25rem] text-[1.1rem] text-gray-800 dark:text-gray-300'>{ blog.body }</article>    
+        <article className='font-serif md:text-[1.25rem] text-[1.1rem] text-gray-800 dark:text-gray-300'>{ blog.blog }</article>    
       </div>
 
       <div className={`blog-icons-section ${ stuck ? 'w-[8.2rem] h-[2.8rem] rounded-[22px] text-center mx-[auto]' : 'w-[100%]'} flex justify-between dark:text-white text-gray-700 text-[1.65rem] sticky bottom-[-1px] bg-gray-200 dark:bg-slate-900`} ref={ ref }>
