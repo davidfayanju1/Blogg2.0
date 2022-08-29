@@ -23,7 +23,7 @@ const UserMain = ({user}) => {
         userBlogs &&  userBlogs.map((person) => (
           <div className="blog-card-container" key={person.id}>
             <div className="blog-card flex items-top mb-[4rem] justify-between md:min-h-[14rem] h-[8rem] border-b dark:border-gray-300 border-gray-400 pb-[3rem]">
-              <div className="blog-text w-[68.3%]">
+              <div className={`blog-text ${person.img !== null ? 'w-[68.3%]' : 'w-[100%]'}`}>
                   <div className="blog-author">
                     <p className="blog-time  mr-[0.6rem]">{ moment(person.createdAt.toDate().toString()).format('ll').substring(0, 6)}</p>
                   </div>
@@ -47,11 +47,14 @@ const UserMain = ({user}) => {
                 </div>  
               </div>
 
-              <div className="blog-image w-[30%] object-cover md:min-h-[8rem] min-h-[6rem]">
-                <Link to={`details/${person.id}`}>
-                  { person.img && <img src={ person.img} alt={ person.id} className="w-[100%] h-[100%]" /> }
-                </Link>
-              </div>
+              { person.img && 
+
+                  <div className="blog-image w-[30%]  md:min-h-[8rem] min-h-[6rem]">
+                    <Link to={`details/${person.id}`}>
+                      <img src={ person.img} alt={ person.id} className="object-cover w-[100%] h-[100%]" /> 
+                    </Link>
+                  </div>
+              }
             </div>
         </div>
         ))

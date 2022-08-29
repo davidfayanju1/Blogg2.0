@@ -84,8 +84,8 @@ export const AuthProvider = ({children}) => {
              
              await db.collection('posts')
              .add({
-                 uid: currentUser.uid, 
-                 author: userData.name,
+                 uid: userData.uid, 
+                 author: userData,
                  title,
                  blog,
                  createdAt: new Date(),
@@ -162,6 +162,11 @@ export const AuthProvider = ({children}) => {
             // console.log(userData.uid);
 
             setUserBlogs([])
+
+            (data.docs.forEach( b => {
+
+                console.log(b.data().author);
+            }));
 
             const filter = data.docs.filter((blogItem => (blogItem.data().uid === userData.uid)))    
             

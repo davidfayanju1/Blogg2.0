@@ -47,6 +47,13 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
     const postBlog = () => {
         // hit the publish button
         setOpenPostPage(true);
+
+        // console.log({
+        //     title:titleRef.current.value,
+        //     body:bodyRef.current.value,
+        //     img:file
+        // })
+
         setBlogPost({
             title:titleRef.current.value,
             body:bodyRef.current.value,

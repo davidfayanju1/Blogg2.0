@@ -25,7 +25,7 @@ const PopupPost = ({setOpenPostPage, blogPost}) => {
 
     console.log(blogPost.img);
 
-  }, [userData]);
+  }, [userData.name]);
 
   return (
     <div className='container md:w-[75%] mx-auto md:py-[2rem] pb-[4rem] w-[85%]'>
@@ -54,7 +54,7 @@ const PopupPost = ({setOpenPostPage, blogPost}) => {
 
           <div className="publish-section md:w-[44%] w-full">
             <div className="publiser mb-[.8rem] text-gray-600 dark:text-gray-100">
-              <p>Publishing to : <span className='font-bold'>{ userData }</span></p>
+              <p>Publishing to : <span className='font-bold'>{ userData.name }</span></p>
             </div>
             <div className="body">
               <p className='text-[.85rem] mb-[1rem]'>Add a topic so readers know what your story is about</p>

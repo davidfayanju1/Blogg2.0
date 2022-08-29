@@ -52,7 +52,7 @@ const UserDetails = () => {
 
 
   return (
-    <div className='mt-[4.5rem] dark:bg-slate-900 bg-gray-200 min-h-[100vh] w-[100%]'>
+    <div className='mt-[4.5rem] dark:bg-slate-900 bg-gray-50 min-h-[100vh] w-[100%]'>
                 
         {
         
