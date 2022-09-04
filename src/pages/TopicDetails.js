@@ -28,39 +28,6 @@ function TopicDetails() {
         category: 'Gaming',
         likes: 2,
         isLiked: false
-      },
-      {
-        title: 'Who Died??..oh False Alarm',
-        id: 3,
-        body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima nostrum inventore dolorem labore aliquid est eos dicta natus quae quia, officia quos rem iste eveniet, eligendi ex. Quis, rerum asperiores reprehenderit, delectus maxime, veritatis alias quisquam ipsum error ducimus obcaecati.',
-        author: 'Patrick Vierra',
-        date: 'Aug 3',
-        img: football,
-        category: 'Entertainment',
-        likes: 2,
-        isLiked: false
-      },
-      {
-        title: 'Beginning of new Season',
-        id: 3,
-        body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima nostrum inventore dolorem labore aliquid est eos dicta natus quae quia, officia quos rem iste eveniet, eligendi ex. Quis, rerum asperiores reprehenderit, delectus maxime, veritatis alias quisquam ipsum error ducimus obcaecati.',
-        author: 'Patrick Vierra',
-        date: 'Aug 3',
-        img: football,
-        category: 'Sports',
-        likes: 2,
-        isLiked: false
-      },
-  
-      {
-        title: 'Beginning of new Season',
-        id: 5,
-        body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima nostrum inventore dolorem labore aliquid est eos dicta natus quae quia, officia quos rem iste eveniet, eligendi ex. Quis, rerum asperiores reprehenderit, delectus maxime, veritatis alias quisquam ipsum error ducimus obcaecati.',
-        author: 'Patrick Vierra',
-        date: 'Aug 3',
-        category: 'Lifestyle',
-        likes: 2,
-        isLiked: false
       }
     ]
 
@@ -106,8 +73,7 @@ function TopicDetails() {
 
       <aside>
 
-      </aside>
-      
+      </aside>      
     </div>
   )
 }

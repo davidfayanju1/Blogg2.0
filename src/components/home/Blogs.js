@@ -135,7 +135,7 @@ const Blogs = () => {
 
             {
               blogsTopic.map((bT, index) => (
-                <Link to={`/topicDetails/${bT.category}`} key={index}>
+                <Link to={`/topicDetails/${bT.category}/`} key={index}>
                   <button className='border-rounded bg-transparent h-[2.7rem] px-[1rem] border-solid border-[1.85px] rounded-[0.3rem] gap-1 border-gray-400 dark:border-white dark:text-white'>                  
                     {bT.category}
                   </button>
