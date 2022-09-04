@@ -122,6 +122,7 @@ export const AuthProvider = ({children}) => {
     }
   
     const [ blogItems, setBlogItems ] = useState([]);    
+    
     const fetchAllPosts = async () => {
         
         try{
@@ -132,6 +133,7 @@ export const AuthProvider = ({children}) => {
             
             // data.docs.forEach(blogItem => setBlogItems(item => [...item, blogItem.data() ]))
             setBlogItems([]);
+
             data.docs.forEach(blog => { setBlogItems(item => [...item, blog.data()])});
 
             

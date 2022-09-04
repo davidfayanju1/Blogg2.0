@@ -7,43 +7,34 @@ import TopicAside from '../components/topicDetails/TopicAside';
 import { ImPriceTag } from 'react-icons/im';
 import TrendingTopics from '../components/topicDetails/TrendingTopics';
 import LatestTopics from '../components/topicDetails/LatestTopics';
+import { useAuth } from '../authContext';
+
 
 
 function TopicDetails() {
 
     const { name } = useParams();
 
-    const [ filteredBlog, setFilteredBlog ] = useState([]);
-
-
-    const blogs = [
-
-      {
-        title: 'Brothers in Arms',
-        id: 3,
-        body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima nostrum inventore dolorem labore aliquid est eos dicta natus quae quia, officia quos rem iste eveniet, eligendi ex. Quis, rerum asperiores reprehenderit, delectus maxime, veritatis alias quisquam ipsum error ducimus obcaecati.',
-        author: 'Patrick Vierra',
-        date: 'Aug 3',
-        img: football,
-        category: 'Gaming',
-        likes: 2,
-        isLiked: false
-      }
-    ]
-
     
-    const newBlog = blogs.filter((blog) => blog.category === name)    
+    const { blogItems, fetchAllPosts } = useAuth();
+
+    const [ filteredBlog, setFilteredBlog ] = useState([]);
+    
     
     useEffect(() => {
-            
-      setFilteredBlog(newBlog);
-
+      
+      fetchAllPosts();
+      
     }, []);
 
-    console.log(filteredBlog);
-    
-    
+    useEffect(() => {
 
+      const newBlog = blogItems.filter((blog) => blog.category === name)    
+      setFilteredBlog(newBlog);
+      
+    }, [blogItems]);
+    
+  
   return (
     <div className="mt-[4.5rem] dark:bg-slate-900 bg-gray-50 dark:text-white min-h-[100vh]">
       <main className='md:border-solid border-r border-gray-300 border-none md:px-[5rem] px-[2.2rem] min-h-[100vh] md:w-[75%] w-[100%]'>
