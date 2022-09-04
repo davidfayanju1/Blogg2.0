@@ -12,12 +12,12 @@ const UserMain = ({id}) => {
   const [ pageBlogs, setPageBlogs ] = useState([]);
 
   const [ blogAuthor, setBlogAuthor ] = useState([]);
-
-  
   
   useEffect(() => {
     
     fetchAllUsers();
+
+    fetchAllPosts();
     
   }, [])
   
@@ -28,8 +28,15 @@ const UserMain = ({id}) => {
     setBlogAuthor(newArr);
     
   }, [users]);
+
+  useEffect(() => {
+
+    setPageBlogs([]);
+    const pageBlog = blogItems.filter((blog) => blog.uid === id)
+    setPageBlogs(pageBlog)
+
+  }, [blogItems]);
   
-  console.log(blogAuthor);
   
 
   return (
@@ -52,13 +59,13 @@ const UserMain = ({id}) => {
       </>
       {
         pageBlogs &&  pageBlogs.map((person) => (
-          <div className="userpage-container" key={person.id}>
+          <div className="blog-card-container" key={person.id}>
             <div className="blog-card flex items-top mb-[4rem] justify-between md:min-h-[11rem] h-[8rem] border-b dark:border-gray-300 border-gray-400 pb-[3rem]">
               <div className={`blog-text ${person.img !== null ? 'w-[68.3%]' : 'w-[100%]'}`}>
                   <div className="blog-author">
                     <p className="blog-time  mr-[0.6rem]">{ moment(person.createdAt.toDate().toString()).format('ll').substring(0, 6)}</p>
                   </div>
-                <Link to={`/details/${person.id}`}>
+                <Link to={`/details/${id}`}>
                   <div className="blog-body w-[100%] mb-[1.2rem]">
                     <h1 className="blog-title md:text-[1.44rem] text-[1.2rem] font-bold">{ person.title }</h1>
                     <p className="blog-text text-gray-700 dark:text-gray-200 text-[1.05rem] md:line-clamp-2 hidden">{ person.blog }</p>

@@ -4,9 +4,9 @@ import { useAuth } from '../../authContext';
 
 const UserAside = ({id, user }) => {
 
-  const { number, userData, fetchAllUsers, users } = useAuth();
+  const { userData, fetchAllUsers, users, blogItems } = useAuth();
   const [ blogAuthor, setBlogAuthor ] = useState([]);
-
+  const [ postNumber, setPostNumber ] = useState(0);
   const newArr = users.filter((mainUser) => mainUser.data().uid === id)
   
   useEffect(() => {
@@ -21,6 +21,12 @@ const UserAside = ({id, user }) => {
 
   }, [users]);
 
+  useEffect(() => {
+
+    const pageBlog = blogItems.filter((blog) => blog.uid === id)
+    setPostNumber(pageBlog.length);
+  }, [blogItems]);
+  
   
   
   return (
@@ -34,7 +40,7 @@ const UserAside = ({id, user }) => {
           </Link>
         ))
       }
-      <p className='post_number text-[1.1rem] text-gray-600 dark:text-gray-300 mb-[1rem]'>{ number.length > 1 ? `${number.length} Posts` : `${number.length} Post` }</p>
+      <p className='post_number text-[1.1rem] text-gray-600 dark:text-gray-300 mb-[1rem]'>{ postNumber > 1 ? `${postNumber} Posts` : `${postNumber} Post` }</p>
       <p className="bio text-gray-600 dark:text-gray-300">Lead Frontend Engieer at Google and strategic expert</p>
     </div>
   )
