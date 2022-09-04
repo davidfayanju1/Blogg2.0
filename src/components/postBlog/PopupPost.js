@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../authContext';
+import { useNavigate } from 'react-router-dom';
 
 const PopupPost = ({setOpenPostPage, blogPost}) => {
 
   // const title = useRef();
   const category = useRef();
+
+  const navigate = useNavigate();
 
   const { postBlog, userData, fetchUserData } = useAuth();
 
@@ -12,9 +15,10 @@ const PopupPost = ({setOpenPostPage, blogPost}) => {
   const clap = 0;
 
   const publishBlog = () => {
-
+    
     postBlog(blogPost.title, blogPost.body, category.current.value, clap, blogPost.img);
-  
+
+    navigate('/');
   }
 
 

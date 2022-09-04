@@ -92,14 +92,14 @@ function TopicDetails() {
         </div>
         <nav className="topic-links after:w-[100%] after:bg-gray-300 after:h-[.02rem] after:block mb-[2rem]">
           <ul className='flex items-center gap-[2rem]'>
-            <NavLink to={`/topicDetails/${ name }/trending`} className={({isActive}) => isActive ? ' text-black dark:text-white after:block after:h-[.04rem] after:w-[100%] after:bg-gray-500 after:dark:h-[.15rem] after:dark:bg-gray-300' : null}>Trending</NavLink>
+            <NavLink to={`/topicDetails/${ name }/`} className={({isActive}) => isActive ? ' text-black dark:text-white after:block after:h-[.04rem] after:w-[100%] after:bg-gray-500 after:dark:h-[.15rem] after:dark:bg-gray-300' : null}>Trending</NavLink>
             <NavLink to={`/topicDetails/${ name }/latest`} className={ ({isActive}) => isActive ? 'text-black dark:text-white after:block after:h-[.04rem] after:w-[100%] after:bg-gray-500 after:dark:h-[.15rem] after:dark:bg-gray-300' : null}>Latest</NavLink>
           </ul>
         </nav>
 
         {/* inner routes */}
         <Routes>
-          <Route path='trending' element={<TrendingTopics />} />
+          <Route path='/' element={<TrendingTopics />} />
           <Route path='latest' element={<LatestTopics />} />
         </Routes>
       </main>

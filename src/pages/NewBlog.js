@@ -10,7 +10,6 @@ import { BsFillMoonFill } from 'react-icons/bs';
 import { useAuth } from '../authContext';
 import { getStorage, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
-
 const NewBlog = ({toggleTheme, darkTheme}) => {
 
     // write your posts here
@@ -29,7 +28,7 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
         e.preventDefault();
         
         bodyRef.current.focus();
-        console.log(bodyRef.current.value);
+        // console.log(bodyRef.current.value);
     }
 
     const titleRef = useRef();
@@ -47,21 +46,13 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
     const postBlog = () => {
         // hit the publish button
         setOpenPostPage(true);
-
-        // console.log({
-        //     title:titleRef.current.value,
-        //     body:bodyRef.current.value,
-        //     img:file
-        // })
-
+       
         setBlogPost({
             title:titleRef.current.value,
             body:bodyRef.current.value,
             img:file
         })            
     }
-
-    
 
     const updatePostBtn = (e) => {
         // title input
@@ -103,20 +94,12 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
     useEffect(() => {
 
         fetchUserData();
-        
-        console.log(file);  
-    
+            
     }, [file]);
 
     const [ blogImg, setBlogImg ] = useState('');
 
-    // const uploadBlogImage = (e) => {
-
-    //      setBlogImg(URL.createObjectURL(e.target.files[0]))
-
-    //     // console.log(e.target.files[0]);
-    // }
-        
+            
   return (
     <div className='new-blog min-h-[100vh] dark:bg-slate-800 bg-white dark:text-white relative'>
         <nav className='flex justify-between items-center md:px-[12rem] px-[2rem] h-[4.5rem]'>

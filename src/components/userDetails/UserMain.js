@@ -1,28 +1,59 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom';
 import { MdOutlineBookmarkAdd } from 'react-icons/md';
 import { useAuth } from '../../authContext';
 import moment from 'moment';
 
 
-const UserMain = ({user}) => {
-  const { userBlogs } = useAuth();
+const UserMain = ({id}) => {
 
+  const { blogItems, fetchAllPosts, fetchAllUsers, users } = useAuth();
+
+  const [ pageBlogs, setPageBlogs ] = useState([]);
+
+  const [ blogAuthor, setBlogAuthor ] = useState([]);
+
+  
+  
+  useEffect(() => {
+    
+    fetchAllUsers();
+    
+  }, [])
+  
+  useEffect(() => {
+
+    setBlogAuthor([]);
+    const newArr = users.filter((mainUser) => mainUser.data().uid === id)
+    setBlogAuthor(newArr);
+    
+  }, [users]);
+  
+  console.log(blogAuthor);
+  
 
   return (
     <div className='min-h-[100vh] md:px-[7rem] md:py-[3rem] px-[2rem] py-[3rem] w-[100%] dark:text-white md:border-solid border-r border-gray-300 border-none'>
-      <div className="profile-name mb-[2rem]">
-          <h1 className='text-[3rem] font-bold'>{ user }</h1>
-      </div>
-      <nav className='mb-[3rem] after:block after:h-[.1rem] after:w-[100%] after:bg-gray-300'>
-          <ul>
-            <li><NavLink to={`/userDetails/${ user }`} className={({isActive}) => !isActive ? 'text-black dark:text-white after:block after:h-[.1rem] after:w-[3rem] after:bg-gray-700 after:dark:h-[.15rem] after:dark:bg-gray-300' : ''}>Home</NavLink></li>
-          </ul>
-      </nav>
+      <>
+        {
+          blogAuthor && blogAuthor.map((author) => (
+            <div key={ id }>
+              <div className="profile-name mb-[2rem]">
+              <h1 className='text-[3rem] font-bold'>{ author.data().name }</h1>
+              </div>
+              <nav className='mb-[3rem] after:block after:h-[.1rem] after:w-[100%] after:bg-gray-300'>
+                  <ul>
+                    <li><NavLink to={`/userDetails/${ author.data().uid }`} className={({isActive}) => !isActive ? 'text-black dark:text-white after:block after:h-[.1rem] after:w-[3rem] after:bg-gray-700 after:dark:h-[.15rem] after:dark:bg-gray-300' : ''}>Home</NavLink></li>
+                  </ul>
+              </nav>
+            </div>
+          ))
+        }
+      </>
       {
-        userBlogs &&  userBlogs.map((person) => (
-          <div className="blog-card-container" key={person.id}>
-            <div className="blog-card flex items-top mb-[4rem] justify-between md:min-h-[14rem] h-[8rem] border-b dark:border-gray-300 border-gray-400 pb-[3rem]">
+        pageBlogs &&  pageBlogs.map((person) => (
+          <div className="userpage-container" key={person.id}>
+            <div className="blog-card flex items-top mb-[4rem] justify-between md:min-h-[11rem] h-[8rem] border-b dark:border-gray-300 border-gray-400 pb-[3rem]">
               <div className={`blog-text ${person.img !== null ? 'w-[68.3%]' : 'w-[100%]'}`}>
                   <div className="blog-author">
                     <p className="blog-time  mr-[0.6rem]">{ moment(person.createdAt.toDate().toString()).format('ll').substring(0, 6)}</p>

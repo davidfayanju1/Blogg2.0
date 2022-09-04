@@ -82,7 +82,7 @@ export const Details = () => {
     const [ blogItems, setBlogItems ] = useState([]);
     const [ loading, setLoading ] = useState(true)
 
-    const fetchPost = async () => {
+    const fetchPostDetails = async () => {
 
       try{
           const response = db.collection('posts')
@@ -110,15 +110,15 @@ export const Details = () => {
   }
     
     
-    useEffect(() =>{
+  useEffect(() =>{
 
-      // setDetails(blogsArray);
-      fetchPost();
+    // setDetails(blogsArray);
+    fetchPostDetails();
 
-      console.log(blogItems);
-
-    }, [])
-
+    
+  }, [])
+  
+  console.log(blogItems);
 
   return (
     <div className='mt-[4.5rem] dark:bg-slate-900 bg-gray-200 w-[100%] min-h-[100vh]'>

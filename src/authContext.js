@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext, createContext } from 'react';
 import { auth, db } from './firebase';
 import { v4 as uuidv4 } from 'uuid';
 
-
 const authContext = createContext();
 
 export const useAuth = () => useContext(authContext);
@@ -56,6 +55,7 @@ export const AuthProvider = ({children}) => {
 
     const [userData, setUserData] = useState(null);
     const[displayError, setDisplayError] = useState('');
+
     const fetchUserData = async () => {
 
         try{
@@ -65,17 +65,35 @@ export const AuthProvider = ({children}) => {
             .get();
 
             const data = query.docs[0].data();
-            
-
             setUserData(data);
+           
+        }catch (err){
+            setDisplayError('Error! Inavlid Data');  
+            console.log(err);         
+        }
 
+        
+    }
+
+    const [users , setUsers] = useState([]);
+
+    const fetchAllUsers = async () => {
+        try{
+            const query = await db
+            .collection('users')
+            .get();
+
+            setUsers([]);
+            const data = query.docs;
+            
+            setUsers(data);
             
         }catch (err){
             setDisplayError('Error! Inavlid Data');  
             console.log(err);         
         }
-        
     }
+
     
     // blogs
     const postBlog = async (title, blog, category, clap, img) => {
@@ -102,10 +120,8 @@ export const AuthProvider = ({children}) => {
             // setBlogError('Error With Blog')  
         }
     }
-
-    
-    const [ blogItems, setBlogItems ] = useState([]);
-    
+  
+    const [ blogItems, setBlogItems ] = useState([]);    
     const fetchAllPosts = async () => {
         
         try{
@@ -113,24 +129,19 @@ export const AuthProvider = ({children}) => {
             .orderBy('createdAt', 'desc')
 
             const data = await response.get()
-
             
             // data.docs.forEach(blogItem => setBlogItems(item => [...item, blogItem.data() ]))
             setBlogItems([]);
             data.docs.forEach(blog => { setBlogItems(item => [...item, blog.data()])});
-            
+
             
         }catch(error) {
             console.log(error)
         }
             
     }
-
-
-    
     
     const [ blogs, setBlogs ] = useState([])
-
     const [ number, setNumber ] = useState([])
     const [ userBlogs, setUserBlogs ] = useState([]);
 
@@ -143,30 +154,7 @@ export const AuthProvider = ({children}) => {
 
             setNumber([]);
 
-            // data.docs.forEach(blogItem => {
-
-            //     // console.log(blogItem.data());
-
-            //     if(blogItem.data().uid ===  userData.uid){
-                    
-            //         // setLoading(false)
-            //         console.log([blogItem.data()].length)
-
-            //     }else{
-            //         return null;
-            //     }
-                
-            //     // console.log(blogs)
-            // })
-
-            // console.log(userData.uid);
-
             setUserBlogs([])
-
-            (data.docs.forEach( b => {
-
-                console.log(b.data().author);
-            }));
 
             const filter = data.docs.filter((blogItem => (blogItem.data().uid === userData.uid)))    
             
@@ -174,11 +162,10 @@ export const AuthProvider = ({children}) => {
 
                 setUserBlogs(b => [...b, item.data()])
 
-                console.log(item.data().author);
             })
             
             setNumber(filter);
-                                            
+                                           
         }catch(error) {
             console.log(error)
         }
@@ -186,11 +173,8 @@ export const AuthProvider = ({children}) => {
     }
 
     
-    
     useEffect(() => {
         
-        // fetchUserData()
-
        userData && fetchUserBlogposts();
 
     }, [userData])
@@ -205,7 +189,6 @@ export const AuthProvider = ({children}) => {
         
         return unsubscribe;
         
-
     }, [])
 
 
@@ -222,7 +205,9 @@ export const AuthProvider = ({children}) => {
         setBlogItems,
         blogItems,
         number,
-        userBlogs
+        userBlogs,
+        fetchAllUsers,
+        users
     }
 
     return (

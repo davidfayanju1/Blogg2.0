@@ -12,6 +12,7 @@ import moment from 'moment';
 const Blogs = () => {
 
   // latest, family, lifestyle,sports,travel,beauty
+  
   const { fetchAllPosts, setBlogItems, blogItems } = useAuth()
 
   const [likes, setLikes] = useState(false);
@@ -40,9 +41,7 @@ const Blogs = () => {
         setBlogPosts(likedPost);     
       
   }
-    
-    
-    
+        
   const blogsTopic = [
     { 
       id: 1,
@@ -74,11 +73,10 @@ const Blogs = () => {
 
     fetchAllPosts();
 
-
   }, []);
 
   return (
-    <section className='dark:bg-slate-900 dark:text-white bg-gray-50 min-w-[22.6rem] min-h-[100vh] lg:px-[4.75rem] lg:py-[8rem] px-[1.8rem] py-[6rem] '>
+    <section className='dark:bg-slate-900 dark:text-white bg-gray-50 min-w-[22.6rem] min-h-[100vh] lg:px-[4.75rem] lg:py-[8rem] px-[1.8rem] py-[6rem]'>
       <h1 className='md:text-[4.75rem] text-[2.5rem] font-bold text-center font-serif mb-[2rem]'>BLOGS</h1>
       <div className="flex-container flex items-start justify-between flex-col-reverse md:flex-row md:min-w-[27rem]">
         <div className="blogs-grid min-h-full md:w-[60%] w-[100%] md:min-w-[21rem]">
@@ -86,12 +84,12 @@ const Blogs = () => {
             blogItems.map((blogPost, index) => (
               <div className="blog flex items-top mb-[4rem] justify-between md:min-h-[10rem] h-[8rem]" key={ blogPost.id }>
                 <div className={`blog-text ${ blogPost.img === null ? 'w-[100%]' : 'w-[63.1%]'}`}>
-                  <Link to={`/userDetails/${blogPost.author}`}>
+                  <Link to={`/userDetails/${blogPost.author.uid}`}>
                     <div className="blog-author flex">
                       {
-                       blogPost.img ?  <img src={ blogPost.img} alt={ blogPost.id}  className=" h-[1.65rem] w-[1.65rem] rounded-[100%] object-cover"/> : <p className='bg-red-800 h-[1.65rem] w-[1.65rem] rounded-[100%] text-[1.1rem] flex items-center justify-center font-semibold text-white'> { blogPost.author[0] }</p>
+                       blogPost.img ?  <img src={ blogPost.img} alt={ blogPost.id}  className=" h-[1.65rem] w-[1.65rem] rounded-[100%] object-cover"/> : <p className='bg-red-800 h-[1.65rem] w-[1.65rem] rounded-[100%] text-[1.1rem] flex items-center justify-center font-semibold text-white'> { blogPost.author.name[0] }</p>
                       }
-                      <p className='author-name ml-[0.2rem]'>{ blogPost.author }</p>
+                      <p className='author-name ml-[0.2rem]'>{ blogPost.author.name }</p>
                     </div>
                   </Link>
                   <Link to={`/details/${blogPost.id}`}>

@@ -24,7 +24,7 @@ const Nav = ({toggleTheme, darkTheme}) => {
 
         fetchUserData();
 
-    }, []);
+    }, [userData]);
 
    
   return (
@@ -64,7 +64,7 @@ const Nav = ({toggleTheme, darkTheme}) => {
         <div className="mobile-icons md:hidden flex items-center">
             <div>
                 {
-                    currentUser ?  userData && <Link to="/dashboard"><p className='bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-gray-200'>{ userData[0] }</p></Link> : <Link to="/login"><button className="bg-black text-white rounded-[30px] text-[1rem] w-[8rem] h-[2rem] dark:bg-white dark:text-black">Get Started</button></Link>
+                    currentUser ?  userData && <Link to="/dashboard"><p className='bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem]  flex items-center justify-center font-semibold text-gray-200'>{ userData.name[0] }</p></Link> : <Link to="/login"><button className="bg-black text-white rounded-[30px] text-[1rem] w-[8rem] h-[2rem] dark:bg-white dark:text-black">Get Started</button></Link>
                 }
             </div>
             {
