@@ -31,8 +31,10 @@ function TopicDetails() {
 
       const newBlog = blogItems.filter((blog) => blog.category === name)    
       setFilteredBlog(newBlog);
+      console.log(filteredBlog.length);
       
     }, [blogItems]);
+
     
   
   return (
@@ -57,8 +59,8 @@ function TopicDetails() {
 
         {/* inner routes */}
         <Routes>
-          <Route path='/' element={<TrendingTopics />} />
-          <Route path='latest' element={<LatestTopics />} />
+          <Route path='/' element={<TrendingTopics filteredBlog ={ filteredBlog}/>} />
+          <Route path='latest' element={<LatestTopics filteredBlog ={ filteredBlog}/>} />
         </Routes>
       </main>
 
