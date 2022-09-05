@@ -35,6 +35,8 @@ const UserMain = ({id}) => {
     const pageBlog = blogItems.filter((blog) => blog.uid === id)
     setPageBlogs(pageBlog)
 
+    console.log(pageBlog);
+
   }, [blogItems]);
   
   
@@ -58,23 +60,23 @@ const UserMain = ({id}) => {
         }
       </>
       {
-        pageBlogs &&  pageBlogs.map((person) => (
-          <div className="blog-card-container" key={person.id}>
+        pageBlogs &&  pageBlogs.map((blogPost) => (
+          <div className="blog-card-container" key={blogPost.id}>
             <div className="blog-card flex items-top mb-[4rem] justify-between md:min-h-[11rem] h-[8rem] border-b dark:border-gray-300 border-gray-400 pb-[3rem]">
-              <div className={`blog-text ${person.img !== null ? 'w-[68.3%]' : 'w-[100%]'}`}>
+              <div className={`blog-text ${blogPost.img !== null ? 'w-[68.3%]' : 'w-[100%]'}`}>
                   <div className="blog-author">
-                    <p className="blog-time  mr-[0.6rem]">{ moment(person.createdAt.toDate().toString()).format('ll').substring(0, 6)}</p>
+                    <p className="blog-time  mr-[0.6rem]">{ moment(blogPost.createdAt.toDate().toString()).format('ll').substring(0, 6)}</p>
                   </div>
-                <Link to={`/details/${id}`}>
+                <Link to={`/details/${blogPost.id}`}>
                   <div className="blog-body w-[100%] mb-[1.2rem]">
-                    <h1 className="blog-title md:text-[1.44rem] text-[1.2rem] font-bold">{ person.title }</h1>
-                    <p className="blog-text text-gray-700 dark:text-gray-200 text-[1.05rem] md:line-clamp-2 hidden">{ person.blog }</p>
+                    <h1 className="blog-title md:text-[1.44rem] text-[1.2rem] font-bold">{ blogPost.title }</h1>
+                    <p className="blog-text text-gray-700 dark:text-gray-200 text-[1.05rem] md:line-clamp-2 hidden">{ blogPost.blog }</p>
                   </div>
                 </Link>
                 <div className="blog-date-data flex justify-between items-center">
                   <div className='flex text-gray-700 dark:text-gray-200 text-[0.9rem]'>
-                    <Link to={`/topicDetails/${ person.category }`}>
-                      <div className="blog-category mr-[0.6rem] bg-gray-300 h-[1.5rem] px-[0.7rem] rounded-[13px] hidden md:block dark:text-gray-800">{ person.category }</div>
+                    <Link to={`/topicDetails/${ blogPost.category }`}>
+                      <div className="blog-category mr-[0.6rem] bg-gray-300 h-[1.5rem] px-[0.7rem] rounded-[13px] hidden md:block dark:text-gray-800">{ blogPost.category }</div>
                     </Link>
                     <p className="mr-[0.6rem]">7min read</p>
                   </div>
@@ -85,11 +87,11 @@ const UserMain = ({id}) => {
                 </div>  
               </div>
 
-              { person.img && 
+              { blogPost.img && 
 
                   <div className="blog-image w-[30%]  md:min-h-[8rem] min-h-[6rem]">
-                    <Link to={`details/${person.id}`}>
-                      <img src={ person.img} alt={ person.id} className="object-cover w-[100%] h-[100%]" /> 
+                    <Link to={`details/${blogPost.id}`}>
+                      <img src={ blogPost.img} alt={ blogPost.id} className="object-cover w-[100%] h-[100%]" /> 
                     </Link>
                   </div>
               }
