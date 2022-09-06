@@ -2,7 +2,7 @@ import React from 'react'
 
 const TopicAside = () => {
   return (
-    <div>TopicAside</div>
+    <div className='bg-red-800'>TopicAside</div>
   )
 }
 

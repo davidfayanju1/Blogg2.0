@@ -102,7 +102,7 @@ const Blogs = () => {
                     <div className='flex text-gray-700 dark:text-gray-200 text-[0.9rem]'>
                       <p className="blog-time  mr-[0.6rem]">{ moment(blogPost.createdAt.toDate().toString()).format('ll').substring(0, 6)}</p>
                       <p className="mr-[0.6rem]">7min read</p>
-                      <Link to={`/topicDetails/${ blogPost.category }`}>
+                      <Link to={`/topicDetails/${ blogPost.category }/`}>
                         <div className="blog-category mr-[0.6rem] bg-gray-300 h-[1.5rem] px-[0.7rem] rounded-[13px] hidden md:block dark:text-gray-800">{ blogPost.category }</div>
                       </Link>
                     </div>

@@ -38,9 +38,9 @@ function TopicDetails() {
     
   
   return (
-    <div className="mt-[4.5rem] dark:bg-slate-900 bg-gray-50 dark:text-white min-h-[100vh]">
-      <main className='md:border-solid border-r border-gray-300 border-none md:px-[5rem] px-[2.2rem] min-h-[100vh] md:w-[75%] w-[100%]'>
-        <div className="topic-name h-[100%]">
+    <div className="mt-[4.5rem] dark:bg-slate-900 bg-gray-50 dark:text-white min-h-[100vh] flex">
+      <div className='md:border-solid border-r border-gray-300 border-none md:px-[5rem] px-[2.2rem] md:w-[75%] w-[100%]'>
+        <div className="topic-name">
           <div className="main-title flex items-center">
             <div className="tag-container rounded-full dark:bg-gray-300 dark:text-slate-800 bg-gray-300 md:h-[2.2rem] md:w-[2.2rem]  h-[1.7rem] w-[1.8rem] md:text-xl text-md flex items-center justify-center mr-3"><ImPriceTag /></div>
             <h1 className='font-bold md:text-[2.5rem] text-[1.7rem]'>{ name }</h1>
@@ -62,11 +62,13 @@ function TopicDetails() {
           <Route path='/' element={<TrendingTopics filteredBlog ={ filteredBlog}/>} />
           <Route path='latest' element={<LatestTopics filteredBlog ={ filteredBlog}/>} />
         </Routes>
-      </main>
+      </div>
 
-      <aside>
-
-      </aside>      
+      <div className="md:block hidden md:w-[25%] min-h-[100vh]">
+        <div className="story-number">
+          <h1 className="font-bold text-[1.2rem]">{ filteredBlog.length > 1 ? `${ filteredBlog.length } storries` : `${ filteredBlog.length} story`}</h1>
+        </div>
+      </div>      
     </div>
   )
 }
