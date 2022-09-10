@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -14,6 +13,7 @@ import UserDetails from './pages/UserDetails';
 import { AuthProvider } from './authContext';
 import NewBlog from './pages/NewBlog';
 import TrendingTopics from './components/topicDetails/TrendingTopics';
+import Settings from './pages/Settings';
 
 function App() {
 
@@ -42,7 +42,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path='/settings' element={<Settings />} />
             <Route path="/details/:id" element={<Details />} />          
             <Route path="/topicDetails/:name/*" element={<TopicDetails />} />
             <Route path="/userDetails/:id" element={<UserDetails />} />

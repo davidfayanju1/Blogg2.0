@@ -19,7 +19,7 @@ const Nav = ({toggleTheme, darkTheme}) => {
     }, [currentUser]);
     
 
-    const[popUp, setPopUp] = useState();
+    const[popUp, setPopUp] = useState(false);
 
     const togglePopUp = () => {
 
@@ -113,7 +113,7 @@ const Nav = ({toggleTheme, darkTheme}) => {
                     </div>
                     <div className='px-[1.4rem] md:px-[.5rem] mt-[1.2rem]'>
                         <Link to='/dashboard'><button className='py-[.4rem] md:py-[0rem] mb-[.8rem] md:mb-[.5rem] text-[1rem] md:text-[.9rem] w-[100%] block bg-transparent rounded-[10rem] border-black border-[.1rem] dark:border-white'>View Profile</button></Link>
-                        <Link to='/dashboard' className='text-[1.1rem] md:text-[1rem]'>Settings</Link>
+                        <Link to='/settings' onClick={ () => setPopUp(false)} className='text-[1.1rem] md:text-[1rem]'>Settings</Link>
                         <p onClick={ signOut } className='cursor-pointer mt-[1rem] md:mt-[.5rem] text-[1.1rem] md:text-[1rem]'>Sign out</p>
                     </div>
                 </nav>
