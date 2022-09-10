@@ -53,6 +53,17 @@ export const AuthProvider = ({children}) => {
 
     }
 
+    const deleteUserAcct = async () => {
+
+        try{
+            await auth.currentUser.delete()
+        }catch (err){
+            console.log(err)
+        }
+    }
+
+
+
     const [userData, setUserData] = useState(null);
     const[displayError, setDisplayError] = useState('');
 
@@ -211,7 +222,8 @@ export const AuthProvider = ({children}) => {
         userBlogs,
         fetchAllUsers,
         users,
-        logoutUser
+        logoutUser,
+        deleteUserAcct
     }
 
     return (

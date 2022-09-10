@@ -37,12 +37,12 @@ function App() {
     <AuthProvider>
       <div className={ darkTheme ? 'dark' : ''}>
           <ScrollToTop />
-          { pathname !== '/newBlog' && pathname !== '/login' && pathname !== '/signup' && <Nav toggleTheme={ toggleTheme } darkTheme={ darkTheme }/>}
+          { pathname !== '/newBlog' && pathname !== '/login' && pathname !== '/signup' && pathname !== '/settings' && <Nav toggleTheme={ toggleTheme } darkTheme={ darkTheme }/>}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path='/settings' element={<Settings />} />
+            <Route path='/settings' element={<Settings toggleTheme={ toggleTheme } darkTheme={ darkTheme } />} />
             <Route path="/details/:id" element={<Details />} />          
             <Route path="/topicDetails/:name/*" element={<TopicDetails />} />
             <Route path="/userDetails/:id" element={<UserDetails />} />
