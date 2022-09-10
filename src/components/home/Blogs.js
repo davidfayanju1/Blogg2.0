@@ -13,34 +13,21 @@ const Blogs = () => {
 
   // latest, family, lifestyle,sports,travel,beauty
   
-  const { fetchAllPosts, setBlogItems, blogItems } = useAuth()
+  const { fetchAllPosts, setBlogItems, blogItems, currentUser } = useAuth()
 
   const [likes, setLikes] = useState(false);
-  const [blogPosts, setBlogPosts] = useState([
-    {
-      title: 'First Trip To Ibiza',
-      id: 1,
-      body: 'Ok, Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quasi dicta aperiam odio, quae',
-      author: 'James Tonly',
-      date: 'Feb 23',
-      img: beauty,
-      category: 'Lifestyle',
-      likes: 1,
-      isLiked: false
-    }
-  ])
-
+  
   const [styles, setStyles] = useState({});
 
-  const likePost = (blogPostId) => {
+  // const likePost = (blogPostId) => {
 
-        const likedPost = [...blogPosts];
+  //       const likedPost = [...blogPosts];
         
-        likedPost[blogPostId].isLiked = !likedPost[blogPostId].isLiked;
+  //       likedPost[blogPostId].isLiked = !likedPost[blogPostId].isLiked;
         
-        setBlogPosts(likedPost);     
+  //       setBlogPosts(likedPost);     
       
-  }
+  // }
         
   const blogsTopic = [
     { 
@@ -82,13 +69,14 @@ const Blogs = () => {
         <div className="blogs-grid min-h-full md:w-[60%] w-[100%] md:min-w-[21rem]">
           {
             blogItems.map((blogPost, index) => (
+              
+              currentUser ?
+
               <div className="blog flex items-top mb-[4rem] justify-between md:min-h-[10rem] h-[8rem]" key={ blogPost.id }>
                 <div className={`blog-text ${ blogPost.img === null ? 'w-[100%]' : 'w-[63.1%]'}`}>
                   <Link to={`/userDetails/${blogPost.author.uid}`}>
                     <div className="blog-author flex">
-                      {
-                       blogPost.img ?  <img src={ blogPost.img} alt={ blogPost.id}  className=" h-[1.65rem] w-[1.65rem] rounded-[100%] object-cover"/> : <p className='bg-red-800 h-[1.65rem] w-[1.65rem] rounded-[100%] text-[1.1rem] flex items-center justify-center font-semibold text-white'> { blogPost.author.name[0] }</p>
-                      }
+                      {blogPost.img ?  <img src={ blogPost.img} alt={ blogPost.id}  className=" h-[1.65rem] w-[1.65rem] rounded-[100%] object-cover"/> : <p className='bg-red-800 h-[1.65rem] w-[1.65rem] rounded-[100%] text-[1.1rem] flex items-center justify-center font-semibold text-white'> { blogPost.author.name[0] }</p>}
                       <p className='author-name ml-[0.2rem]'>{ blogPost.author.name }</p>
                     </div>
                   </Link>
@@ -107,7 +95,6 @@ const Blogs = () => {
                       </Link>
                     </div>
                     <div className="save-icon ml-[2rem]">
-                      {/* <MdOutlineBookmarkAdd  className='text-[1.4rem]' title="Save"/> */}
                       <svg width="25" height="25"  className="dark:fill-white"><path d="M18 2.5a.5.5 0 0 1 1 0V5h2.5a.5.5 0 0 1 0 1H19v2.5a.5.5 0 1 1-1 0V6h-2.5a.5.5 0 0 1 0-1H18V2.5zM7 7a1 1 0 0 1 1-1h3.5a.5.5 0 0 0 0-1H8a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-8.5a.5.5 0 0 0-1 0v7.48l-5.2-4a.5.5 0 0 0-.6 0l-5.2 4V7z"></path></svg>
                     </div>
                   </div>  
@@ -122,6 +109,10 @@ const Blogs = () => {
                   </div>
                 }  
               </div>
+
+              :
+
+              <p>Loading...</p>
             ))
           }
         </div>

@@ -110,7 +110,7 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
             </div>
             <div className="newblog-controls flex items-center gap-[1rem]">
                 <button className='bg-green-700 hover:bg-green-800 h-[2rem] w-[5rem] text-white font-semibold rounded-[20px] disabled:opacity-[.6]' disabled={ !newBlog } onClick={ postBlog }>Publish</button>
-                <div className="user">
+                <div className="user cursor-pointer">
                     {user.img ? <img src={user.img} alt="user" /> : userData && <p className='bg-red-800 w-[2.1rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-white'> { userData.name[0] }</p>}
                 </div>
                 <div className="theme-toggle cursor-pointer text-lg" onClick={toggleTheme}>
@@ -125,18 +125,18 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
                     <input type="text" name='title' onChange = { updatePostBtn } autoFocus  ref={ titleRef } className='w-[100%] dark:bg-slate-800 h-[4.5rem] placeholder:font-serif md:placeholder:text-[2.6rem] placeholder:text-[1.8rem] md:text-[2.6rem] text-[1.8rem] outline-none border-none font-serif text-gray-700 dark:text-white' placeholder='Title' required/>
                 </div>
                 <div className="form-group">
-                    <div className="container relative">
-                        
+                    <div className="container relative">                        
                         {open && !file &&
-                            <label htmlFor='uploadImage' >  
+                            <label htmlFor='uploadImage'>  
                                 <input type="file" id="uploadImage" className='hidden' accept='.jpeg, .png' onChange={ uploadBlogPicture }/>
-                                <BsPlusCircle className="md:text-[2rem] text-[1.4rem] absolute top-[0%] md:top-[0%] left-[-7%] font-extralight text-gray-800 cursor-pointer dark:text-white" title="Upload Image"/>
+                                <span className='cursor-pointer dark:border-white absolute top-[0%] md:top-[0%] left-[-7%] border-black border-[.02rem] rounded-[100%] flex items-center justify-center md:h-[2rem] md:w-[2rem]'>
+                                    <svg className="svgIcon-use dark:fill-white" width="25" height="25"><path d="M20 12h-7V5h-1v7H5v1h7v7h1v-7h7"></path></svg>
+                                </span>
                             </label> 
                         }
                         <>
                             {
                                 file &&
-
                                 <div className="image-container mb-[.95rem] h-[28rem] w-[100%]">
                                     <img src={ file } alt="" className='block w-[100%] h-[100%] object-cover' />
                                 </div>

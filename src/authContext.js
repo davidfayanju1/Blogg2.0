@@ -210,7 +210,8 @@ export const AuthProvider = ({children}) => {
         number,
         userBlogs,
         fetchAllUsers,
-        users
+        users,
+        logoutUser
     }
 
     return (

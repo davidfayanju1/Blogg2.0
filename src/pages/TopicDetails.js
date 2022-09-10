@@ -64,9 +64,9 @@ function TopicDetails() {
         </Routes>
       </div>
 
-      <div className="md:block hidden md:w-[25%] min-h-[100vh]">
-        <div className="story-number">
-          <h1 className="font-bold text-[1.2rem]">{ filteredBlog.length > 1 ? `${ filteredBlog.length } storries` : `${ filteredBlog.length} story`}</h1>
+      <div className="md:block hidden md:w-[25%] min-h-[100vh] dark:text-white md:sticky top-[9rem] md:px-[2rem] py-[4rem]">
+        <div className="story-number ">
+          <h1 className="font-semibold text-[1.4rem]">{filteredBlog.length > 1 ? `${ filteredBlog.length } storries` : `${ filteredBlog.length} story`}</h1>
         </div>
       </div>      
     </div>

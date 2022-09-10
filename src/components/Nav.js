@@ -9,24 +9,30 @@ import { useAuth } from '../authContext';
 
 const Nav = ({toggleTheme, darkTheme}) => {
 
-    const {currentUser, fetchUserData, userData } = useAuth();
+    const {currentUser, fetchUserData, userData, logoutUser } = useAuth();
     const[ navToggle, setNavToggle] = useState(false);
-
-    // if(userData === null) {
-    //     console.log(true);
-    // }else{
-    //     console.log(userData)
-    // }
-
-    // const currentUser = false;
-
+    
     useEffect(() => {
 
-        fetchUserData();
+       currentUser &&  fetchUserData();
+        
+    }, [currentUser]);
+    
 
-    }, [userData]);
+    const[popUp, setPopUp] = useState();
 
-   
+    const togglePopUp = () => {
+
+        setPopUp(!popUp);
+    }
+
+    const signOut = () => {
+
+        logoutUser();
+        setPopUp(false);
+
+    }
+       
   return (
     <div className="w-full dark:bg-slate-900 bg-gray-50 dark:text-white flex justify-between items-center md:px-24 px-[1rem] fixed top-0 z-50 h-[4.5rem] border-solid border-b border-gray-300">
         <div className="nav-title md:text-3xl text-[1.3rem] font-bold font-serif">
@@ -39,9 +45,9 @@ const Nav = ({toggleTheme, darkTheme}) => {
                     currentUser ? 
                     <ul className='flex items-center gap-[2rem] mr-[3rem] text-[1.1rem]'>
                         <li><Link to="/" >Home</Link></li>
-                        <li><Link to="/newBlog">Write</Link></li>
+                        <li><Link to="/newBlog" title='Write'>Write</Link></li>
                         <li><Link to="/list" title='Reading List'>List</Link></li>
-                        <li><Link to='/stories'></Link></li>
+                        <li><Link to='/stories' title='Your Story'></Link></li>
                     </ul>
             
                     : 
@@ -49,10 +55,15 @@ const Nav = ({toggleTheme, darkTheme}) => {
                 }
             </nav>
 
-            <div>
+            <div className='desktop'>
                 {currentUser ? 
-                
-                userData && <Link to="/dashboard"><p className='bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-gray-200'>{ userData.name[0] }</p></Link> 
+                <>
+                    {
+                        userData ? <p onClick={ togglePopUp } className='cursor-pointer bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-gray-200'>{ userData.name[0] }</p> 
+                        :
+                        <p>Loading</p>
+                    }
+                </>
                 : 
                 <Link to="/login"><button className="bg-black text-white rounded-[30px] w-[8rem] h-[2.4rem] dark:bg-white dark:text-black">Get Started</button></Link>}
             </div>
@@ -64,7 +75,7 @@ const Nav = ({toggleTheme, darkTheme}) => {
         <div className="mobile-icons md:hidden flex items-center">
             <div>
                 {
-                    currentUser ?  userData && <Link to="/dashboard"><p className='bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem]  flex items-center justify-center font-semibold text-gray-200'>{ userData.name[0] }</p></Link> : <Link to="/login"><button className="bg-black text-white rounded-[30px] text-[1rem] w-[8rem] h-[2rem] dark:bg-white dark:text-black">Get Started</button></Link>
+                    currentUser ?  userData && <p onClick={ togglePopUp } className='cursor-pointer bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem]  flex items-center justify-center font-semibold text-gray-200'>{ userData.name[0] }</p> : <Link to="/login"><button className="bg-black text-white rounded-[30px] text-[1rem] w-[8rem] h-[2rem] dark:bg-white dark:text-black">Get Started</button></Link>
                 }
             </div>
             {
@@ -89,6 +100,25 @@ const Nav = ({toggleTheme, darkTheme}) => {
                 </li>
             </ul>
         </nav>
+        }
+
+        {
+            popUp &&
+            
+            <div className="nav-popup dark:bg-slate-700 py-[1.5rem] md:py-[.8rem] md:rounded-[6px] absolute md:top-[5rem] top-[4.5rem] md:right-[4.5%] right-[0%] bg-white md:min-h-[13rem] md:w-[15rem] min-h-[100vh] w-full">
+                <nav>
+                    <div className='after:h-[.01rem] after:block after:w-[100%] after:bg-gray-200'>
+                        <p className='mb-[.8rem] md:mb-[0rem] font-bold px-[1.4rem] md:px-[.5rem] text-[1.1rem] md:text-[1rem]'>{ userData.email }</p>
+                        <p className='px-[1.4rem] md:px-[.5rem] mb-[.8rem] text-[1.1rem] md:text-[1rem]'>{ userData.name }</p>
+                    </div>
+                    <div className='px-[1.4rem] md:px-[.5rem] mt-[1.2rem]'>
+                        <Link to='/dashboard'><button className='py-[.4rem] md:py-[0rem] mb-[.8rem] md:mb-[.5rem] text-[1rem] md:text-[.9rem] w-[100%] block bg-transparent rounded-[10rem] border-black border-[.1rem] dark:border-white'>View Profile</button></Link>
+                        <Link to='/dashboard' className='text-[1.1rem] md:text-[1rem]'>Settings</Link>
+                        <p onClick={ signOut } className='cursor-pointer mt-[1rem] md:mt-[.5rem] text-[1.1rem] md:text-[1rem]'>Sign out</p>
+                    </div>
+                </nav>
+            </div>
+
         }
     </div>
   )

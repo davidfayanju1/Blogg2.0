@@ -7,7 +7,7 @@ import { useAuth } from '../authContext';
 const Login = () => {
 
   // take email and password
-  const { registerUser } = useAuth();
+  const { loginUser } = useAuth();
 
   const [showPassword, setShowPassword] = useState(true); 
   const email = useRef();
@@ -17,7 +17,7 @@ const Login = () => {
   
   const submitForm = () => {
 
-    registerUser(email.current.value, password.current.value);
+    loginUser(email.current.value, password.current.value);
     navigate('/');
 
   }
