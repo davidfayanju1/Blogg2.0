@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../authContext';
 import { HiSun } from 'react-icons/hi';
@@ -6,19 +6,30 @@ import { BsFillMoonFill } from 'react-icons/bs';
 
 const Settings = ({toggleTheme, darkTheme}) => {
 
-  const inputRef = useRef(null);
+  const nameInputRef = useRef(null);
+  const inputRef = useRef();
   const navigate = useNavigate();
 
-  const { userData, deleteUserAcct, currentUser } = useAuth()
+  const {fetchUserData, userData, deleteUserAcct, currentUser, updateName } = useAuth()
 
   const [toggleField, setToggleField] = useState(false);
   const [ togglePage, setTogglePage] = useState(false);
   
+  useEffect(() => {
+
+    fetchUserData();
+
+  }, []);
+
   const openInput = () => {
 
     setToggleField(true);
-    inputRef.current.focus();
+    nameInputRef.current.focus();
 
+  }
+
+  const changeName = () => {
+    updateName(nameInputRef.current.value)
   }
 
   const deleteUser = () => {
@@ -49,7 +60,7 @@ const Settings = ({toggleTheme, darkTheme}) => {
       
       <div className='flex items-start justify-between md:px-[8.5rem] py-[4.5rem] px-[1.2rem]'>
 
-        <aside className='side-nav md:block hidden h-[100vh] w-[28%]'>        
+        <aside className='sticky top-[3rem] bottom-[0rem] side-nav md:block hidden h-[100vh] w-[28%]'>        
           <h1 className='mb-[1rem] font-bold text-[1.35rem]'>Settings</h1>
           {/* About you, Email, Security */}
           <nav className='flex flex-col'>
@@ -70,7 +81,7 @@ const Settings = ({toggleTheme, darkTheme}) => {
               <div className="name flex w-[100%] justify-between">
                 <div className="name-container w-[70%]">
                   <h1 className='font-semibold text-[1.2rem] mb-[.2rem]'>Name</h1>
-                  <input className=" mb-[.8rem] text-[16px] py-[.4rem] outline-none border-b-[.11rem] border-gray-200 w-full bg-transparent" maxLength={ 40 } placeholder={userData && userData.name} type="text" ref={ inputRef } disabled={ !toggleField }/>
+                  <input className=" mb-[.8rem] text-[16px] py-[.4rem] outline-none border-b-[.11rem] border-gray-200 w-full bg-transparent" maxLength={ 40 } placeholder={userData && userData.name} type="text" ref={ nameInputRef } disabled={ !toggleField }/>
                   <p className='text-[.95rem] w-full'>Your name appears on your Profile page, as your byline, and in your responses. It is a required field.</p>
                 </div>
                 <div className="edit-btn-container">
@@ -79,7 +90,7 @@ const Settings = ({toggleTheme, darkTheme}) => {
                       <button onClick={ openInput } className="text-[.9rem] bg-transparent text-gray-700 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white">Edit</button>
                       :
                       <div className="flex gap-[.5rem]">
-                        <button className="text-[.9rem] bg-transparent text-green-700 dark:text-gray-100 rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-green-700 dark:border-gray-100">Save</button>
+                        <button onClick={ changeName } className="text-[.9rem] bg-transparent text-green-700 dark:text-gray-100 rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-green-700 dark:border-gray-100">Save</button>
                         <button className="text-[.9rem] bg-transparent text-gray-600 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white" onClick={ () => setToggleField(false)}>Cancel</button>
                       </div>
                     }

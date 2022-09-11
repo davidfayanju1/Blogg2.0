@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import { auth, db } from './firebase';
 import { v4 as uuidv4 } from 'uuid';
-
+import { ref, set, getDatabase } from 'firebase/database';
+import { doc, getFirestore, updateDoc } from 'firebase/firestore'
 const authContext = createContext();
 
 export const useAuth = () => useContext(authContext);
@@ -16,8 +17,8 @@ export const AuthProvider = ({children}) => {
             const res = await auth.createUserWithEmailAndPassword(email, password);
             const user = res.user;
 
-            await db.collection('users')
-            .add({
+            await db.collection('users').doc(user.uid)
+            .set({
                 uid: user.uid,
                 name,
                 authProvider: 'local',
@@ -53,6 +54,7 @@ export const AuthProvider = ({children}) => {
 
     }
 
+    
     const deleteUserAcct = async () => {
 
         try{
@@ -105,6 +107,35 @@ export const AuthProvider = ({children}) => {
         }
     }
 
+
+    const updateName = (name) => {
+
+        db.collection('users').doc(currentUser.uid).update({
+            'name' : name
+        })
+        .then(() => {
+            console.log('sucessful')
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+
+        
+
+              
+        // const docRef = doc(db, 'users', currentUser.uid)
+        // updateDoc(docRef, {
+        //     userName: name
+        // })
+        // .then(docRef => {
+        //     console.log('sucess')
+        // })
+        // .catch((err) => {
+        //     console.log(err)
+        // })
+      
+
+    }
     
     // blogs
     const postBlog = async (title, blog, category, clap, img) => {
@@ -223,7 +254,8 @@ export const AuthProvider = ({children}) => {
         fetchAllUsers,
         users,
         logoutUser,
-        deleteUserAcct
+        deleteUserAcct,
+        updateName
     }
 
     return (
