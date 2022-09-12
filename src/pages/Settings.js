@@ -14,22 +14,34 @@ const Settings = ({toggleTheme, darkTheme}) => {
 
   const [toggleField, setToggleField] = useState(false);
   const [ togglePage, setTogglePage] = useState(false);
+  const [toggleFieldOne, setToggleFieldOne] = useState(false);
   
   useEffect(() => {
 
     fetchUserData();
 
+    
   }, []);
-
+  
   const openInput = () => {
 
-    setToggleField(true);
+    console.log('ok');
+  }
+
+  const openInputOne = () => {
+
+    setToggleFieldOne(true);
     nameInputRef.current.focus();
 
   }
 
   const changeName = () => {
-    updateName(nameInputRef.current.value)
+
+    updateName(nameInputRef.current.value);
+    nameInputRef.current.value = ''
+    setToggleFieldOne(false);
+    fetchUserData();
+
   }
 
   const deleteUser = () => {
@@ -78,20 +90,20 @@ const Settings = ({toggleTheme, darkTheme}) => {
               <div className="title-container mb-[1.5rem] after:block after:w-[100%] after:h-[.01rem] after:bg-gray-200 dark:after:bg-white">
                 <h1 className='font-bold md:text-[1.6rem] mb-[.6rem]'>About you</h1>
               </div>
-              <div className="name flex w-[100%] justify-between">
-                <div className="name-container w-[70%]">
+              <div className="name flex w-[100%] justify-between md:flex-row flex-col">
+                <div className="name-container md:w-[70%] w-[100%] md:mb-[0] mb-[1.2rem]">
                   <h1 className='font-semibold text-[1.2rem] mb-[.2rem]'>Name</h1>
-                  <input className=" mb-[.8rem] text-[16px] py-[.4rem] outline-none border-b-[.11rem] border-gray-200 w-full bg-transparent" maxLength={ 40 } placeholder={userData && userData.name} type="text" ref={ nameInputRef } disabled={ !toggleField }/>
+                  <input className="mb-[.8rem] text-[16px] py-[.4rem] outline-none border-b-[.11rem] border-gray-200 w-full bg-transparent" maxLength={ 40 } placeholder={userData && userData.name} type="text" ref={ nameInputRef } disabled={ !toggleFieldOne }/>
                   <p className='text-[.95rem] w-full'>Your name appears on your Profile page, as your byline, and in your responses. It is a required field.</p>
                 </div>
                 <div className="edit-btn-container">
                     {
-                      !toggleField ? 
-                      <button onClick={ openInput } className="text-[.9rem] bg-transparent text-gray-700 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white">Edit</button>
+                      !toggleFieldOne ? 
+                      <button onClick={ openInputOne } className="text-[.9rem] bg-transparent text-gray-700 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white">Edit</button>
                       :
                       <div className="flex gap-[.5rem]">
                         <button onClick={ changeName } className="text-[.9rem] bg-transparent text-green-700 dark:text-gray-100 rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-green-700 dark:border-gray-100">Save</button>
-                        <button className="text-[.9rem] bg-transparent text-gray-600 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white" onClick={ () => setToggleField(false)}>Cancel</button>
+                        <button className="text-[.9rem] bg-transparent text-gray-600 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white" onClick={ () => setToggleFieldOne(false)}>Cancel</button>
                       </div>
                     }
                 </div>

@@ -113,27 +113,12 @@ export const AuthProvider = ({children}) => {
         db.collection('users').doc(currentUser.uid).update({
             'name' : name
         })
-        .then(() => {
-            console.log('sucessful')
+        .then((data) => {
+            console.log(data)
         })
         .catch((err) => {
             console.log(err);
         })
-
-        
-
-              
-        // const docRef = doc(db, 'users', currentUser.uid)
-        // updateDoc(docRef, {
-        //     userName: name
-        // })
-        // .then(docRef => {
-        //     console.log('sucess')
-        // })
-        // .catch((err) => {
-        //     console.log(err)
-        // })
-      
 
     }
     
