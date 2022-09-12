@@ -11,7 +11,7 @@ export const AuthProvider = ({children}) => {
     const [ loading, setLoading ] = useState(true);
     const [currentUser, setCurrentUser ] = useState(null);
     
-    const registerUser = async (name, email, password) => {
+    const registerUser = async (name, email, password, bio) => {
 
         try {
             const res = await auth.createUserWithEmailAndPassword(email, password);
@@ -23,7 +23,8 @@ export const AuthProvider = ({children}) => {
                 name,
                 authProvider: 'local',
                 email,
-                password
+                password,
+                bio
             })
 
         }catch(error) {
@@ -115,6 +116,20 @@ export const AuthProvider = ({children}) => {
         })
         .then((data) => {
             console.log(data)
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+
+    }
+
+    const updateBio = (bio) => {
+
+        db.collection('users').doc(currentUser.uid).update({
+            'bio' : bio
+        })
+        .then(() => {
+            console.log('successful')
         })
         .catch((err) => {
             console.log(err);
@@ -240,7 +255,8 @@ export const AuthProvider = ({children}) => {
         users,
         logoutUser,
         deleteUserAcct,
-        updateName
+        updateName,
+        updateBio
     }
 
     return (

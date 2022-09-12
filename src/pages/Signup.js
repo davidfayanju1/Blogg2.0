@@ -11,6 +11,7 @@ const Signup = () => {
   const password = useRef();
   const email = useRef();
   const confirmPassword = useRef();
+  const bio = null;
 
   // name, email, password,confirmpassword
   const [showPassword, setShowPassword] = useState(true); 
@@ -28,7 +29,7 @@ const Signup = () => {
 
     }else {
 
-      registerUser(name.current.value, email.current.value, password.current.value)
+      registerUser(name.current.value, email.current.value, password.current.value, bio)
       navigate('/');
     }
 

@@ -7,14 +7,16 @@ import { BsFillMoonFill } from 'react-icons/bs';
 const Settings = ({toggleTheme, darkTheme}) => {
 
   const nameInputRef = useRef(null);
+  const bioRef = useRef(null)
   const inputRef = useRef();
   const navigate = useNavigate();
 
-  const {fetchUserData, userData, deleteUserAcct, currentUser, updateName } = useAuth()
+  const {fetchUserData, userData, deleteUserAcct, currentUser, updateName, updateBio } = useAuth()
 
   const [toggleField, setToggleField] = useState(false);
   const [ togglePage, setTogglePage] = useState(false);
   const [toggleFieldOne, setToggleFieldOne] = useState(false);
+  const [toggleFieldTwo, setToggleFieldTwo] = useState(false);
   
   useEffect(() => {
 
@@ -35,12 +37,29 @@ const Settings = ({toggleTheme, darkTheme}) => {
 
   }
 
+  const openInputTwo = () => {
+
+    setToggleFieldTwo(true);
+    bioRef.current.focus();
+
+  }
+
   const changeName = () => {
 
     updateName(nameInputRef.current.value);
     nameInputRef.current.value = ''
     setToggleFieldOne(false);
     fetchUserData();
+
+  }
+
+  const changeBio = () => {
+
+    updateBio(bioRef.current.value);
+    bioRef.current.value = ''
+    setToggleFieldTwo(false);
+    fetchUserData();
+
 
   }
 
@@ -112,20 +131,20 @@ const Settings = ({toggleTheme, darkTheme}) => {
             
             {/* Short bio */}
             
-            <div className="short-bio mb-[4rem] flex w-[100%] justify-between">
-              <div className="bio-container w-[70%]">
+            <div className="short-bio mb-[4rem] flex w-[100%] justify-between md:flex-row flex-col">
+              <div className="bio-container md:w-[70%] mb-[1.2rem] md:mb-[0] w-[100%]">
                 <h1 className='font-semibold text-[1.2rem] mb-[.2rem]'>Short bio</h1>
-                <input className=" mb-[.8rem] text-[16px] py-[.4rem] outline-none border-b-[.11rem] border-gray-200 w-full" maxLength={ 40 } type="text" ref={ inputRef } disabled={ !toggleField }/>
+                <input ref={ bioRef } placeholder={ userData && userData.bio } className="mb-[.8rem] bg-transparent text-[16px] py-[.4rem] outline-none border-b-[.11rem] border-gray-200 w-full" maxLength={ 40 } type="text" disabled={ !toggleFieldTwo }/>
                 <p className='text-[.95rem] w-full'>Your short bio appears on your Profile and next to your stories. Max 160 characters.</p>
               </div>
               <div className="edit-btn-container">
                   {
-                    !toggleField ? 
-                    <button onClick={ openInput } className="text-[.9rem] bg-transparent text-gray-700 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white">Edit</button>
+                    !toggleFieldTwo ? 
+                    <button onClick={ openInputTwo } className="text-[.9rem] bg-transparent text-gray-700 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white">Edit</button>
                     :
                     <div className="flex gap-[.5rem]">
-                      <button className="text-[.9rem] bg-transparent text-green-700 dark:text-gray-100 rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-green-700 dark:border-gray-100">Save</button>
-                      <button className="text-[.9rem] bg-transparent text-gray-600 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white" onClick={ () => setToggleField(false)}>Cancel</button>
+                      <button onClick={ changeBio } className="text-[.9rem] bg-transparent text-green-700 dark:text-gray-100 rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-green-700 dark:border-gray-100">Save</button>
+                      <button className="text-[.9rem] bg-transparent text-gray-600 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white" onClick={ () => setToggleFieldTwo(false)}>Cancel</button>
                     </div>
                   }
               </div>
@@ -155,21 +174,13 @@ const Settings = ({toggleTheme, darkTheme}) => {
             
             {/* About page */}
             
-            <div className=" mb-[4rem] flex w-[100%] justify-between">
-              <div className="about-container w-[70%]">
+            <div className=" mb-[4rem] flex w-full justify-between md:flex-row flex-col">
+              <div className="about-container w-full md:w-[70%] md:mb-[0] mb-[1rem]">
                 <h1 className='font-semibold text-[1.2rem] mb-[.2rem]'>About page</h1>
                 <p className='text-[.95rem] w-full'>This page should tell your readers more about you and explain the benefits of reading your work.</p>
               </div>
               <div className="edit-btn-container">
-                  {
-                    !toggleField ? 
-                    <button onClick={ openInput } className="text-[.9rem] bg-transparent text-gray-700 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white">Edit</button>
-                    :
-                    <div className="flex gap-[.5rem]">
-                      <button className="text-[.9rem] bg-transparent text-green-700 dark:text-gray-100 rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-green-700 dark:border-gray-100">Save</button>
-                      <button className="text-[.9rem] bg-transparent text-gray-600 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white" onClick={ () => setToggleField(false)}>Cancel</button>
-                    </div>
-                  }
+                <Link to={`/userDetails/${currentUser.uid}`}><button onClick={ openInput } className="text-[.9rem] bg-transparent text-gray-700 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white">Edit your about page</button></Link>
               </div>
             </div>
             

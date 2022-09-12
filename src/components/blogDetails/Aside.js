@@ -17,7 +17,13 @@ const Aside = ({ blog }) => {
         <p className='author_bio font-bold text-[1.23rem]'>{ blog.author.name }</p>
       </Link>
       <p className='post_number text-[1.1rem] text-gray-600 mb-[1rem] dark:text-gray-200'>{ number.length > 1 ? `${number.length} Posts` : `${number.length} Post` }</p>
-      <p className="bio text-gray-600 mb-[1rem] dark:text-gray-200">Lead Frontend Engieer at Google and strategic expert</p>
+      <p className="bio text-gray-600 mb-[1rem] dark:text-gray-200">{ blog.author.bio }</p>
+      {
+        blog.author.uid === userData.uid ? 
+        <Link to='/settings' className='text-green-800 dark:text-gray-300'>Edit profile</Link>
+        : 
+        null
+      }
     </div>
   )
 }
