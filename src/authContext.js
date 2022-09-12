@@ -136,6 +136,20 @@ export const AuthProvider = ({children}) => {
         })
 
     }
+
+    const updateMail = (mail) => {
+
+        db.collection('users').doc(currentUser.uid).update({
+            'email' : mail
+        })
+        .then(() => {
+            console.log('successful')
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+
+    }
     
     // blogs
     const postBlog = async (title, blog, category, clap, img) => {
@@ -256,7 +270,8 @@ export const AuthProvider = ({children}) => {
         logoutUser,
         deleteUserAcct,
         updateName,
-        updateBio
+        updateBio,
+        updateMail
     }
 
     return (
