@@ -10,16 +10,18 @@ const Settings = ({toggleTheme, darkTheme}) => {
   const bioRef = useRef(null)
   const inputRef = useRef(null);
   const mailRef = useRef(null);
+  const usernameRef = useRef(null);
 
   const navigate = useNavigate();
 
-  const {updateMail, fetchUserData, userData, deleteUserAcct, currentUser, updateName, updateBio } = useAuth()
+  const {updateMail, fetchUserData, userData, deleteUserAcct, currentUser, updateName, updateBio, updateUsername } = useAuth()
 
   const [toggleField, setToggleField] = useState(false);
   const [ togglePage, setTogglePage] = useState(false);
   const [toggleFieldOne, setToggleFieldOne] = useState(false);
   const [toggleFieldTwo, setToggleFieldTwo] = useState(false);
   const [toggleEmailField, setToggleEmailField] = useState(false);
+  const [toggleUsernameField, setToggleUsernameField] = useState(false);
   
   useEffect(() => {
 
@@ -52,6 +54,11 @@ const Settings = ({toggleTheme, darkTheme}) => {
     mailRef.current.focus();
   }
 
+  const openUsernameInput = () => {
+    setToggleUsernameField(true);
+    usernameRef.current.focus();
+  }
+
   const changeName = () => {
 
     updateName(nameInputRef.current.value);
@@ -75,6 +82,13 @@ const Settings = ({toggleTheme, darkTheme}) => {
     fetchUserData();
   }
 
+  const changeUsername = () => {
+    updateUsername(usernameRef.current.value);
+    usernameRef.current.value = ''
+    setToggleUsernameField(false);
+    fetchUserData();
+  }
+
   const deleteUser = () => {
 
     deleteUserAcct();
@@ -85,16 +99,16 @@ const Settings = ({toggleTheme, darkTheme}) => {
 
   return (
     <div className='dark:bg-slate-800 dark:text-white'>
-      <nav className='flex justify-between items-center md:px-[12rem] px-[2rem] h-[4.5rem]'>
+      <nav className='flex justify-between items-center md:px-[8rem] px-[2rem] h-[4.5rem]'>
         <div className="title">
             <Link to='/'>
                 <h1 className='font-serif text-[1.5rem]'>ECONOTES</h1>
             </Link>
         </div>
         <div className="newblog-controls flex items-center gap-[1rem]">
-            {/* <div className="user cursor-pointer">
-                {user.img ? <img src={user.img} alt="user" /> : userData && <p className='bg-red-800 w-[2.1rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-white'> { userData.name[0] }</p>}
-            </div> */}
+            <div className="user cursor-pointer">
+                {userData && userData.img ? <img src={userData.img} alt="user" /> : userData && <p className='bg-red-800 w-[2.1rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-white'> { userData.name[0] }</p>}
+            </div>
             <div className="theme-toggle cursor-pointer text-lg" onClick={toggleTheme}>
                 {darkTheme ? <HiSun /> : <BsFillMoonFill />}
             </div>
@@ -119,7 +133,7 @@ const Settings = ({toggleTheme, darkTheme}) => {
             {/* name */}
             <div className="bio-card mb-[4rem]">
               <div className="title-container mb-[1.5rem] after:block after:w-[100%] after:h-[.01rem] after:bg-gray-200 dark:after:bg-white">
-                <h1 className='font-bold md:text-[1.6rem] mb-[.6rem]'>About you</h1>
+                <h1 className='font-bold md:text-[1.6rem] text-[1.5rem] mb-[.6rem]'>About you</h1>
               </div>
               <div className="name flex w-[100%] justify-between md:flex-row flex-col">
                 <div className="name-container md:w-[70%] w-[100%] md:mb-[0] mb-[1.2rem]">
@@ -164,11 +178,16 @@ const Settings = ({toggleTheme, darkTheme}) => {
             
             {/* Photo */}
             
-            <div className="mb-[4rem] photo flex w-[100%] justify-between">
-              <div className="photo-container w-[70%]">
-                <h1 className='font-semibold text-[1.2rem] mb-[.2rem]'>Photo</h1>
-                <p className='mb-[1rem] text-[.95rem] w-full'>Your photo appears on your Profile page and with your stories across Space.</p>
-                <p className='text-[.95rem] w-full'>Recommended size: Square, at least 1000 pixels per side. File type: JPG or PNG</p>                
+            <div className="mb-[4rem] photo flex w-[100%] justify-between md:flex-row flex-col">
+              <div className="inner-flex flex items-center justify-between">
+                <div className="photo-container w-[70%]">
+                  <h1 className='font-semibold text-[1.2rem] mb-[.2rem]'>Photo</h1>
+                  <p className='mb-[1rem] text-[.95rem] w-full'>Your photo appears on your Profile page and with your stories across Space.</p>
+                  <p className='text-[.95rem] w-full md:mb-[0] mb-[1.2rem]'>Recommended size: Square, at least 1000 pixels per side. File type: JPG or PNG</p>                
+                </div>
+                <div className="user cursor-pointer">
+                  {userData && userData.img ? <img src={userData.img} alt="user" className='w-[6rem] h-[6rem] rounded-[100%]' /> : userData && <p className='bg-red-800 w-[6rem] h-[6rem] rounded-[100%] text-[3rem] flex items-center justify-center font-semibold text-white'> { userData.name[0] }</p>}
+                </div>
               </div>
               <div className="edit-btn-container">
                   {
@@ -199,18 +218,18 @@ const Settings = ({toggleTheme, darkTheme}) => {
 
             {/* username */}
             
-            <div className="user-name flex w-[100%] justify-between">
-              <div className="name-container w-[70%]">
+            <div className="user-name flex w-[100%] justify-between md:flex-row flex-col">
+              <div className="name-container md:w-[70%] w-[100%]">
                 <h1 className='font-semibold text-[1.2rem] mb-[.2rem]'>Username</h1>
-                <input className=" mb-[.8rem] text-[16px] py-[.4rem] outline-none border-b-[.11rem] border-gray-200 w-full" maxLength={ 40 } type="text" ref={ inputRef } disabled={ !toggleField }/>
+                <input placeholder={ userData && userData.username } className="bg-transparent mb-[.8rem] text-[16px] py-[.4rem] outline-none border-b-[.11rem] border-gray-200 w-full" maxLength={ 40 } type="text" ref={ usernameRef } disabled={ !toggleUsernameField }/>
               </div>
               <div className="edit-btn-container">
                   {
-                    !toggleField ? 
-                    <button onClick={ openInput } className="text-[.9rem] bg-transparent text-gray-700 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white">Edit</button>
+                    !toggleUsernameField ? 
+                    <button onClick={ openUsernameInput } className="text-[.9rem] bg-transparent text-gray-700 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white">Edit</button>
                     :
                     <div className="flex gap-[.5rem]">
-                      <button className="text-[.9rem] bg-transparent text-green-700 dark:text-gray-100 rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-green-700 dark:border-gray-100">Save</button>
+                      <button onClick={ changeUsername } className="text-[.9rem] bg-transparent text-green-700 dark:text-gray-100 rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-green-700 dark:border-gray-100">Save</button>
                       <button className="text-[.9rem] bg-transparent text-gray-600 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white" onClick={ () => setToggleField(false)}>Cancel</button>
                     </div>
                   }
@@ -223,10 +242,10 @@ const Settings = ({toggleTheme, darkTheme}) => {
           <section id="emailSettings" className='mb-[3.5rem]'>
             <div className="bio-card">
               <div className="title-container mb-[1.5rem] after:block after:w-[100%] after:h-[.01rem] after:bg-gray-200 dark:after:bg-white">
-                <h1 className='font-bold md:text-[1.6rem] mb-[.6rem]'>Email settings</h1>
+                <h1 className='font-bold md:text-[1.6rem] text-[1.5rem] mb-[.6rem]'>Email settings</h1>
               </div>
-              <div className="name flex w-[100%] justify-between">
-                <div className="name-container w-[70%]">
+              <div className="name flex w-[100%] justify-between md:flex-row flex-col">
+                <div className="name-container md:w-[70%] w-100%">
                   <h1 className='font-semibold text-[1.2rem] mb-[.2rem]'>Your email</h1>
                   <input placeholder={ userData ? userData.email : 'coming...' } className="bg-transparent mb-[.8rem] text-[16px] py-[.4rem] outline-none border-b-[.11rem] border-gray-200 w-full" maxLength={ 40 } type="email" ref={ mailRef } disabled={ !toggleEmailField }/>
                 </div>

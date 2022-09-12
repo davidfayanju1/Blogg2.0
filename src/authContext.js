@@ -150,6 +150,34 @@ export const AuthProvider = ({children}) => {
         })
 
     }
+
+    const updateUsername = (username) => {
+
+        db.collection('users').doc(currentUser.uid).update({
+            'username' : username
+        })
+        .then(() => {
+            console.log('successful')
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+
+    }
+
+    const updateUserImage = (image) => {
+
+        db.collection('users').doc(currentUser.uid).update({
+            'img' : image
+        })
+        .then(() => {
+            console.log('successful')
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+
+    }
     
     // blogs
     const postBlog = async (title, blog, category, clap, img) => {
@@ -271,7 +299,9 @@ export const AuthProvider = ({children}) => {
         deleteUserAcct,
         updateName,
         updateBio,
-        updateMail
+        updateMail,
+        updateUsername,
+        updateUserImage
     }
 
     return (
