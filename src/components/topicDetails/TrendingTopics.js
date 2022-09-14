@@ -1,12 +1,31 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
-const TrendingTopics = ({ filteredBlog }) => {
+const TrendingTopics = ({ filteredBlog, topicLoading }) => {
   return (
     <div>
+
       {
-        filteredBlog && filteredBlog.map((blogPost) => (
+        topicLoading === false && filteredBlog.length === 0 ?
+
+        <p>Start Contributing to this community <Link to="/newblog">write</Link></p>
+
+        : null
+      }
+
+      {
+        topicLoading === true ?
+        
+          <SkeletonTheme baseColor="#ffff" highlightColor="#D3D3D3">
+            <Skeleton className="md:min-h-[10rem] h-[8rem] mb-[1rem]" count={ 4 }/>
+          </SkeletonTheme>
+        
+        :
+                
+        filteredBlog.map((blogPost) => (
 
           <div className="blog-card-container" key={blogPost.id}>
           <div className="blog-card flex items-top mb-[4rem] justify-between md:min-h-[11rem] h-[8rem] border-b dark:border-gray-300 border-gray-400 pb-[3rem]">

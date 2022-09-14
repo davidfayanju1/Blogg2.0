@@ -19,7 +19,7 @@ function TopicDetails() {
     const { blogItems, fetchAllPosts } = useAuth();
 
     const [ filteredBlog, setFilteredBlog ] = useState([]);
-    
+    const [ topicLoading, setTopicLoading ] = useState(true); 
     
     useEffect(() => {
       
@@ -31,7 +31,11 @@ function TopicDetails() {
 
       const newBlog = blogItems.filter((blog) => blog.category === name)    
       setFilteredBlog(newBlog);
-      console.log(filteredBlog.length);
+      setTopicLoading(false);
+
+      if(topicLoading === false || filteredBlog.length === 0) {
+        console.log('it Works!!!');
+      }
       
     }, [blogItems]);
 
@@ -59,8 +63,8 @@ function TopicDetails() {
 
         {/* inner routes */}
         <Routes>
-          <Route path='/' element={<TrendingTopics filteredBlog ={ filteredBlog}/>} />
-          <Route path='latest' element={<LatestTopics filteredBlog ={ filteredBlog}/>} />
+          <Route path='/' element={<TrendingTopics filteredBlog ={ filteredBlog} topicLoading={ topicLoading }/>} />
+          <Route path='latest' element={<LatestTopics filteredBlog ={ filteredBlog} topicLoading={ topicLoading }/>} />
         </Routes>
       </div>
 

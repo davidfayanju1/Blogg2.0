@@ -65,16 +65,23 @@ const Blogs = () => {
 
   }, []);
 
-  // console.log(blogItems.length === 0);
-  console.log(postLoading);
+  
   return (
     <section className='dark:bg-slate-900 dark:text-white bg-gray-50 min-w-[22.6rem] min-h-[100vh] lg:px-[4.75rem] lg:py-[8rem] px-[1.8rem] py-[6rem]'>
       <h1 className='md:text-[4.75rem] text-[2.5rem] font-bold text-center font-serif mb-[2rem]'>BLOGS</h1>
       <div className="flex-container flex items-start justify-between flex-col-reverse md:flex-row md:min-w-[27rem]">
         <div className="blogs-grid min-h-full md:w-[60%] w-[100%] md:min-w-[21rem]">
           {
-            
-            blogItems.length === 0 ?
+            postLoading === false && blogItems.length === 0 ?
+
+            <p className="font-serif text-center text-[2rem] text-gray-700 dark:text-gray-200">OOPS!! poor internet connection</p>
+            :
+            null
+          }
+          
+          
+          {            
+            postLoading === true ?
 
             <SkeletonTheme baseColor="#ffff" highlightColor="#D3D3D3">
               <Skeleton className="md:min-h-[10rem] h-[8rem]" count={ 5 }/>
