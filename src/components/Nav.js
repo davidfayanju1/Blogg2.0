@@ -58,11 +58,23 @@ const Nav = ({toggleTheme, darkTheme}) => {
             <div className='desktop'>
                 {currentUser ? 
                 <>
-                    {
-                        userData ? <p onClick={ togglePopUp } className='cursor-pointer bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-gray-200'>{ userData.name[0] }</p> 
-                        :
-                        <p>Loading</p>
-                    }
+                   
+                    <>
+                       {
+                            userData ?
+                            <>
+                                {
+                                    userData.img ? 
+                                    <img onClick={ togglePopUp } src={userData.img} alt="user" className='w-[2.1rem] h-[2rem] rounded-[100%] object-cover'/>
+                                    :
+                                    <p  className='cursor-pointer bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-gray-200'>{ userData.name[0] }</p>
+                                }
+                            </>
+
+                            :
+                            <p className='text-[1.3rem]'>--</p>
+                        }
+                    </> 
                 </>
                 : 
                 <Link to="/login"><button className="bg-black text-white rounded-[30px] w-[8rem] h-[2.4rem] dark:bg-white dark:text-black">Get Started</button></Link>}
@@ -75,7 +87,24 @@ const Nav = ({toggleTheme, darkTheme}) => {
         <div className="mobile-icons md:hidden flex items-center">
             <div>
                 {
-                    currentUser ?  userData && <p onClick={ togglePopUp } className='cursor-pointer bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem]  flex items-center justify-center font-semibold text-gray-200'>{ userData.name[0] }</p> : <Link to="/login"><button className="bg-black text-white rounded-[30px] text-[1rem] w-[8rem] h-[2rem] dark:bg-white dark:text-black">Get Started</button></Link>
+                    currentUser ? 
+                    <>
+                       {
+                            userData ?
+                            <>
+                                {
+                                    userData.img ? <img onClick={ togglePopUp } src={ userData.img} alt={ userData.id}  className=" h-[1.65rem] w-[1.65rem] rounded-[100%] object-cover"/>
+                                    :
+                                    <p onClick={ togglePopUp } className='cursor-pointer bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem]  flex items-center justify-center font-semibold text-gray-200'>{ userData.name[0] }</p>
+                                }
+                            </>
+
+                            :
+                            <p className='text-[1.3rem]'>--</p>
+                        }
+                    </> 
+                     : 
+                     <Link to="/login"><button className="bg-black text-white rounded-[30px] text-[1rem] w-[8rem] h-[2rem] dark:bg-white dark:text-bla   ck">Get Started</button></Link>
                 }
             </div>
             {
@@ -112,7 +141,7 @@ const Nav = ({toggleTheme, darkTheme}) => {
                         <p className='px-[1.4rem] md:px-[.5rem] mb-[.8rem] text-[1.1rem] md:text-[1rem]'>{ userData.name }</p>
                     </div>
                     <div className='px-[1.4rem] md:px-[.5rem] mt-[1.2rem]'>
-                        <Link to='/dashboard'><button className='py-[.4rem] md:py-[0rem] mb-[.8rem] md:mb-[.5rem] text-[1rem] md:text-[.9rem] w-[100%] block bg-transparent rounded-[10rem] border-black border-[.1rem] dark:border-white'>View Profile</button></Link>
+                        <Link onClick={ () => setPopUp(false) } to={`/userDetails/${ userData.uid }`}><button className='py-[.4rem] md:py-[0rem] mb-[.8rem] md:mb-[.5rem] text-[1rem] md:text-[.9rem] w-[100%] block bg-transparent rounded-[10rem] border-black border-[.1rem] dark:border-white'>View Profile</button></Link>
                         <Link to='/settings' onClick={ () => setPopUp(false)} className='text-[1.1rem] md:text-[1rem]'>Settings</Link>
                         <p onClick={ signOut } className='cursor-pointer mt-[1rem] md:mt-[.5rem] text-[1.1rem] md:text-[1rem]'>Sign out</p>
                     </div>

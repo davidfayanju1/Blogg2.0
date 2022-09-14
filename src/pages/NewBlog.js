@@ -111,7 +111,7 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
             <div className="newblog-controls flex items-center gap-[1rem]">
                 <button className='bg-green-700 hover:bg-green-800 h-[2rem] w-[5rem] text-white font-semibold rounded-[20px] disabled:opacity-[.6]' disabled={ !newBlog } onClick={ postBlog }>Publish</button>
                 <div className="user cursor-pointer">
-                    {user.img ? <img src={user.img} alt="user" /> : userData && <p className='bg-red-800 w-[2.1rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-white'> { userData.name[0] }</p>}
+                    {userData && userData.img ? <img src={userData.img} alt="user" className='w-[2.1rem] h-[2rem] rounded-[100%] object-cover'/> : userData && <p className='bg-red-800 w-[2.1rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-white'> { userData.name[0] }</p>}
                 </div>
                 <div className="theme-toggle cursor-pointer text-lg" onClick={toggleTheme}>
                     {darkTheme ? <HiSun /> : <BsFillMoonFill />}
@@ -128,7 +128,7 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
                     <div className="container relative">                        
                         {open && !file &&
                             <label htmlFor='uploadImage'>  
-                                <input type="file" id="uploadImage" className='hidden' accept='.jpeg, .png' onChange={ uploadBlogPicture }/>
+                                <input type="file" id="uploadImage" className='hidden' onChange={ uploadBlogPicture }/>
                                 <span className='cursor-pointer dark:border-white absolute top-[0%] md:top-[0%] left-[-7%] border-black border-[.02rem] rounded-[100%] flex items-center justify-center md:h-[2rem] md:w-[2rem]'>
                                     <svg className="svgIcon-use dark:fill-white" width="25" height="25"><path d="M20 12h-7V5h-1v7H5v1h7v7h1v-7h7"></path></svg>
                                 </span>

@@ -30,7 +30,7 @@ const MainArticle = ({ blog }) => {
     <main className='main-article min-h-[100vh] md:px-[7rem] md:py-[4rem] px-[2rem] py-[3rem] w-[100%] dark:text-white md:border-solid border-r border-gray-300 border-none'>    
       <div className='blog-author-details flex justify-between items-center mb-[1rem]'>
         <div className="flex items-center">
-          {!blog.img ? <p className='bg-red-800 w-[3rem] h-[3rem] rounded-[100%] text-[1.9rem] flex items-center justify-center font-semibold text-gray-200'> { blog.author.name[0] }</p> : <img src={ blog.img } alt={ blog.category} className="w-[3rem] h-[3rem] rounded-[100%]"/> }
+          {!blog.author.img ? <p className='bg-red-800 w-[3rem] h-[3rem] rounded-[100%] text-[1.9rem] flex items-center justify-center font-semibold text-gray-200'> { blog.author.name[0] }</p> : <img src={ blog.author.img } alt={ blog.category} className="w-[3rem] h-[3rem] rounded-[100%]"/> }
           <div className="info ml-[0.8rem]">
             <p className='text-gray-900 dark:text-gray-200 text-[1.15rem] mb-[.2rem]'>{ blog.author.name }</p>
             <div className="inner-flex flex items-center text-gray-700 dark:text-gray-200 text-[0.9rem]">

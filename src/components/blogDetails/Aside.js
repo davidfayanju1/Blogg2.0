@@ -13,7 +13,7 @@ const Aside = ({ blog }) => {
         <TwitterIcon size={32} round/>
       </TwitterShareButton> */}
       <Link to={`/userDetails/${ blog.author.uid }`}>
-        {!blog.img ? <p className='bg-red-800 w-[3rem] h-[3rem] rounded-[100%] text-[1.8rem] flex items-center justify-center font-semibold text-gray-200'> { blog.author.name[0] }</p> : <img src={ blog.img } alt={ blog.title }  className=" h-[5.5rem] w-[5.6rem] rounded-[100%] mb-[.85rem] object-cover"/> }
+        {!blog.author.img ? <p className='bg-red-800 w-[3rem] h-[3rem] rounded-[100%] text-[1.8rem] flex items-center justify-center font-semibold text-gray-200'> { blog.author.name[0] }</p> : <img src={ blog.author.img } alt={ blog.title }  className=" h-[5.5rem] w-[5.6rem] rounded-[100%] mb-[.85rem] object-cover"/> }
         <p className='author_bio font-bold text-[1.23rem]'>{ blog.author.name }</p>
       </Link>
       <p className='post_number text-[1.1rem] text-gray-600 mb-[1rem] dark:text-gray-200'>{ number.length > 1 ? `${number.length} Posts` : `${number.length} Post` }</p>

@@ -205,7 +205,8 @@ export const AuthProvider = ({children}) => {
         }
     }
   
-    const [ blogItems, setBlogItems ] = useState([]);    
+    const [ blogItems, setBlogItems ] = useState([]);
+    const [postLoading, setPostLoading] = useState(true);    
     
     const fetchAllPosts = async () => {
         
@@ -219,14 +220,15 @@ export const AuthProvider = ({children}) => {
             setBlogItems([]);
 
             data.docs.forEach(blog => { setBlogItems(item => [...item, blog.data()])});
+            setPostLoading(false);
 
             
         }catch(error) {
             console.log(error)
         }
-            
+        
     }
-
+    
     
     const [ blogs, setBlogs ] = useState([])
     const [ number, setNumber ] = useState([])
@@ -301,7 +303,8 @@ export const AuthProvider = ({children}) => {
         updateBio,
         updateMail,
         updateUsername,
-        updateUserImage
+        updateUserImage,
+        postLoading
     }
 
     return (
