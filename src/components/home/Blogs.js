@@ -9,6 +9,7 @@ import { useAuth } from '../../authContext';
 import moment from 'moment';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import BlogsLoader from './BlogsLoader';
 
 
 
@@ -81,14 +82,13 @@ const Blogs = () => {
           
           
           {            
-            postLoading === true ?
+            !postLoading === true ?
 
-            <SkeletonTheme baseColor="#ffff" highlightColor="#D3D3D3">
-              <Skeleton className="md:min-h-[10rem] h-[8rem]" count={ 5 }/>
-            </SkeletonTheme>
-            // <p className='font-bold text-[2rem]'>LOADING!!!</p>
             
+            <BlogsLoader amount={ 5 } />
+
             :
+
             blogItems.map((blogPost, index) => (
               
 

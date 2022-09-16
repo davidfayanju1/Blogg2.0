@@ -3,6 +3,8 @@ import { Link, NavLink } from 'react-router-dom';
 import { MdOutlineBookmarkAdd } from 'react-icons/md';
 import { useAuth } from '../../authContext';
 import moment from 'moment';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 
 const UserMain = ({id}) => {
@@ -39,13 +41,14 @@ const UserMain = ({id}) => {
 
   }, [blogItems]);
   
-  
 
   return (
     <div className='min-h-[100vh] md:px-[7rem] md:py-[3rem] px-[2rem] py-[3rem] w-[100%] dark:text-white md:border-solid border-r border-gray-300 border-none'>
       <>
         {
-          blogAuthor && blogAuthor.map((author) => (
+          blogAuthor.length !== 0 ? 
+
+          blogAuthor.map((author) => (
             <div key={ id }>
               <div className="profile-name mb-[2rem]">
               <h1 className='text-[3rem] font-bold'>{ author.data().name }</h1>
@@ -57,10 +60,18 @@ const UserMain = ({id}) => {
               </nav>
             </div>
           ))
+
+          :
+
+          <SkeletonTheme baseColor="#ffff" highlightColor="#D3D3D3">
+            <Skeleton className='max-w-[20rem] h-[3rem] mb-[2rem]'/>
+          </SkeletonTheme>
         }
       </>
       {
-        pageBlogs &&  pageBlogs.map((blogPost) => (
+        pageBlogs.length !== 0 ?
+        
+        pageBlogs.map((blogPost) => (
           <div className="blog-card-container" key={blogPost.id}>
             <div className="blog-card flex items-top mb-[4rem] justify-between md:min-h-[11rem] h-[8rem] border-b dark:border-gray-300 border-gray-400 pb-[3rem]">
               <div className={`blog-text ${blogPost.img !== null ? 'w-[68.3%]' : 'w-[100%]'}`}>
@@ -98,7 +109,10 @@ const UserMain = ({id}) => {
             </div>
         </div>
         ))
-        
+        :
+        <SkeletonTheme baseColor="#ffff" highlightColor="#D3D3D3">
+          <Skeleton className="md:min-h-[10rem] h-[8rem]" count={ 5 }/>
+        </SkeletonTheme>
       }
       
 
