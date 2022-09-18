@@ -4,7 +4,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 const BlogsLoader = ({ amount }) => {
 
-    const loadCards = Array(amount).fill(1);
+    const loadCards = Array(amount).fill();
 
   return loadCards.map ((_, i) => (
     <div className='blog-loader w-[70%] mb-[4rem]' key={ i }>

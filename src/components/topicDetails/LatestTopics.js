@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import BlogsLoader from '../home/BlogsLoader';
 
 
 const LatestTopics = ({ filteredBlog, topicLoading}) => {
@@ -17,10 +16,9 @@ const LatestTopics = ({ filteredBlog, topicLoading}) => {
       }
 
         {
-          topicLoading === true ?
-          <SkeletonTheme baseColor="#ffff" highlightColor="#D3D3D3">
-            <Skeleton className="md:min-h-[10rem] h-[8rem] mb-[1rem]" count={ 4 }/>
-          </SkeletonTheme>
+          topicLoading === true && filteredBlog.length === 0 ?
+
+          <BlogsLoader amount={2}/>
                     
           :
 

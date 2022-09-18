@@ -5,6 +5,7 @@ import { useAuth } from '../../authContext';
 import moment from 'moment';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import BlogsLoader from '../home/BlogsLoader';
 
 
 const UserMain = ({id}) => {
@@ -110,9 +111,7 @@ const UserMain = ({id}) => {
         </div>
         ))
         :
-        <SkeletonTheme baseColor="#ffff" highlightColor="#D3D3D3">
-          <Skeleton className="md:min-h-[10rem] h-[8rem]" count={ 5 }/>
-        </SkeletonTheme>
+        <BlogsLoader amount={1}/>
       }
       
 

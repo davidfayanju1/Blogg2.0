@@ -82,7 +82,7 @@ const Blogs = () => {
           
           
           {            
-            !postLoading === true ?
+            postLoading === true ?
 
             
             <BlogsLoader amount={ 5 } />

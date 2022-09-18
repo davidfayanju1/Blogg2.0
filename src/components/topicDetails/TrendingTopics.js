@@ -3,13 +3,16 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import BlogsLoader from '../home/BlogsLoader';
 
 const TrendingTopics = ({ filteredBlog, topicLoading }) => {
+  // console.log(filteredBlog, topicLoading)
+
   return (
     <div>
 
       {
-        topicLoading === false && filteredBlog.length === 0 ?
+        filteredBlog.length === 0 && topicLoading === false   ?
 
         <p>Start Contributing to this community <Link to="/newblog">write</Link></p>
 
@@ -17,17 +20,15 @@ const TrendingTopics = ({ filteredBlog, topicLoading }) => {
       }
 
       {
-        topicLoading === true ?
+        filteredBlog.length === 0 && topicLoading === true ?
         
-          <SkeletonTheme baseColor="#ffff" highlightColor="#D3D3D3">
-            <Skeleton className="md:min-h-[10rem] h-[8rem] mb-[1rem]" count={ 4 }/>
-          </SkeletonTheme>
+          <BlogsLoader amount={ 2 }/>
         
         :
                 
         filteredBlog.map((blogPost) => (
 
-          <div className="blog-card-container" key={blogPost.id}>
+        <div className="blog-card-container" key={blogPost.id}>
           <div className="blog-card flex items-top mb-[4rem] justify-between md:min-h-[11rem] h-[8rem] border-b dark:border-gray-300 border-gray-400 pb-[3rem]">
             <div className={`blog-text ${blogPost.img !== null ? 'w-[68.3%]' : 'w-[100%]'}`}>
                 <div className="blog-author">

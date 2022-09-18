@@ -30,15 +30,13 @@ function TopicDetails() {
     useEffect(() => {
 
       const newBlog = blogItems.filter((blog) => blog.category === name)    
+      
       setFilteredBlog(newBlog);
-      setTopicLoading(false);
-
-      if(topicLoading === false || filteredBlog.length === 0) {
-        console.log('it Works!!!');
-      }
+      
+      filteredBlog.length === 0 ? setTopicLoading(true) : setTopicLoading(false);
       
     }, [blogItems]);
-
+    
     
   
   return (
