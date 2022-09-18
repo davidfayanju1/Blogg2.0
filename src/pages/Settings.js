@@ -225,12 +225,12 @@ const Settings = ({toggleTheme, darkTheme}) => {
                 <div className="photo-container w-[70%]">
                   <h1 className='font-semibold text-[1.2rem] mb-[.2rem]'>Photo</h1>
                   <p className='mb-[1rem] text-[.95rem] w-full'>Your photo appears on your Profile page and with your stories across Space.</p>
-                  <p className='text-[.95rem] w-full md:mb-[0] mb-[1.2rem]'>Recommended size: Square, at least 1000 pixels per side. File type: JPG or PNG</p>                
+                  <p className='text-[.95rem] w-full md:mb-0 mb-[1.2rem]'>Recommended size: Square, at least 1000 pixels per side. File type: JPG or PNG</p>                
                 </div>
                 <div onClick={ openImageField } className="user cursor-pointer w-[5rem] h-[5rem] rounded-[100%] relative">
                   {
                     toggleImageField ?
-                    <label htmlFor='userImage' className="upload-image-icon z-10 absolute top-[0] left-[0] bg-black h-full w-full opacity-[.5] rounded-[100%] flex items-center justify-center">                      
+                    <label htmlFor='userImage' className="upload-image-icon z-10 absolute top-0 left-0 bg-black h-full w-full opacity-[.5] rounded-full flex items-center justify-center">                      
                       <input type="file" id="userImage"  className='hidden' onChange={ uploadUserPic }/>
                       {loading ? 
                       <p className='font-[1rem] text-gray-600'>...</p>
