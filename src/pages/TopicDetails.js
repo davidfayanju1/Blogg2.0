@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, NavLink, Routes, Route } from 'react-router-dom';
 import football from '../img/football.jpg';
-import family from '../img/family.jpg';
-import TopicMain from '../components/topicDetails/TopicMain';
-import TopicAside from '../components/topicDetails/TopicAside'; 
+import family from '../img/family.jpg'; 
 import { ImPriceTag } from 'react-icons/im';
 import TrendingTopics from '../components/topicDetails/TrendingTopics';
 import LatestTopics from '../components/topicDetails/LatestTopics';
@@ -14,8 +12,7 @@ import { useAuth } from '../authContext';
 function TopicDetails() {
 
     const { name } = useParams();
-
-    
+  
     const { blogItems, fetchAllPosts } = useAuth();
 
     const [ filteredBlog, setFilteredBlog ] = useState([]);

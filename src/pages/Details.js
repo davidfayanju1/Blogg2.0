@@ -121,7 +121,7 @@ export const Details = () => {
   console.log(blogItems);
 
   return (
-    <div className='mt-[4.5rem] dark:bg-slate-900 bg-gray-200 w-[100%] min-h-[100vh]'>
+    <div className='mt-[4.5rem] dark:bg-slate-900 bg-gray-50 w-[100%] min-h-[100vh]'>
       {
         blogItems.map((blog) => (
           <div className="flex justify-between" key={ blog.id }>
