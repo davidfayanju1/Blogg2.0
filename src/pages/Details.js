@@ -121,19 +121,15 @@ export const Details = () => {
   console.log(blogItems);
 
   return (
-    <div className='mt-[4.5rem] dark:bg-slate-900 bg-gray-50 w-[100%] min-h-[100vh]'>
-      {
-        blogItems.map((blog) => (
-          <div className="flex justify-between" key={ blog.id }>
-            <div className="main-article md:w-[75%] w-[100%]">
-              <MainArticle blog={ blog }/>
-            </div>
-            <div className="article-sidebar md:w-[25%] hidden md:block">
-              <Aside blog={ blog }/>
-            </div>
-          </div>
-      ))
-      }
+    <div className='mt-[4.5rem] dark:bg-slate-900 bg-gray-50 w-[100%] min-h-[100vh]'>      
+      <div className="flex justify-between">
+        <div className="main-article md:w-[75%] w-[100%]">
+          <MainArticle blogItems={ blogItems }/>
+        </div>
+        <div className="article-sidebar md:w-[25%] hidden md:block">
+          <Aside blogItems={ blogItems }/>
+        </div>
+      </div>      
     </div>
   )
 }
