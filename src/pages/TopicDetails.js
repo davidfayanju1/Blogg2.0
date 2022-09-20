@@ -50,7 +50,7 @@ function TopicDetails() {
             <NavLink to='/newBlog' className='bg-transparent text-green-800 dark:text-gray-100 px-[1.1rem] py-[.5rem] border-green-800 dark:border-gray-100 border-solid border-[.02rem] rounded-[20px]'>Start Writing</NavLink>
           </div>
         </div>
-        <nav className="topic-links after:w-[100%] after:bg-gray-300 after:h-[.02rem] after:block mb-[2rem]">
+        <nav className="topic-links after:w-full after:bg-gray-300 after:h-[.02rem] after:block mb-[2rem]">
           <ul className='flex items-center gap-[2rem]'>
             <NavLink to={`/topicDetails/${ name }/`} className={({isActive}) => isActive ? ' text-black dark:text-white after:block after:h-[.04rem] after:w-[100%] after:bg-gray-500 after:dark:h-[.15rem] after:dark:bg-gray-300' : null}>Trending</NavLink>
             <NavLink to={`/topicDetails/${ name }/latest`} className={ ({isActive}) => isActive ? 'text-black dark:text-white after:block after:h-[.04rem] after:w-[100%] after:bg-gray-500 after:dark:h-[.15rem] after:dark:bg-gray-300' : null}>Latest</NavLink>

@@ -265,7 +265,7 @@ const Settings = ({toggleTheme, darkTheme}) => {
                 <p className='text-[.95rem] w-full'>This page should tell your readers more about you and explain the benefits of reading your work.</p>
               </div>
               <div className="edit-btn-container">
-                <Link to={`/userDetails/${currentUser.uid}`}><button onClick={ openInput } className="text-[.9rem] bg-transparent text-gray-700 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white">Edit your about page</button></Link>
+                <Link to={`/userDetails/${currentUser.uid}/`}><button onClick={ openInput } className="text-[.9rem] bg-transparent text-gray-700 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white">Edit your about page</button></Link>
               </div>
             </div>
             

@@ -94,7 +94,7 @@ const Blogs = () => {
 
               <div className="blog flex items-top mb-[4rem] justify-between md:min-h-[10rem] h-[8rem]" key={ blogPost.id }>
                 <div className={`blog-text ${ blogPost.img === null ? 'w-[100%]' : 'w-[63.1%]'}`}>
-                  <Link to={`/userDetails/${blogPost.author.uid}`}>
+                  <Link to={`/userDetails/${blogPost.author.uid}/`}>
                     <div className="blog-author flex">
                       {blogPost.author.img ?  <img src={ blogPost.author.img} alt={ blogPost.id}  className=" h-[1.65rem] w-[1.65rem] rounded-[100%] object-cover"/> : <p className='bg-red-800 h-[1.65rem] w-[1.65rem] rounded-[100%] text-[1.1rem] flex items-center justify-center font-semibold text-white'> { blogPost.author.name[0] }</p>}
                       <p className='author-name ml-[0.2rem]'>{ blogPost.author.name }</p>
