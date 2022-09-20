@@ -12,9 +12,9 @@ const TrendingTopics = ({ filteredBlog, topicLoading }) => {
     <div>
 
       {
-        filteredBlog.length === 0 && topicLoading === false   ?
+        filteredBlog.length === 0 && topicLoading === false ?
 
-        <p>Start Contributing to this community <Link to="/newblog">write</Link></p>
+        <p>Start Contributing to this community. <Link to="/newblog">Write</Link></p>
 
         : null
       }

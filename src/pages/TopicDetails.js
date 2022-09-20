@@ -21,19 +21,20 @@ function TopicDetails() {
     useEffect(() => {
       
       fetchAllPosts();
-      
+      setTopicLoading(true);
+
     }, []);
 
     useEffect(() => {
 
-      const newBlog = blogItems.filter((blog) => blog.category === name)    
+      // setTopicLoading(false);
       
+      const newBlog = blogItems.filter((blog) => blog.category === name)    
       setFilteredBlog(newBlog);
       
-      filteredBlog.length === 0 ? setTopicLoading(true) : setTopicLoading(false);
-      
+      blogItems.length && setTopicLoading(false);
+
     }, [blogItems]);
-    
     
   
   return (

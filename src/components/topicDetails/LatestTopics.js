@@ -7,14 +7,16 @@ import BlogsLoader from '../home/BlogsLoader';
 const LatestTopics = ({ filteredBlog, topicLoading}) => {
   return (
     <div className='latest-topics-container'>
-      {
-        topicLoading === false && filteredBlog.length === 0 ?
+      <>
+        {
+          topicLoading === false && filteredBlog.length === 0 ?
 
-        <p>Start Contributing to this community</p>
+          <p>Start Contributing to this community. <Link to='/newBlog'>Write</Link></p>
 
-        : null
-      }
-
+          : null
+        }
+      </>
+      <>
         {
           topicLoading === true && filteredBlog.length === 0 ?
 
@@ -62,6 +64,7 @@ const LatestTopics = ({ filteredBlog, topicLoading}) => {
 
           ))
         }
+      </>  
     </div>
   )
 }

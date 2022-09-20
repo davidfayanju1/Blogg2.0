@@ -28,7 +28,13 @@ const MainArticle = ({ blogItems }) => {
   return (
     <main className='main-article min-h-[100vh] md:px-[7rem] md:py-[4rem] px-[2rem] py-[3rem] w-[100%] dark:text-white md:border-solid border-r border-gray-300 border-none'>
       {
-        blogItems && blogItems.map((blog) => (
+        blogItems.length === 0 ?
+        
+        <p className="font-bold">LOADING</p>
+        
+        :
+
+        blogItems.map((blog) => (
           <div key={ blog.id }>    
             <div className='blog-author-details flex justify-between items-center mb-[1rem]'>
               <div className="flex items-center">
