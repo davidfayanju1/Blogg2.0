@@ -104,14 +104,14 @@ const Nav = ({toggleTheme, darkTheme}) => {
                         }
                     </> 
                      : 
-                     <Link to="/login"><button className="bg-black text-white rounded-[30px] text-[1rem] w-[8rem] h-[2rem] dark:bg-white dark:text-bla   ck">Get Started</button></Link>
+                     <Link to="/login"><button className="bg-black text-white dark:text-black rounded-[30px] text-[1rem] w-[8rem] h-[2rem] dark:bg-white dark:text-bla   ck">Get Started</button></Link>
                 }
             </div>
             {
                 currentUser && 
                 <div className="hamburger d-block h-[2rem] w-[2rem] flex flex-col justify-center gap-[0.35rem] ml-[1rem] cursor-pointer" onClick={() => setNavToggle(!navToggle)}>
                     <span className="burger w-[100%] bg-black dark:bg-white h-[.15rem] rounded-[23px]"></span>
-                    <span className="burger w-[100%] bg-black dark:bg-white h-[.15rem] rounded-[23px]"></span>
+                    <span className="burger w-[100%] bg-black dark:bg-white h-[.15rem] rounded-[23px] my-[.35rem]"></span>
                     <span className="burger w-[100%] bg-black dark:bg-white h-[.15rem] rounded-[23px]"></span>
                 </div>
             }
@@ -141,7 +141,7 @@ const Nav = ({toggleTheme, darkTheme}) => {
                         <p className='px-[1.4rem] md:px-[.5rem] mb-[.8rem] text-[1.1rem] md:text-[1rem]'>{ userData.name }</p>
                     </div>
                     <div className='px-[1.4rem] md:px-[.5rem] mt-[1.2rem]'>
-                        <Link onClick={ () => setPopUp(false) } to={`/userDetails/${ userData.uid }`}><button className='py-[.4rem] md:py-[0rem] mb-[.8rem] md:mb-[.5rem] text-[1rem] md:text-[.9rem] w-[100%] block bg-transparent rounded-[10rem] border-black border-[.1rem] dark:border-white'>View Profile</button></Link>
+                        <Link onClick={ () => setPopUp(false) } to={`/userDetails/${ userData.uid }/`}><button className='py-[.4rem] md:py-[0rem] mb-[.8rem] md:mb-[.5rem] text-[1rem] md:text-[.9rem] w-[100%] block bg-transparent rounded-[10rem] border-black border-[.1rem] dark:border-white'>View Profile</button></Link>
                         <Link to='/settings' onClick={ () => setPopUp(false)} className='text-[1.1rem] md:text-[1rem]'>Settings</Link>
                         <p onClick={ signOut } className='cursor-pointer mt-[1rem] md:mt-[.5rem] text-[1.1rem] md:text-[1rem]'>Sign out</p>
                     </div>

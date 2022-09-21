@@ -39,7 +39,7 @@ function TopicDetails() {
   
   return (
     <div className="mt-[4.5rem] dark:bg-slate-900 bg-gray-50 dark:text-white min-h-[100vh] flex">
-      <div className='md:border-solid border-r border-gray-300 border-none md:px-[5rem] px-[2.2rem] md:w-[75%] w-[100%]'>
+      <div className='md:border-solid border-r border-gray-300 border-none md:px-[5rem] px-[1.3rem] md:w-[75%] w-[100%]'>
         <div className="topic-name">
           <div className="main-title flex items-center">
             <div className="tag-container rounded-full dark:bg-gray-300 dark:text-slate-800 bg-gray-300 md:h-[2.2rem] md:w-[2.2rem]  h-[1.7rem] w-[1.8rem] md:text-xl text-md flex items-center justify-center mr-3"><ImPriceTag /></div>
@@ -52,7 +52,7 @@ function TopicDetails() {
         </div>
         <nav className="topic-links after:w-full after:bg-gray-300 after:h-[.02rem] after:block mb-[2rem]">
           <ul className='flex items-center gap-[2rem]'>
-            <NavLink to={`/topicDetails/${ name }/`} className={({isActive}) => isActive ? ' text-black dark:text-white after:block after:h-[.04rem] after:w-[100%] after:bg-gray-500 after:dark:h-[.15rem] after:dark:bg-gray-300' : null}>Trending</NavLink>
+            <NavLink to={`/topicDetails/${ name }/`} className={({isActive}) => isActive ? ' text-black dark:text-white after:block after:h-[.04rem] after:w-[100%] after:bg-gray-500 after:dark:h-[.15rem] after:dark:bg-gray-300' : null} style={{marginRight: '2rem'}}>Trending</NavLink>
             <NavLink to={`/topicDetails/${ name }/latest`} className={ ({isActive}) => isActive ? 'text-black dark:text-white after:block after:h-[.04rem] after:w-[100%] after:bg-gray-500 after:dark:h-[.15rem] after:dark:bg-gray-300' : null}>Latest</NavLink>
           </ul>
         </nav>
@@ -66,7 +66,7 @@ function TopicDetails() {
 
       <div className="md:block hidden md:w-[25%] min-h-[100vh] dark:text-white md:sticky top-[9rem] md:px-[2rem] py-[4rem]">
         <div className="story-number ">
-          <h1 className="font-semibold text-[1.4rem]">{filteredBlog.length > 1 ? `${ filteredBlog.length } storries` : `${ filteredBlog.length} story`}</h1>
+          <h1 className="font-semibold text-[1.4rem]">{filteredBlog.length > 1 ? `${ filteredBlog.length } stories` : `${filteredBlog.length} story`}</h1>
         </div>
       </div>      
     </div>

@@ -42,7 +42,7 @@ const UserAside = ({id, user }) => {
         blogAuthor.map((author) => (
 
           <div className="author-card" key={id}>
-            <Link to={`/userDetails/${ id }`}>
+            <Link to={`/userDetails/${ id }/`}>
               {!author.data().img ? <p className='bg-red-800 w-[3rem] h-[3rem] rounded-full text-[1.8rem] flex items-center justify-center font-semibold text-gray-200'>{ author.data().name[0] }</p> : <img src={ author.data().img } alt={ author.data().name }  className=" h-[5.5rem] w-[5.6rem] rounded-full mb-[.85rem] object-cover"/> }
               <p className='author_name font-bold text-[1.23rem]'>{ author.data().name }</p>
             </Link>

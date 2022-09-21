@@ -43,7 +43,11 @@ const LatestTopics = ({ filteredBlog, topicLoading}) => {
                     <Link to={`/topicDetails/${ blogPost.category }/`}>
                       <div className="blog-category mr-[0.6rem] bg-gray-300 h-[1.5rem] px-[0.7rem] rounded-[13px] hidden md:block dark:text-gray-800">{ blogPost.category }</div>
                     </Link>
-                    <p className="mr-[0.6rem]">7min read</p>
+                    <p className="mr-[0.6rem]">
+                      {
+                        Math.ceil(blogPost.blog.trim().split(/\s+/).length / 200)
+                      } min read
+                    </p>
                   </div>
                   <div className="save-icon ml-[2rem]">
                     <svg width="25" height="25"  className="dark:fill-white" title="Save"><path d="M18 2.5a.5.5 0 0 1 1 0V5h2.5a.5.5 0 0 1 0 1H19v2.5a.5.5 0 1 1-1 0V6h-2.5a.5.5 0 0 1 0-1H18V2.5zM7 7a1 1 0 0 1 1-1h3.5a.5.5 0 0 0 0-1H8a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-8.5a.5.5 0 0 0-1 0v7.48l-5.2-4a.5.5 0 0 0-.6 0l-5.2 4V7z"></path></svg>

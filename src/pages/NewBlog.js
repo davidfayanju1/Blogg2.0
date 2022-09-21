@@ -102,15 +102,15 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
             
   return (
     <div className='new-blog min-h-[100vh] dark:bg-slate-800 bg-white dark:text-white relative'>
-        <nav className='flex justify-between items-center md:px-[12rem] px-[2rem] h-[4.5rem]'>
+        <nav className='flex justify-between items-center md:px-[12rem] px-[1.2rem] h-[4.5rem]'>
             <div className="title">
                 <Link to='/'>
                     <h1 className='font-serif text-[1.5rem]'>ECONOTES</h1>
                 </Link>
             </div>
-            <div className="newblog-controls flex items-center gap-[1rem]">
-                <button className='bg-green-700 hover:bg-green-800 h-[2rem] w-[5rem] text-white font-semibold rounded-[20px] disabled:opacity-[.6]' disabled={ !newBlog } onClick={ postBlog }>Publish</button>
-                <div className="user cursor-pointer">
+            <div className="newblog-controls flex items-center">
+                <button className='mr-[.8rem] bg-green-700 hover:bg-green-800 h-[2rem] w-[5rem] text-white font-semibold rounded-[20px] disabled:opacity-[.6]' disabled={ !newBlog } onClick={ postBlog }>Publish</button>
+                <div className="user cursor-pointer mr-[.8rem] ">
                     {userData && userData.img ? <img src={userData.img} alt="user" className='w-[2.1rem] h-[2rem] rounded-[100%] object-cover'/> : userData && <p className='bg-red-800 w-[2.1rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-white'> { userData.name[0] }</p>}
                 </div>
                 <div className="theme-toggle cursor-pointer text-lg" onClick={toggleTheme}>
