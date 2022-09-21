@@ -49,7 +49,7 @@ const PopupPost = ({setOpenPostPage, blogPost}) => {
             </div>
             <h1 className='font-bold text-[1.1rem] text-gray-700 mb-[.27rem] dark:text-gray-200'>New Title</h1>
             <div className='mb-[.55rem]'>
-              <input type="text" className="bg-transparent outline-none w-[100%] story-title border-slate-500 dark:border-slate-300 border-solid border-b border-t pt-[.55rem] pb-[.1rem] placeholder:text-gray-600 dark:placeholder:text-gray-200" placeholder={blogPost.title}></input>
+              <input type="text" className="rounded-none bg-transparent outline-none w-[100%] story-title border-slate-500 dark:border-slate-300 border-solid border-b border-t pt-[.55rem] pb-[.1rem] placeholder:text-gray-600 dark:placeholder:text-gray-200" placeholder={blogPost.title}></input>
             </div> 
             <div className="sidenote">
               <p className='text-gray-600 text-[.9rem] dark:text-gray-200'><span className='font-bold mr-[.25rem]'>Note:</span>Changes here will affect how your story appears in public places like the homepage — not the contents of the story itself.</p>
