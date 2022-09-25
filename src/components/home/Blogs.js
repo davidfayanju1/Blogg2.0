@@ -95,7 +95,7 @@ const Blogs = () => {
               
 
               <div className="blog flex items-top mb-[4rem] justify-between md:min-h-[10rem] h-[8rem]" key={ blogPost.id }>
-                <div className={`blog-text ${ blogPost.img === null ? 'w-[100%]' : 'w-[72.1%]'}`}>
+                <div className={`blog-text ${ blogPost.img === null ? 'w-[100%]' : 'md:w-[65%]'}`}>
                   <Link to={`/userDetails/${blogPost.author.uid}/`}>
                     <div className="blog-author flex items-center">
                       {blogPost.author.img ?  <img src={ blogPost.author.img} alt={ blogPost.id}  className=" h-[1.65rem] w-[1.65rem] rounded-[100%] object-cover"/> : <p className='bg-red-800 h-[1.65rem] w-[1.65rem] rounded-[100%] text-[1.1rem] flex items-center justify-center font-semibold text-white'> { blogPost.author.name[0] }</p>}
@@ -119,7 +119,7 @@ const Blogs = () => {
                       </p>
                        
                       <Link to={`/topicDetails/${ blogPost.category }/`}>
-                        <div className={`blog-category mr-[0.6rem] bg-gray-300 h-[1.5rem] px-[0.7rem] rounded-[13px] dark:text-gray-800 ${!currentUser && 'hidden'} md:block`}>{ blogPost.category }</div>
+                        <div className={`blog-category mr-[0.6rem] text-[.77rem] md:text-[.8rem] bg-gray-300 h-[1.5rem] flex items-center justify-center px-[0.7rem] rounded-[13px] dark:text-gray-800 ${!currentUser && 'hidden'} md:block`}>{ blogPost.category }</div>
                       </Link>
                       
                     </div>
@@ -148,12 +148,12 @@ const Blogs = () => {
             <h1 className="md:text-[1.02rem] text-[0.92rem] font-bold">DISCOVER MORE OF WHAT MATTERS TO YOU</h1>
           </div>
 
-          <div className="blog_topic_button_flex w-[100%] min-w-[16rem]  flex flex-wrap gap-[0.7rem] min-h-[4.76rem]">
+          <div className="blog_topic_button_flex w-[100%] min-w-[16rem]  flex flex-wrap min-h-[4.76rem]">
 
             {
               blogsTopic.map((bT, index) => (
                 <Link to={`/topicDetails/${bT.category}/`} key={index}>
-                  <button className='border-rounded bg-transparent h-[2.7rem] px-[1rem] border-solid border-[1.85px] rounded-[0.3rem] gap-1 border-gray-400 dark:border-white dark:text-white'>                  
+                  <button className='mr-[0.7rem] mb-[.7rem] border-rounded bg-transparent h-[2.7rem] px-[1rem] border-solid border-[1.85px] rounded-[0.3rem] gap-1 border-gray-400 dark:border-white dark:text-white'>                  
                     {bT.category}
                   </button>
                 </Link>  

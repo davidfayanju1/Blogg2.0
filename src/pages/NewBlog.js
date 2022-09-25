@@ -15,10 +15,6 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
     // write your posts here
     const { userData, fetchUserData } = useAuth();
 
-    const user = {
-        name: 'Billie Will',
-    }
-
     const [ open, setOpen ] = useState(true);
     const [ blogData, setBlogData ] = useState({})
 
@@ -28,7 +24,6 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
         e.preventDefault();
         
         bodyRef.current.focus();
-        // console.log(bodyRef.current.value);
     }
 
     const titleRef = useRef();

@@ -24,10 +24,7 @@ const PopupPost = ({setOpenPostPage, blogPost}) => {
 
   useEffect(() => {
 
-    // blogPost && console.log(blogPost)
     fetchUserData();
-
-    console.log(blogPost.img);
 
   }, [userData.name]);
 

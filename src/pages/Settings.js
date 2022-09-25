@@ -142,17 +142,17 @@ const Settings = ({toggleTheme, darkTheme}) => {
     <div className='dark:bg-slate-800 dark:text-white'>
       <nav className='flex justify-between items-center md:px-[8rem] px-[1.2rem] h-[4.5rem]'>
         <div className="title">
-            <Link to='/'>
-                <h1 className='font-serif text-[1.5rem]'>ECONOTES</h1>
-            </Link>
+          <Link to='/'>
+              <h1 className='font-serif text-[1.5rem]'>ECONOTES</h1>
+          </Link>
         </div>
         <div className="newblog-controls flex items-center">
-            <div className="user cursor-pointer mr-[1rem]">
-                {userData && userData.img ? <img src={userData.img} alt="user" className='w-[2.1rem] h-[2rem] rounded-[100%]' /> : userData && <p className='bg-red-800 w-[2.1rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-white'> { userData.name[0] }</p>}
-            </div>
-            <div className="theme-toggle cursor-pointer text-lg" onClick={toggleTheme}>
-                {darkTheme ? <HiSun /> : <BsFillMoonFill />}
-            </div>
+          <div className="user cursor-pointer mr-[1rem]">
+              {userData && userData.img ? <img src={userData.img} alt="user" className='w-[2.1rem] h-[2rem] rounded-[100%]' /> : userData && <p className='bg-red-800 w-[2.1rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-white'> { userData.name[0] }</p>}
+          </div>
+          <div className="theme-toggle cursor-pointer text-lg" onClick={toggleTheme}>
+              {darkTheme ? <HiSun /> : <BsFillMoonFill />}
+          </div>
         </div>
       </nav>
       

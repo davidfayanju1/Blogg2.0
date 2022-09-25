@@ -101,6 +101,7 @@ export const AuthProvider = ({children}) => {
             const data = query.docs;
             
             setUsers(data);
+            console.log('users', data);
             
         }catch (err){
             setDisplayError('Error! Inavlid Data');  
@@ -195,7 +196,6 @@ export const AuthProvider = ({children}) => {
                  category,
                  clap,
                  img
-                //  photo: currentUser.photoURL
              })
              
  
@@ -204,6 +204,54 @@ export const AuthProvider = ({children}) => {
             // setBlogError('Error With Blog')  
         }
     }
+
+    // comments
+
+    const commentId = uuidv4();
+
+    const postComments = async (body, id) => {
+
+        try{
+             
+             await db.collection('comments')
+             .add({
+                 blogId: id, 
+                 author: userData,
+                 body,
+                 createdAt: new Date()
+             })
+             
+ 
+        }catch(err){
+            console.log(err);
+            // setBlogError('Error With Blog')  
+        }
+    }
+
+    const [comments, setComments] = useState([]);
+
+    const fetchComments = async (blogId) => {
+
+     
+        try{
+            const response = db.collection('comments')
+            .where('blogId', '==', blogId)
+            .orderBy('createdAt', 'desc')
+            
+            const data = await response.get()
+            setComments([]);
+            
+            data.docs.forEach((comment) => {
+
+                setComments(items => [...items, comment.data()]);             
+               
+            });            
+            
+        }catch(error) {
+            console.log(error)
+        }
+        
+    }    
   
     const [ blogItems, setBlogItems ] = useState([]);
     const [postLoading, setPostLoading] = useState(true);    
@@ -304,7 +352,10 @@ export const AuthProvider = ({children}) => {
         updateMail,
         updateUsername,
         updateUserImage,
-        postLoading
+        postLoading,
+        postComments,
+        fetchComments,
+        comments
     }
 
     return (
