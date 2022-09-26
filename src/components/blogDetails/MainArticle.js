@@ -8,10 +8,12 @@ const MainArticle = ({ blogItems }) => {
 
   const[ stuck, setStuck ] = useState(false);
 
-  const { comments, fetchComments, userData, updateApplause } = useAuth();
+  const { comments, fetchComments, userData, updateApplause, updateBookmarkList } = useAuth();
   
   const [ clapCount, setClapCount ] = useState(blogItems[0].clap)
   const [clapStyle, setClapStyle] = useState(false);
+  const [bookMark, setBookMark] = useState(false);
+  
   const handleApplause = () => {
 
     if (!blogItems[0].likedUsers.includes(userData.uid.trim())) {
@@ -33,6 +35,27 @@ const MainArticle = ({ blogItems }) => {
 
   }
 
+  const bookmarkBlog = () => {
+
+    if(!userData.bookmarkedUsers.includes(blogItems[0].id)){
+      setBookMark(true);
+      userData.bookmark.push(blogItems[0]);
+      userData.bookmarkedUsers.push(blogItems[0].id);
+      updateBookmarkList(userData.bookmark, userData.bookmarkedUsers);
+
+    }else {
+
+      const index = userData.bookmark.indexOf(blogItems[0]);
+      const blogIndex = userData.bookmarkedUsers.indexOf(blogItems[0].id)
+      userData.bookmark.splice(index, 1);
+      userData.bookmarkedUsers.splice(blogIndex, 1);
+      updateBookmarkList(userData.bookmark, userData.bookmarkedUsers);
+      setBookMark(false);
+
+    }
+
+  }
+
   useEffect(() => {
 
     if (blogItems[0].likedUsers.includes(userData.uid.trim())) {
@@ -47,6 +70,22 @@ const MainArticle = ({ blogItems }) => {
 
     
   }, [blogItems[0].clap]);
+
+
+  useEffect(() => {
+      
+    if(userData.bookmarkedUsers.includes(blogItems[0].id)) {
+      
+      console.log(userData)
+      setBookMark(true);
+
+    }else {
+      
+      setBookMark(false);
+    
+    }     
+
+  }, [userData]);
   
 
   return (
@@ -77,8 +116,13 @@ const MainArticle = ({ blogItems }) => {
                   </div>
                 </div>
               </div>
-              <div className="user-icons">
-                <svg width="25" height="25"  className="dark:fill-white cursor-pointer" title="Save"><path d="M18 2.5a.5.5 0 0 1 1 0V5h2.5a.5.5 0 0 1 0 1H19v2.5a.5.5 0 1 1-1 0V6h-2.5a.5.5 0 0 1 0-1H18V2.5zM7 7a1 1 0 0 1 1-1h3.5a.5.5 0 0 0 0-1H8a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-8.5a.5.5 0 0 0-1 0v7.48l-5.2-4a.5.5 0 0 0-.6 0l-5.2 4V7z"></path></svg>
+              <div className="userbookmark-icons" onClick={ bookmarkBlog }>
+                {
+                  bookMark ?
+                  <svg className='dark:fill-white fill-black' width="24" height="24" viewBox="0 0 24 24"><path d="M7.5 3.75a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-14a2 2 0 0 0-2-2h-9z"></path></svg>
+                  :
+                  <svg width="25" height="25"  className="dark:fill-white cursor-pointer" title="Save"><path d="M18 2.5a.5.5 0 0 1 1 0V5h2.5a.5.5 0 0 1 0 1H19v2.5a.5.5 0 1 1-1 0V6h-2.5a.5.5 0 0 1 0-1H18V2.5zM7 7a1 1 0 0 1 1-1h3.5a.5.5 0 0 0 0-1H8a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-8.5a.5.5 0 0 0-1 0v7.48l-5.2-4a.5.5 0 0 0-.6 0l-5.2 4V7z"></path></svg>
+                }
               </div>
             </div>
             

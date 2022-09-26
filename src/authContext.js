@@ -11,7 +11,7 @@ export const AuthProvider = ({children}) => {
     const [ loading, setLoading ] = useState(true);
     const [currentUser, setCurrentUser ] = useState(null);
     
-    const registerUser = async (name, email, password, bio) => {
+    const registerUser = async (name, email, bio, password, bookmark) => {
 
         try {
             const res = await auth.createUserWithEmailAndPassword(email, password);
@@ -23,8 +23,8 @@ export const AuthProvider = ({children}) => {
                 name,
                 authProvider: 'local',
                 email,
-                password,
-                bio
+                bio,
+                bookmark
             })
 
         }catch(error) {
@@ -225,6 +225,19 @@ export const AuthProvider = ({children}) => {
 
     }
 
+    const updateBookmarkList = async(bookmarkList, bookmarkUsers) => {
+
+        try {
+            db.collection('users').doc(currentUser.uid).update({
+                'bookmark' : bookmarkList,
+                'bookmarkedUsers': bookmarkUsers
+            })
+
+        }catch(err) {
+            console.log(err)
+        }
+    }
+
     // comments
 
     const commentId = uuidv4();
@@ -376,7 +389,8 @@ export const AuthProvider = ({children}) => {
         postComments,
         fetchComments,
         comments,
-        updateApplause
+        updateApplause,
+        updateBookmarkList
     }
 
     return (

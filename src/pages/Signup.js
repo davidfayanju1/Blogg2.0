@@ -12,6 +12,7 @@ const Signup = () => {
   const email = useRef();
   const confirmPassword = useRef();
   const bio = null;
+  const bookmarkList = [];
 
   // name, email, password,confirmpassword
   const [showPassword, setShowPassword] = useState(true); 
@@ -25,11 +26,11 @@ const Signup = () => {
     e.preventDefault()
     if(password.current.value !== confirmPassword.current.value){
 
-      setPasswordError('BITCH!!!');
+      setPasswordError('please Try again');
 
     }else {
 
-      registerUser(name.current.value, email.current.value, password.current.value, bio)
+      registerUser(name.current.value, email.current.value, password.current.value, bio, bookmarkList)
       navigate('/');
     }
 
