@@ -101,7 +101,6 @@ export const AuthProvider = ({children}) => {
             const data = query.docs;
             
             setUsers(data);
-            console.log('users', data);
             
         }catch (err){
             setDisplayError('Error! Inavlid Data');  
@@ -179,23 +178,27 @@ export const AuthProvider = ({children}) => {
         })
 
     }
-    
+
+       
     // blogs
-    const postBlog = async (title, blog, category, clap, img) => {
+    const blogUID = uuidv4();
+
+    const postBlog = async (title, blog, category, clap, img, likedUsers) => {
 
         try{
              
-             await db.collection('posts')
-             .add({
+             await db.collection('posts').doc(blogUID)
+             .set({
                  uid: userData.uid, 
                  author: userData,
                  title,
                  blog,
                  createdAt: new Date(),
-                 id: uuidv4(),
+                 id: blogUID,
                  category,
                  clap,
-                 img
+                 img,
+                 likedUsers
              })
              
  
@@ -203,6 +206,23 @@ export const AuthProvider = ({children}) => {
             console.log(err);
             // setBlogError('Error With Blog')  
         }
+    }
+
+    const updateApplause = async ( claps, likedUsers, blogId) => {
+
+        try{
+
+            db.collection('posts').doc(blogId).update({
+                'clap' :claps,
+                'likedUsers': likedUsers
+            })
+
+        }catch(error) {
+
+            console.log(error);
+
+        }
+
     }
 
     // comments
@@ -264,7 +284,6 @@ export const AuthProvider = ({children}) => {
 
             const data = await response.get()
             
-            // data.docs.forEach(blogItem => setBlogItems(item => [...item, blogItem.data() ]))
             setBlogItems([]);
 
             data.docs.forEach(blog => { setBlogItems(item => [...item, blog.data()])});
@@ -300,6 +319,7 @@ export const AuthProvider = ({children}) => {
                 setUserBlogs(b => [...b, item.data()])
 
             })
+
             
             setNumber(filter);
                                            
@@ -355,7 +375,8 @@ export const AuthProvider = ({children}) => {
         postLoading,
         postComments,
         fetchComments,
-        comments
+        comments,
+        updateApplause
     }
 
     return (

@@ -8,6 +8,9 @@ const Aside = ({ blogItems }) => {
 
   const {currentUser, fetchUserBlogPosts, userData, blogs, number } = useAuth();
 
+
+  console.log(number.length);
+
   return (
     
     <div className='dark:text-white md:sticky top-[9rem] md:px-[2rem]'>

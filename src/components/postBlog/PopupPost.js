@@ -13,12 +13,14 @@ const PopupPost = ({setOpenPostPage, blogPost}) => {
 
   const noImage = true;
   const clap = 0;
+  const likedUsers = [];
 
   const publishBlog = () => {
     
-    postBlog(blogPost.title, blogPost.body, category.current.value, clap, blogPost.img);
+    postBlog(blogPost.title, blogPost.body, category.current.value, clap, blogPost.img, likedUsers);
 
     navigate('/');
+    
   }
 
 
