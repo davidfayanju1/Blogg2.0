@@ -27,8 +27,7 @@ const BlogsCard = ({ blogPost, index }) => {
       userData.bookmarkedUsers.splice(blogIndex, 1);
       updateBookmarkList(userData.bookmark, userData.bookmarkedUsers);
       setActiveBlog(null)
-      
-      
+        
     }
   
   }
@@ -36,7 +35,7 @@ const BlogsCard = ({ blogPost, index }) => {
 
   useEffect(() => {
 
-    if(!userData.bookmarkedUsers.includes(blogPost.id)){
+    if(userData && !userData.bookmarkedUsers.includes(blogPost.id)){
         
         setActiveBlog(null)
         
@@ -53,7 +52,7 @@ const BlogsCard = ({ blogPost, index }) => {
         <div className="blog flex items-top mb-[4rem] justify-between md:min-h-[10rem] h-[8rem]" key={ blogPost.id }>
             <div className={`blog-text ${ blogPost.img === null ? 'w-[100%]' : 'md:w-[65%]'}`}>
                 <Link to={`/userDetails/${blogPost.author.uid}/`}>
-                <div className="blog-author flex items-center">
+                <div className="blog-author flex items-center mb-[.7rem]">
                     {blogPost.author.img ?  <img src={ blogPost.author.img} alt={ blogPost.id}  className=" h-[1.65rem] w-[1.65rem] rounded-[100%] object-cover"/> : <p className='bg-red-800 h-[1.65rem] w-[1.65rem] rounded-[100%] text-[1.1rem] flex items-center justify-center font-semibold text-white'> { blogPost.author.name[0] }</p>}
                     <p className='author-name ml-[0.2rem] text-[.9rem] mr-[.2rem]'>{ blogPost.author.name } .</p>
                     {currentUser && <p className="blog-time text-[.85rem]">{ moment(blogPost.createdAt.toDate().toString()).format('ll').substring(0, 6)}</p>}
@@ -79,14 +78,21 @@ const BlogsCard = ({ blogPost, index }) => {
                     </Link>
                     
                 </div>
-                <div className="save-icon ml-[2rem]" onClick={ bookmarkBlog }>
-                    {
-                    blogPost.id === activeBlog ?
-                    <svg className='dark:fill-white fill-black' width="24" height="24" viewBox="0 0 24 24"><path d="M7.5 3.75a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-14a2 2 0 0 0-2-2h-9z"></path></svg>
+                {
+                    !currentUser ?
+                    <Link to="/login">
+                        <svg  width="25" height="25"  className="dark:fill-white"><path d="M18 2.5a.5.5 0 0 1 1 0V5h2.5a.5.5 0 0 1 0 1H19v2.5a.5.5 0 1 1-1 0V6h-2.5a.5.5 0 0 1 0-1H18V2.5zM7 7a1 1 0 0 1 1-1h3.5a.5.5 0 0 0 0-1H8a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-8.5a.5.5 0 0 0-1 0v7.48l-5.2-4a.5.5 0 0 0-.6 0l-5.2 4V7z"></path></svg>
+                    </Link>
                     :
-                    <svg  width="25" height="25"  className="dark:fill-white"><path d="M18 2.5a.5.5 0 0 1 1 0V5h2.5a.5.5 0 0 1 0 1H19v2.5a.5.5 0 1 1-1 0V6h-2.5a.5.5 0 0 1 0-1H18V2.5zM7 7a1 1 0 0 1 1-1h3.5a.5.5 0 0 0 0-1H8a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-8.5a.5.5 0 0 0-1 0v7.48l-5.2-4a.5.5 0 0 0-.6 0l-5.2 4V7z"></path></svg>
-                    }
-                </div>
+                    <div className="save-icon ml-[2rem]" onClick={ bookmarkBlog }>
+                        {
+                        blogPost.id === activeBlog ?
+                        <svg className='dark:fill-white fill-black' width="24" height="24" viewBox="0 0 24 24"><path d="M7.5 3.75a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-14a2 2 0 0 0-2-2h-9z"></path></svg>
+                        :
+                        <svg  width="25" height="25"  className="dark:fill-white"><path d="M18 2.5a.5.5 0 0 1 1 0V5h2.5a.5.5 0 0 1 0 1H19v2.5a.5.5 0 1 1-1 0V6h-2.5a.5.5 0 0 1 0-1H18V2.5zM7 7a1 1 0 0 1 1-1h3.5a.5.5 0 0 0 0-1H8a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-8.5a.5.5 0 0 0-1 0v7.48l-5.2-4a.5.5 0 0 0-.6 0l-5.2 4V7z"></path></svg>
+                        }
+                    </div>
+                }
                 </div>  
             </div>
             {

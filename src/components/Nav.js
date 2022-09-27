@@ -67,7 +67,7 @@ const Nav = ({toggleTheme, darkTheme}) => {
                                     userData.img ? 
                                     <img onClick={ togglePopUp } src={userData.img} alt="user" className='w-[2.1rem] h-[2rem] rounded-[100%] object-cover'/>
                                     :
-                                    <p  className='cursor-pointer bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-gray-200'>{ userData.name[0] }</p>
+                                    <p onClick={ togglePopUp } className='cursor-pointer bg-red-800 w-[2rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-gray-200'>{ userData.name[0] }</p>
                                 }
                             </>
 
