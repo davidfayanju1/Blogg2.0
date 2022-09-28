@@ -45,7 +45,7 @@ const BlogsCard = ({ blogPost, index }) => {
                 
     }
 
-  }, []);
+  }, [userData.bookmark]);
 
   return (
     <div>

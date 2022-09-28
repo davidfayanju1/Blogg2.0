@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react'
 import { VscEye, VscEyeClosed } from 'react-icons/vsc';
 import { useAuth } from '../authContext';
 import { useNavigate } from 'react-router-dom';
-import { BiErrorCircle } from 'react-icons/bi';
 
 const Signup = () => {
 
@@ -16,7 +15,6 @@ const Signup = () => {
   const bookmark = [];
   const bookmarkedUsers = [];
 
-  // name, email, password,confirmpassword
   const [showPassword, setShowPassword] = useState(true); 
   const [showSecondPassword, setShowSecondPassword] = useState(true); 
   const [passwordError, setPasswordError] = useState('');
@@ -41,9 +39,7 @@ const Signup = () => {
       navigate('/');
     }
 
-
   }
-
 
    return (
     <div className='bg-slate-300 dark:bg-slate-900 min-h-screen flex items-center justify-center'>
