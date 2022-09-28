@@ -36,13 +36,14 @@ export const AuthProvider = ({children}) => {
         }
     }
 
+    const [ loginError, setLoginError] = useState('');
+
     const loginUser = async (email, password) => {
 
         try{
             await auth.signInWithEmailAndPassword(email, password);
         }catch (err){
-            console.log(err);
-            // setLoginError('You do not have an account with us');
+            setLoginError('You do not have an account with us');
         }
         
     }
@@ -392,7 +393,8 @@ export const AuthProvider = ({children}) => {
         fetchComments,
         comments,
         updateApplause,
-        updateBookmarkList
+        updateBookmarkList,
+        loginError
     }
 
     return (

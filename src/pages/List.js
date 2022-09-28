@@ -14,6 +14,7 @@ const List = () => {
   return (
     <div className='mt-[4.5rem] dark:bg-slate-900 bg-gray-50 dark:text-white min-h-[100vh] flex'>
        <div className='list min-h-[100vh] py-[2rem] md:border-solid border-r border-gray-300 border-none md:px-[5rem] px-[1.3rem] md:w-[75%] w-[100%]'>
+       
        {
         !userData ?
 
@@ -23,15 +24,14 @@ const List = () => {
 
         <main>
             <div className="user-data">
-            <div className="flex items-center">
+              <div className="flex items-center">
                 <Link to={`/userDetails/${ userData.uid }/`}>
-                  {!userData.img ? <p className='bg-red-800 w-[3rem] h-[3rem] rounded-[100%] text-[1.9rem] flex items-center justify-center font-semibold text-gray-200'> { userData.name[0] }</p> : <img src={ userData.img } alt={ userData.name} className="w-[3rem] h-[3rem] rounded-[100%]"/> }
+                  {!userData.img ? <p className='bg-red-800 w-[3rem] h-[3rem] rounded-[100%] text-[1.9rem] flex items-center justify-center font-semibold text-gray-200'> { userData.name[0] }</p> : <img src={ userData.img } alt={ userData.name} className="w-[3rem] h-[3rem] rounded-full object-cover"/> }
                 </Link>
                 <div className="info ml-[0.8rem]">
                   <p className='text-gray-900 dark:text-gray-200 text-[1.15rem] mb-[.2rem]'>{ userData.name }</p>
                   <div className="inner-flex flex items-center text-gray-700 dark:text-gray-200 text-[0.9rem]">
-                    <p className='flex items-center'>{ moment(time.toDateString()).format('MMM Do YYYY, h:mm:ss a').substring(0, 6)}.</p>
-                    <p className="read-time ml-[0.4rem]">{ userData.bookmark.length } Stories</p>
+                    <p className='flex items-center justify-center relative' style={{lineHeight: '20px'}}><span>{ moment(time.toDateString()).format('MMM Do YYYY, h:mm:ss a').substring(0, 6)}</span><span className='mx-[.3rem]'>.</span><span>{ userData.bookmark.length } Stories</span></p>
                   </div>
                 </div>
               </div>
@@ -41,7 +41,13 @@ const List = () => {
             </div>
 
             <div className="blogs-section mt-[3rem]">
-            {
+            {   
+              userData.bookmark.length === 0 ?
+
+              <p className='text-center'>OOps!! You do not have a reading list. Click the 'Bookmark' icon to add to the list</p>
+
+              :
+
                 userData.bookmark.map((blogPost, index) => (                    
                   
                 <div className="container" key={ blogPost.id}>
