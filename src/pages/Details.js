@@ -7,6 +7,7 @@ import MainArticle from '../components/blogDetails/MainArticle';
 import Aside from '../components/blogDetails/Aside';
 import { useAuth } from '../authContext';
 import { db } from '../firebase';
+import DetailsLoader from '../loadStates/DetailsLoader';
 
 
 export const Details = () => {
@@ -125,9 +126,10 @@ export const Details = () => {
         <div className="main-article md:w-[75%] w-[100%]">
           { blogItems.length === 0 ?
           
-          <p className='font-bold text-center text-[2rem]'>LOADING...</p>
+          <DetailsLoader />
           :
-          <MainArticle blogItems={ blogItems }/>}
+          <MainArticle blogItems={ blogItems }/>
+          }
         </div>
         <div className="article-sidebar md:w-[25%] hidden md:block">
           <Aside blogItems={ blogItems }/>
