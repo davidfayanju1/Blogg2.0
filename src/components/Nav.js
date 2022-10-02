@@ -36,7 +36,7 @@ const Nav = ({toggleTheme, darkTheme}) => {
   return (
     <div className="w-full dark:bg-slate-900 bg-gray-50 dark:text-white flex justify-between items-center md:px-24 px-[1rem] fixed top-0 z-50 h-[4.5rem] border-solid border-b border-gray-300">
         <div className="nav-title md:text-3xl text-[1.3rem] font-bold font-serif">
-            <Link to='/' onClick={() => setNavToggle(false)}>ECONOTES.</Link>
+            <Link to='/' onClick={() => setNavToggle(false)}>SPACE.</Link>
         </div>
         <div className="desktop-icons hidden md:flex items-center">
 

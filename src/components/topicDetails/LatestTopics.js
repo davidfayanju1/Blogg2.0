@@ -4,15 +4,14 @@ import moment from 'moment';
 import BlogsLoader from '../home/BlogsLoader';
 import BlogsCard from '../home/BlogsCard';
 
-
-const LatestTopics = ({ filteredBlog, topicLoading}) => {
+const LatestTopics = ({ filteredBlog, topicLoading, currentUser}) => {
   return (
     <div className='latest-topics-container'>
       <>
         {
           topicLoading === false && filteredBlog.length === 0 ?
 
-          <p>Start Contributing to this community. <Link to='/newBlog'>Write</Link></p>
+          <p>Start Contributing to this community. {currentUser ? <Link to='/newBlog'>Write</Link> :  <Link to='/login'>Write</Link>}</p>
 
           : null
         }

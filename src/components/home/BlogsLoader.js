@@ -24,7 +24,7 @@ const BlogsLoader = ({ amount }) => {
                     </div>
                 </div>
                 <div className="image w-[25%]">
-                    <Skeleton className='w-[100%] h-[80%]'/>
+                    <Skeleton className='w-[100%] h-[60%]'/>
                 </div>    
             </div>
         </SkeletonTheme>

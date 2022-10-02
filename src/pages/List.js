@@ -7,6 +7,7 @@ import BlogsCard from '../components/home/BlogsCard';
 import BlogsLoader from '../components/home/BlogsLoader';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import ListLoadState from '../loadStates/ListLoadState';
 
 const List = () => {
 
@@ -20,15 +21,13 @@ const List = () => {
        {
         !userData ?
 
-        <SkeletonTheme baseColor="#ffff" highlightColor="#D3D3D3">
-          <Skeleton className='max-w-[20rem] h-[3rem] mb-[2rem]'/>
-        </SkeletonTheme>
+        <ListLoadState />
         :
         <main>
           <div className="user-data">
             <div className="flex items-center">
               <Link to={`/userDetails/${ userData.uid }/`}>
-                {!userData.img ? <p className='bg-red-800 w-[3rem] h-[3rem] rounded-[100%] text-[1.9rem] flex items-center justify-center font-semibold text-gray-200'> { userData.name[0] }</p> : <img src={ userData.img } alt={ userData.name} className="w-[3rem] h-[3rem] rounded-full object-cover"/> }
+                {!userData.img ? <p className='bg-red-800 w-[3rem] h-[3rem] rounded-full text-[1.9rem] flex items-center justify-center font-semibold text-gray-200'> { userData.name[0] }</p> : <img src={ userData.img } alt={ userData.name} className="w-[3rem] h-[3rem] rounded-full object-cover"/> }
               </Link>
               <div className="info ml-[0.8rem]">
                 <p className='text-gray-900 dark:text-gray-200 text-[1.15rem] mb-[.2rem]'>{ userData.name }</p>

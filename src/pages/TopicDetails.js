@@ -13,7 +13,7 @@ function TopicDetails() {
 
     const { name } = useParams();
   
-    const { blogItems, fetchAllPosts } = useAuth();
+    const { blogItems, fetchAllPosts, currentUser } = useAuth();
 
     const [ filteredBlog, setFilteredBlog ] = useState([]);
     const [ topicLoading, setTopicLoading ] = useState(true); 
@@ -47,7 +47,13 @@ function TopicDetails() {
           </div>
 
           <div className="pt-[1.3rem] pb-[2.2rem]">
-            <NavLink to='/newBlog' className='bg-transparent text-green-800 dark:text-gray-100 px-[1.1rem] py-[.5rem] border-green-800 dark:border-gray-100 border-solid border-[.02rem] rounded-[20px]'>Start Writing</NavLink>
+            {
+              currentUser ?
+
+              <NavLink to='/newBlog' className='bg-transparent text-green-800 dark:text-gray-100 px-[1.1rem] py-[.5rem] border-green-800 dark:border-gray-100 border-solid border-[.02rem] rounded-[20px]'>Start Writing</NavLink>
+              :
+              <NavLink to='/login' className='bg-transparent text-green-800 dark:text-gray-100 px-[1.1rem] py-[.5rem] border-green-800 dark:border-gray-100 border-solid border-[.02rem] rounded-[20px]'>Start Writing</NavLink>
+            }
           </div>
         </div>
         <nav className="topic-links after:w-full after:bg-gray-300 after:h-[.02rem] after:block mb-[2rem]">
@@ -59,8 +65,8 @@ function TopicDetails() {
 
         {/* inner routes */}
         <Routes>
-          <Route path='/' element={<TrendingTopics filteredBlog ={ filteredBlog} topicLoading={ topicLoading }/>} />
-          <Route path='latest' element={<LatestTopics filteredBlog ={ filteredBlog} topicLoading={ topicLoading }/>} />
+          <Route path='/' element={<TrendingTopics filteredBlog ={ filteredBlog} topicLoading={ topicLoading }/>} currentUser={ currentUser}/>
+          <Route path='latest' element={<LatestTopics filteredBlog ={ filteredBlog} topicLoading={ topicLoading }/>} currentUser={ currentUser}/>
         </Routes>
       </div>
 

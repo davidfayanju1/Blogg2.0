@@ -32,20 +32,22 @@ const BlogsCard = ({ blogPost, index }) => {
   
   }
 
-
+  
+  
   useEffect(() => {
 
     if(userData && !userData.bookmarkedUsers.includes(blogPost.id)){
         
-        setActiveBlog(null)
+        setActiveBlog(null);
         
     }else {
         
         setActiveBlog(blogPost.id)
                 
     }
-
-  }, [userData.bookmark]);
+    
+  
+    }, [blogPost.id]);
 
   return (
     <div>
