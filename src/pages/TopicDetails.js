@@ -25,10 +25,7 @@ function TopicDetails() {
 
     }, []);
 
-    useEffect(() => {
-
-      // setTopicLoading(false);
-      
+    useEffect(() => {      
       const newBlog = blogItems.filter((blog) => blog.category === name)    
       setFilteredBlog(newBlog);
       

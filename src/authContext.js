@@ -168,6 +168,19 @@ export const AuthProvider = ({children}) => {
 
     }
 
+    const updateUserAbout = async (about) => {
+
+        try{
+            await db.collection('users').doc(currentUser.uid).update({
+                 'about' : about
+             })
+        }catch (err) {
+            console.log(err);
+        }
+        
+
+    }
+
     const updateUserImage = (image) => {
 
         db.collection('users').doc(currentUser.uid).update({
@@ -394,7 +407,8 @@ export const AuthProvider = ({children}) => {
         comments,
         updateApplause,
         updateBookmarkList,
-        loginError
+        loginError,
+        updateUserAbout
     }
 
     return (

@@ -56,7 +56,7 @@ const BlogsCard = ({ blogPost, index }) => {
                 <Link to={`/userDetails/${blogPost.author.uid}/`}>
                     <div className="blog-author flex items-center mb-[.7rem]">
                         {blogPost.author.img ?  <img src={ blogPost.author.img} alt={ blogPost.id}  className=" h-[1.65rem] w-[1.65rem] rounded-[100%] object-cover"/> : <p className='bg-red-800 h-[1.65rem] w-[1.65rem] rounded-[100%] text-[1.1rem] flex items-center justify-center font-semibold text-white'> { blogPost.author.name[0] }</p>}
-                        <p className='author-name ml-[0.2rem] text-[.9rem] mr-[.2rem]'>{ blogPost.author.name } .</p>
+                        <p className='author-name ml-[0.2rem] text-[.9rem] mr-[.2rem]'>{ blogPost.author.name }</p>
                         {currentUser && <p className="blog-time text-[.85rem]">{ moment(blogPost.createdAt.toDate().toString()).format('ll').substring(0, 6)}</p>}
                     </div>
                 </Link>

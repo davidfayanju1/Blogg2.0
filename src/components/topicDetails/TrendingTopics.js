@@ -5,8 +5,11 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import BlogsLoader from '../home/BlogsLoader';
 import BlogsCard from '../home/BlogsCard';
+import { useAuth } from '../../authContext';
 
 const TrendingTopics = ({ filteredBlog, topicLoading }) => {
+
+  const { currentUser } = useAuth();
 
   return (
     <div>
@@ -15,7 +18,7 @@ const TrendingTopics = ({ filteredBlog, topicLoading }) => {
         {
           filteredBlog.length === 0 && topicLoading === false ?
 
-          <p>Start Contributing to this community. <Link to="/newblog">Write</Link></p>
+          <p>Start Contributing to this community. {currentUser ? <Link to='/newBlog'>Write</Link> :  <Link to='/login'>Write</Link>}</p>
 
           : null
         }

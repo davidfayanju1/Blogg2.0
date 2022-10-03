@@ -3,8 +3,12 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import BlogsLoader from '../home/BlogsLoader';
 import BlogsCard from '../home/BlogsCard';
+import { useAuth } from '../../authContext';
 
-const LatestTopics = ({ filteredBlog, topicLoading, currentUser}) => {
+const LatestTopics = ({ filteredBlog, topicLoading }) => {
+  
+  const { currentUser } = useAuth(); 
+  
   return (
     <div className='latest-topics-container'>
       <>

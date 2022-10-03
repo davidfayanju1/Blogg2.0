@@ -6,6 +6,7 @@ import { MdLogin } from 'react-icons/md';
 import { FaUserAlt } from 'react-icons/fa';
 import { GrLogin } from 'react-icons/gr';
 import { useAuth } from '../authContext';
+import ReactTooltip from 'react-tooltip';
 
 const Nav = ({toggleTheme, darkTheme}) => {
 

@@ -17,7 +17,9 @@ const UserMain = ({id}) => {
   const [ pageBlogs, setPageBlogs ] = useState([]);
 
   const [ blogAuthor, setBlogAuthor ] = useState([]);
-  
+  const [ loading, setLoading ] = useState(true);
+
+
   useEffect(() => {
     
     fetchAllUsers();
@@ -28,6 +30,7 @@ const UserMain = ({id}) => {
   
   useEffect(() => {
 
+    setLoading(true);
     setBlogAuthor([]);
     const newArr = users.filter((mainUser) => mainUser.data().uid === id)
     setBlogAuthor(newArr);
@@ -40,6 +43,7 @@ const UserMain = ({id}) => {
     const pageBlog = blogItems.filter((blog) => blog.uid === id)
     setPageBlogs(pageBlog)
 
+    blogItems.length && setLoading(false);
 
   }, [blogItems]);
   
@@ -74,7 +78,7 @@ const UserMain = ({id}) => {
       
       {/* inner routes */}
       <Routes>
-        <Route path='/' element={<DetailsHome pageBlogs={ pageBlogs } />} />
+        <Route path='/' element={<DetailsHome pageBlogs={ pageBlogs } loading={ loading }/>} />
         <Route path='about' element={<DetailsAbout />} />
       </Routes>
     </div>
