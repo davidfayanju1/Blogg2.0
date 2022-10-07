@@ -12,7 +12,7 @@ import DetailsAbout from './DetailsAbout';
 
 const UserMain = ({id}) => {
 
-  const { blogItems, fetchAllPosts, fetchAllUsers, users } = useAuth();
+  const { blogItems, fetchAllPosts, fetchAllUsers, users, userData, currentUser } = useAuth();
 
   const [ pageBlogs, setPageBlogs ] = useState([]);
 
@@ -57,9 +57,23 @@ const UserMain = ({id}) => {
           blogAuthor.map((author) => (
             <div key={ id }>
               <div className="profile-name mb-[2rem]">
-              <h1 className='text-[3rem] font-bold'>{ author.data().name }</h1>
+                <h1 className='text-[3rem] font-bold'>{ author.data().name }</h1>
               </div>
+
+              <nav className='mb-[3rem] after:block after:h-[.1rem] after:w-full after:bg-gray-300'>
+                <ul className='flex items-center'>
+                  <NavLink to={`/userDetails/${ id }/`} className={({isActive}) => isActive ? 'text-black dark:text-white after:block after:h-[.1rem] after:w-[3rem] after:bg-gray-700 after:dark:h-[.15rem] after:dark:bg-gray-300 mr-[2rem]' : 'mr-[2rem]'}>Home</NavLink>
+                  { author.data().about && <NavLink to={`/userDetails/${ id }/about`} className={({isActive}) => isActive ? 'text-black dark:text-white after:block after:h-[.1rem] after:w-[3rem] after:bg-gray-700 after:dark:h-[.15rem] after:dark:bg-gray-300' : ''}>About</NavLink>}
+                </ul>
+              </nav>
+              {/* inner routes */}
+              <Routes>
+                <Route path='/' element={<DetailsHome pageBlogs={ pageBlogs } loading={ loading }/>} />
+                <Route path='about' element={<DetailsAbout author={ author }/>} />
+              </Routes>
             </div>
+
+
           ))
 
           :
@@ -69,18 +83,8 @@ const UserMain = ({id}) => {
           </SkeletonTheme>
         }
       </>
-      <nav className='mb-[3rem] after:block after:h-[.1rem] after:w-full after:bg-gray-300'>
-        <ul className='flex items-center'>
-          <NavLink to={`/userDetails/${ id }/`} className={({isActive}) => isActive ? 'text-black dark:text-white after:block after:h-[.1rem] after:w-[3rem] after:bg-gray-700 after:dark:h-[.15rem] after:dark:bg-gray-300 mr-[2rem]' : 'mr-[2rem]'}>Home</NavLink>
-          <NavLink to={`/userDetails/${ id }/about`} className={({isActive}) => isActive ? 'text-black dark:text-white after:block after:h-[.1rem] after:w-[3rem] after:bg-gray-700 after:dark:h-[.15rem] after:dark:bg-gray-300' : ''}>About</NavLink>
-        </ul>
-      </nav>
       
-      {/* inner routes */}
-      <Routes>
-        <Route path='/' element={<DetailsHome pageBlogs={ pageBlogs } loading={ loading }/>} />
-        <Route path='about' element={<DetailsAbout />} />
-      </Routes>
+      
     </div>
   )
 }

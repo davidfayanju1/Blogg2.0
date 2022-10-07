@@ -50,7 +50,7 @@ const UserAside = ({id, user }) => {
             <p className="author_bio text-gray-600 dark:text-gray-300 mb-[1.2rem]">{ author.data().bio }</p>
 
             {
-              author.data().uid === userData.uid ?
+              author.data().uid === userData && userData.uid ?
 
               <Link to='/settings' className='text-green-800 dark:text-gray-300'>Edit profile</Link>
               : 
