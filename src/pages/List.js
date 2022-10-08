@@ -11,10 +11,17 @@ import ListLoadState from '../loadStates/ListLoadState';
 
 const List = () => {
 
-  const { userData, currentUser, number } = useAuth();
+  const { userData, currentUser, number, fetchUserData } = useAuth();
 
   const time  = new Date();
 
+  
+  useEffect(() => {
+
+    fetchUserData();
+  
+  }, [userData])
+  
   return (
     <div className='mt-[4.5rem] dark:bg-slate-900 bg-gray-50 dark:text-white min-h-[100vh] flex'>
        <div className='list min-h-[100vh] py-[2rem] md:border-solid border-r border-gray-300 border-none md:px-[5rem] px-[1.3rem] md:w-[75%] w-[100%]'>

@@ -31,8 +31,6 @@ const BlogsCard = ({ blogPost, index }) => {
     }
   
   }
-
-  
   
   useEffect(() => {
 
@@ -47,7 +45,7 @@ const BlogsCard = ({ blogPost, index }) => {
     }
     
   
-    }, [blogPost.id]);
+    }, [userData]);
 
   return (
     <div>
@@ -86,12 +84,12 @@ const BlogsCard = ({ blogPost, index }) => {
                         </Link>
                         :
                         <div className="save-icon ml-[2rem]" onClick={ bookmarkBlog }>
-                            {
+                        {
                             blogPost.id === activeBlog ?
                             <svg className='dark:fill-white fill-black' width="24" height="24" viewBox="0 0 24 24"><path d="M7.5 3.75a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-14a2 2 0 0 0-2-2h-9z"></path></svg>
                             :
                             <svg  width="25" height="25"  className="dark:fill-white"><path d="M18 2.5a.5.5 0 0 1 1 0V5h2.5a.5.5 0 0 1 0 1H19v2.5a.5.5 0 1 1-1 0V6h-2.5a.5.5 0 0 1 0-1H18V2.5zM7 7a1 1 0 0 1 1-1h3.5a.5.5 0 0 0 0-1H8a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-8.5a.5.5 0 0 0-1 0v7.48l-5.2-4a.5.5 0 0 0-.6 0l-5.2 4V7z"></path></svg>
-                            }
+                        }
                         </div>
                     }
                 </div>  

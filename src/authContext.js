@@ -11,7 +11,7 @@ export const AuthProvider = ({children}) => {
     const [ loading, setLoading ] = useState(true);
     const [currentUser, setCurrentUser ] = useState(null);
     
-    const registerUser = async (name, email, bio, password, bookmark, bookmarkedUsers) => {
+    const registerUser = async (name, email, bio, password, bookmark, bookmarkedUsers, about) => {
 
         try {
             const res = await auth.createUserWithEmailAndPassword(email, password);
@@ -26,8 +26,9 @@ export const AuthProvider = ({children}) => {
                 bio,
                 bookmark,
                 password,
-                bookmarkedUsers
-            })
+                bookmarkedUsers,
+                about
+            })          
 
         }catch(error) {
 

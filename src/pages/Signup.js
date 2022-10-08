@@ -14,6 +14,7 @@ const Signup = () => {
   const bio = null;
   const bookmark = [];
   const bookmarkedUsers = [];
+  const about = '';
 
   const [showPassword, setShowPassword] = useState(true); 
   const [showSecondPassword, setShowSecondPassword] = useState(true); 
@@ -35,7 +36,7 @@ const Signup = () => {
 
     }else {
 
-      registerUser(name.current.value, email.current.value, bio, password.current.value, bookmark, bookmarkedUsers)
+      registerUser(name.current.value, email.current.value, bio, password.current.value, bookmark, bookmarkedUsers, about)
       navigate('/');
     }
 
