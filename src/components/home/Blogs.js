@@ -24,17 +24,6 @@ const Blogs = () => {
   const [likes, setLikes] = useState(false);
   
   const [styles, setStyles] = useState({});
-
-  // const likePost = (blogPostId) => {
-
-  //       const likedPost = [...blogPosts];
-        
-  //       likedPost[blogPostId].isLiked = !likedPost[blogPostId].isLiked;
-        
-  //       setBlogPosts(likedPost);     
-      
-  // }
-  
         
   const blogsTopic = [
     { 
