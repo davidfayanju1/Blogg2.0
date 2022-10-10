@@ -4,15 +4,14 @@ import moment from 'moment';
 import Comments from './Comments';
 import { useAuth } from '../../authContext';
 
-const MainArticle = ({ blogItems }) => {
+const MainArticle = ({ blogItems, userData }) => {
 
-  const[ stuck, setStuck ] = useState(false);
-
-  const {currentUser, comments, fetchComments, userData, updateApplause, updateBookmarkList } = useAuth();
-  
+  const[ stuck, setStuck ] = useState(false);  
+  const {currentUser, comments, fetchComments, updateApplause, updateBookmarkList } = useAuth();
   const [ clapCount, setClapCount ] = useState(blogItems[0].clap)
   const [clapStyle, setClapStyle] = useState(false);
   const [bookMark, setBookMark] = useState(false);
+  
   
   const handleApplause = () => {
 
@@ -67,8 +66,7 @@ const MainArticle = ({ blogItems }) => {
       setClapStyle(false);
       
     }
-
-    
+ 
   }, [blogItems[0].clap]);
 
 
@@ -76,7 +74,6 @@ const MainArticle = ({ blogItems }) => {
       
     if(userData.bookmarkedUsers.includes(blogItems[0].id)) {
       
-      console.log(userData)
       setBookMark(true);
 
     }else {
@@ -103,9 +100,7 @@ const MainArticle = ({ blogItems }) => {
                   <div className="inner-flex flex items-center text-gray-700 dark:text-gray-200 text-[0.9rem]">
                     <p className='flex items-center'>{ moment(blog.createdAt.toDate().toString()).format('ll').substring(0, 6) }.</p>
                     <p className="read-time ml-[0.4rem]">
-                    {
-                      Math.ceil(blog.blog.trim().split(/\s+/).length / 200)
-                    } min read
+                      {Math.ceil(blog.blog.trim().split(/\s+/).length / 200)} min read
                     </p>
                   </div>
                 </div>

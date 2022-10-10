@@ -5,7 +5,7 @@ import moment from 'moment';
 
 const BlogsCard = ({ blogPost, index }) => {
 
-  const {updateBookmarkList, userData, postLoading, fetchAllPosts, setBlogItems, blogItems, currentUser } = useAuth()
+  const {updateBookmarkList, userData, postLoading, fetchAllPosts, setBlogItems, blogItems, currentUser, updateViews } = useAuth()
 
   const [ bookmark, setBookmark] = useState(false);
   const [activeBlog, setActiveBlog ] = useState(null)
@@ -31,6 +31,12 @@ const BlogsCard = ({ blogPost, index }) => {
     }
   
   }
+
+  const updateView = () => {
+
+    updateViews(++blogPost.view, blogPost.id);
+
+  }
   
   useEffect(() => {
 
@@ -49,7 +55,7 @@ const BlogsCard = ({ blogPost, index }) => {
 
   return (
     <div>
-        <div className="blog flex items-top mb-[4rem] justify-between md:min-h-[10rem] h-[8rem]" key={ blogPost.id }>
+        <div onClick={ updateView } className="blog flex items-top mb-[4rem] justify-between md:min-h-[10rem] h-[8rem]" key={ blogPost.id }>
             <div className={`blog-text ${ blogPost.img === null ? 'w-[100%]' : 'w-[67%] '}`}>
                 <Link to={`/userDetails/${blogPost.author.uid}/`}>
                     <div className="blog-author flex items-center mb-[.7rem]">
@@ -67,14 +73,14 @@ const BlogsCard = ({ blogPost, index }) => {
                 <div className="blog-date-data flex justify-between items-center">
                     <div className={`flex text-gray-700 dark:text-gray-200 text-[0.9rem] ${currentUser && 'flex-row-reverse'} flex-row`}>
                         {!currentUser && <p className="blog-time  mr-[0.6rem] text-[.85rem]">{ moment(blogPost.createdAt.toDate().toString()).format('ll').substring(0, 6)}</p>}                      
-                        <p className="read-time mr-[0.6rem] text-[.85rem]">
+                        <p className="read-time mr-[0.8rem] text-[.75rem]">
                         {
                             Math.ceil(blogPost.blog.trim().split(/\s+/).length / 200)
                         } min read
                         </p>
                         
                         <Link to={`/topicDetails/${ blogPost.category }/`}>
-                        <div className={`blog-category mr-[0.6rem] text-[.77rem] md:text-[.8rem] bg-gray-300 h-[1.5rem] flex items-center justify-center px-[0.7rem] rounded-[13px] dark:text-gray-800 ${!currentUser && 'hidden'} md:block`}>{ blogPost.category }</div>
+                            <div className={`blog-category mr-[0.6rem] text-[.77rem] md:text-[.8rem] bg-gray-300 h-[1.5rem] flex items-center justify-center px-[0.7rem] rounded-[13px] dark:text-gray-800 ${!currentUser && 'hidden'} md:block`}>{ blogPost.category }</div>
                         </Link>     
                     </div>
                     {

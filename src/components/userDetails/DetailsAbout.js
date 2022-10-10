@@ -45,7 +45,7 @@ const DetailsAbout = ({ author }) => {
       <div className="edit-buttons mt-[2rem] flex items-end w-full justify-end">
        
        {
-        currentUser.uid === author.data().uid ?
+        currentUser && currentUser.uid === author.data().uid ?
         
           !openInput ?
 
@@ -63,11 +63,11 @@ const DetailsAbout = ({ author }) => {
       </div>
       <div className="about-you w-full mt-[.6rem]">
         {
-         currentUser.uid === author.data().uid 
+        currentUser &&  currentUser.uid === author.data().uid 
          
          ?
 
-         <textarea ref={ about } defaultValue={ author.data().about === undefined ? 'Tell us about yourself' : author.data().about } className="outline-none w-full bg-transparent font-serif" required disabled={ !openInput }></textarea>
+         <textarea ref={ about } defaultValue={ author.data().about === undefined ? 'Tell us about yourself' : author.data().about } className="outline-none w-full bg-transparent font-serif min-h-[30vh]" required disabled={ !openInput }></textarea>
 
          :
 

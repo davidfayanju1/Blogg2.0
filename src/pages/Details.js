@@ -82,6 +82,7 @@ export const Details = () => {
     
     const [ blogItems, setBlogItems ] = useState([]);
     const [ loading, setLoading ] = useState(true)
+    const { userData } = useAuth();
 
     const fetchPostDetails = async () => {
 
@@ -113,9 +114,7 @@ export const Details = () => {
     
   useEffect(() =>{
 
-    // setDetails(blogsArray);
     fetchPostDetails();
-
     
   }, [])
   
@@ -124,11 +123,11 @@ export const Details = () => {
     <div className='mt-[4.5rem] dark:bg-slate-900 bg-gray-50 w-[100%] min-h-[100vh]'>      
       <div className="flex justify-between">
         <div className="main-article md:w-[75%] w-[100%]">
-          { blogItems.length === 0 ?
+          { !blogItems.length ?
           
           <DetailsLoader />
           :
-          <MainArticle blogItems={ blogItems }/>
+          <MainArticle blogItems={ blogItems } userData={ userData }/>
           }
         </div>
         <div className="article-sidebar md:w-[25%] hidden md:block">

@@ -3,6 +3,7 @@ import Carousel from '../components/home/Carousel';
 import Blogs from '../components/home/Blogs';
 import { useAuth } from '../authContext';
 import Hero from '../components/home/Hero';
+import Trending from '../components/home/Trending';
 
 const Home = () => {
 
@@ -12,6 +13,7 @@ const Home = () => {
   return (
     <div>
       { currentUser ? <Carousel /> : <Hero /> }
+      {!currentUser && <Trending />}
       <Blogs />
     </div>
   )

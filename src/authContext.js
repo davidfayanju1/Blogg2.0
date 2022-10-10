@@ -200,7 +200,7 @@ export const AuthProvider = ({children}) => {
     // blogs
     const blogUID = uuidv4();
 
-    const postBlog = async (title, blog, category, clap, img, likedUsers) => {
+    const postBlog = async (title, blog, category, clap, img, likedUsers, view) => {
 
         try{
              
@@ -215,7 +215,8 @@ export const AuthProvider = ({children}) => {
                  category,
                  clap,
                  img,
-                 likedUsers
+                 likedUsers,
+                 view
              })
              
  
@@ -229,9 +230,25 @@ export const AuthProvider = ({children}) => {
 
         try{
 
-            db.collection('posts').doc(blogId).update({
+          await db.collection('posts').doc(blogId).update({
                 'clap' :claps,
                 'likedUsers': likedUsers
+            })
+
+        }catch(error) {
+
+            console.log(error);
+
+        }
+
+    }
+
+    const updateViews = async ( view, blogId) => {
+
+        try{
+
+          await db.collection('posts').doc(blogId).update({
+                'view' : view,
             })
 
         }catch(error) {
@@ -325,6 +342,30 @@ export const AuthProvider = ({children}) => {
         }
         
     }
+
+    const [ trending, setTrending ] = useState([]);
+
+    const fetchTrendingPosts = async () => {
+        
+        try{
+            const response = db.collection('posts')
+            .orderBy('view', 'desc')
+            .limit(6)
+
+            const data = await response.get()
+            
+            setTrending([]);
+
+            data.docs.forEach(blog => { setTrending(item => [...item, blog.data()])});
+            setPostLoading(false);
+
+
+            
+        }catch(error) {
+            console.log(error)
+        }
+        
+    }
     
     
     const [ blogs, setBlogs ] = useState([])
@@ -409,7 +450,10 @@ export const AuthProvider = ({children}) => {
         updateApplause,
         updateBookmarkList,
         loginError,
-        updateUserAbout
+        updateUserAbout,
+        updateViews,
+        fetchTrendingPosts,
+        trending
     }
 
     return (

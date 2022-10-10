@@ -49,7 +49,7 @@ const UserMain = ({id}) => {
   
 
   return (
-    <div className='min-h-[100vh] md:px-[7rem] md:py-[3rem] px-[2rem] py-[3rem] w-[100%] dark:text-white md:border-solid border-r border-gray-300 border-none'>
+    <div className='min-h-[100vh] md:px-[7rem] md:py-[3rem] px-[1.6rem] py-[3rem] w-[100%] dark:text-white md:border-solid border-r border-gray-300 border-none'>
       <>
         {
           blogAuthor.length !== 0 ? 
