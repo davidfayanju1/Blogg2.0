@@ -143,7 +143,7 @@ const Settings = ({toggleTheme, darkTheme}) => {
       <nav className='flex justify-between items-center md:px-[8rem] px-[1.2rem] h-[4.5rem]'>
         <div className="title">
           <Link to='/'>
-              <h1 className='font-serif text-[1.5rem]'>ECONOTES</h1>
+              <h1 className='font-serif text-[1.5rem]'>SPACE.</h1>
           </Link>
         </div>
         <div className="newblog-controls flex items-center">

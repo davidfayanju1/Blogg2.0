@@ -358,8 +358,6 @@ export const AuthProvider = ({children}) => {
 
             data.docs.forEach(blog => { setTrending(item => [...item, blog.data()])});
             setPostLoading(false);
-
-
             
         }catch(error) {
             console.log(error)
