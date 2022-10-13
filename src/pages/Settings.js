@@ -28,9 +28,9 @@ const Settings = ({toggleTheme, darkTheme}) => {
   useEffect(() => {
 
     fetchUserData();
-
     
   }, []);
+
   
   const openInput = () => {
 
@@ -67,32 +67,55 @@ const Settings = ({toggleTheme, darkTheme}) => {
 
   const changeName = () => {
 
-    updateName(nameInputRef.current.value);
-    nameInputRef.current.value = ''
-    setToggleFieldOne(false);
-    fetchUserData();
+    if(nameInputRef.current.value === ''){
 
+      alert('You cannot leave this field empty');
+
+    }else {
+      updateName(nameInputRef.current.value);
+      fetchUserData();
+      setToggleFieldOne(false);
+    }
+    
+    
   }
+  
+  userData && console.log(userData.name)
 
   const changeBio = () => {
-    updateBio(bioRef.current.value);
-    bioRef.current.value = ''
-    setToggleFieldTwo(false);
-    fetchUserData();
+
+    if(bioRef.current.value === ''){
+
+      alert('You cannot leave this field empty');
+
+    }else {
+      updateBio(bioRef.current.value);
+      bioRef.current.value = ''
+      setToggleFieldTwo(false);
+      fetchUserData();
+    }
   }
 
   const changeMail = () => {
-    updateMail(mailRef.current.value);
-    mailRef.current.value = ''
-    setToggleEmailField(false);
-    fetchUserData();
+    if(mailRef.current.value === ''){
+      alert('You cannot leave this field empty');
+    }else {
+      updateMail(mailRef.current.value);
+      fetchUserData();
+      setToggleEmailField(false);
+    }
   }
 
   const changeUsername = () => {
-    updateUsername(usernameRef.current.value);
-    usernameRef.current.value = ''
-    setToggleUsernameField(false);
-    fetchUserData();
+    if(usernameRef.current.value === ''){
+
+      alert('You cannot leave this field empty');
+
+    }else {
+      updateUsername(usernameRef.current.value);
+      setToggleUsernameField(false);
+      fetchUserData();
+    }
   }
 
   const [ file, setFile ] = useState(null);
@@ -179,7 +202,7 @@ const Settings = ({toggleTheme, darkTheme}) => {
               <div className="name flex w-[100%] justify-between md:flex-row flex-col">
                 <div className="name-container md:w-[70%] w-[100%] md:mb-[0] mb-[1.2rem]">
                   <h1 className='font-semibold text-[1.2rem] mb-[.2rem]'>Name</h1>
-                  <input className="rounded-none mb-[.8rem] text-[16px] py-[.4rem] outline-none border-b-[.11rem] border-gray-200 w-full bg-transparent" maxLength={ 40 } placeholder={userData && userData.name} type="text" ref={ nameInputRef } disabled={ !toggleFieldOne }/>
+                  <input defaultValue={ userData && userData.name } className="rounded-none mb-[.8rem] text-[16px] py-[.4rem] outline-none border-b-[.11rem] border-gray-200 w-full bg-transparent" maxLength={ 40 } type="text" ref={ nameInputRef } disabled={ !toggleFieldOne }/>
                   <p className='text-[.95rem] w-full'>Your name appears on your Profile page, as your byline, and in your responses. It is a required field.</p>
                 </div>
                 <div className="edit-btn-container">
@@ -201,7 +224,7 @@ const Settings = ({toggleTheme, darkTheme}) => {
             <div className="short-bio mb-[4rem] flex w-[100%] justify-between md:flex-row flex-col">
               <div className="bio-container md:w-[70%] mb-[1.2rem] md:mb-[0] w-[100%]">
                 <h1 className='font-semibold text-[1.2rem] mb-[.2rem]'>Short bio</h1>
-                <input ref={ bioRef } placeholder={ userData && userData.bio } className="rounded-none mb-[.8rem] bg-transparent text-[16px] py-[.4rem] outline-none border-b-[.11rem] border-gray-200 w-full" maxLength={ 40 } type="text" disabled={ !toggleFieldTwo }/>
+                <input ref={ bioRef } defaultValue={ userData && userData.bio } className="rounded-none mb-[.8rem] bg-transparent text-[16px] py-[.4rem] outline-none border-b-[.11rem] border-gray-200 w-full" maxLength={ 60 } type="text" disabled={ !toggleFieldTwo } required/>
                 <p className='text-[.95rem] w-full'>Your short bio appears on your Profile and next to your stories. Max 160 characters.</p>
               </div>
               <div className="edit-btn-container">
@@ -230,7 +253,7 @@ const Settings = ({toggleTheme, darkTheme}) => {
                   {
                     toggleImageField ?
                     <label htmlFor='userImage' className="upload-image-icon z-10 absolute top-0 left-0 bg-black h-full w-full opacity-[.5] rounded-full flex items-center justify-center">                      
-                      <input type="file" id="userImage"  className='hidden' onChange={ uploadUserPic }/>
+                      <input type="file" id="userImage"  className='hidden' onChange={ uploadUserPic } required/>
                       {loading ? 
                       <p className='font-[1rem] text-gray-600'>...</p>
                       :  
@@ -239,7 +262,7 @@ const Settings = ({toggleTheme, darkTheme}) => {
                     </label>
                     : null
                   }
-                  {userData && userData.img ? <img src={userData.img} alt="user" className='rounded-[100%] w-full h-full object-cover' /> : userData && <p className='rounded-[100%] bg-red-800 w-full h-full text-[3rem] flex items-center justify-center font-semibold text-white'> { userData.name[0] }</p>}
+                  {userData && userData.img ? <img src={ file ? file : userData.img } alt="user" className='rounded-[100%] w-full h-full object-cover' /> : userData && <p className='rounded-[100%] bg-red-800 w-full h-full text-[3rem] flex items-center justify-center font-semibold text-white'> { userData.name[0] }</p>}
                 </div>
               </div>
               <div className="edit-btn-container">
@@ -254,8 +277,7 @@ const Settings = ({toggleTheme, darkTheme}) => {
                   }
               </div>
             </div>
-            
-            
+                     
             {/* About page */}
             
             <div className=" mb-[4rem] flex w-full justify-between md:flex-row flex-col">
@@ -268,28 +290,26 @@ const Settings = ({toggleTheme, darkTheme}) => {
               </div>
             </div>
             
-
             {/* username */}
             
             <div className="user-name flex w-[100%] justify-between md:flex-row flex-col">
               <div className="name-container md:w-[70%] w-[100%]">
                 <h1 className='font-semibold text-[1.2rem] mb-[.2rem]'>Username</h1>
-                <input placeholder={ userData && userData.username } className="rounded-none bg-transparent mb-[.8rem] text-[16px] py-[.4rem] outline-none border-b-[.11rem] border-gray-200 w-full" maxLength={ 40 } type="text" ref={ usernameRef } disabled={ !toggleUsernameField }/>
+                <input defaultValue={ userData && userData.username } className="rounded-none bg-transparent mb-[.8rem] text-[16px] py-[.4rem] outline-none border-b-[.11rem] border-gray-200 w-full" maxLength={ 40 } type="text" ref={ usernameRef } disabled={ !toggleUsernameField } required/>
               </div>
               <div className="edit-btn-container">
-                  {
-                    !toggleUsernameField ? 
-                    <button onClick={ openUsernameInput } className="text-[.9rem] bg-transparent text-gray-700 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white">Edit</button>
-                    :
-                    <div className="flex gap-[.5rem]">
-                      <button onClick={ changeUsername } className="mr-[.5rem] text-[.9rem] bg-transparent text-green-700 dark:text-gray-100 rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-green-700 dark:border-gray-100">Save</button>
-                      <button className="text-[.9rem] bg-transparent text-gray-600 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white" onClick={ () => setToggleUsernameField(false)}>Cancel</button>
-                    </div>
-                  }
+                {
+                  !toggleUsernameField ? 
+                  <button onClick={ openUsernameInput } className="text-[.9rem] bg-transparent text-gray-700 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white">Edit</button>
+                  :
+                  <div className="flex gap-[.5rem]">
+                    <button onClick={ changeUsername } className="mr-[.5rem] text-[.9rem] bg-transparent text-green-700 dark:text-gray-100 rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-green-700 dark:border-gray-100">Save</button>
+                    <button className="text-[.9rem] bg-transparent text-gray-600 dark:text-gray-100 hover:dark:text-white rounded-[10rem] border-[.1rem] py-[.4rem] px-[1rem] border-gray-400 hover:border-black hover:text-black dark:border-gray-100 hover:dark:border-white" onClick={ () => setToggleUsernameField(false)}>Cancel</button>
+                  </div>
+                }
               </div>
             </div>
           </section>
-
 
           {/* email  */}
           <section id="emailSettings" className='mb-[3.5rem]'>
@@ -300,7 +320,7 @@ const Settings = ({toggleTheme, darkTheme}) => {
               <div className="name flex w-[100%] justify-between md:flex-row flex-col">
                 <div className="name-container md:w-[70%] w-100%">
                   <h1 className='font-semibold text-[1.2rem] mb-[.2rem]'>Your email</h1>
-                  <input placeholder={ userData ? userData.email : 'coming...' } className="rounded-none bg-transparent mb-[.8rem] text-[16px] py-[.4rem] outline-none border-b-[.11rem] border-gray-200 w-full" maxLength={ 40 } type="email" ref={ mailRef } disabled={ !toggleEmailField }/>
+                  <input defaultValue={ userData ? userData.email : 'coming...' } className="rounded-none bg-transparent mb-[.8rem] text-[16px] py-[.4rem] outline-none border-b-[.11rem] border-gray-200 w-full" maxLength={ 40 } type="email" ref={ mailRef } disabled={ !toggleEmailField } required/>
                 </div>
                 <div className="edit-btn-container">
                   {
@@ -316,7 +336,6 @@ const Settings = ({toggleTheme, darkTheme}) => {
               </div>
             </div>       
           </section>
-
 
           {/*security  */}
           <section id="security">

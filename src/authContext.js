@@ -113,17 +113,16 @@ export const AuthProvider = ({children}) => {
     }
 
 
-    const updateName = (name) => {
+    const updateName = async (name) => {
 
-        db.collection('users').doc(currentUser.uid).update({
-            'name' : name
-        })
-        .then((data) => {
-            console.log(data)
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+        try {
+            await db.collection('users').doc(currentUser.uid).update({
+                'name' : name
+            })
+        }catch(err) {
+            console.log(err)
+        }
+        
 
     }
 

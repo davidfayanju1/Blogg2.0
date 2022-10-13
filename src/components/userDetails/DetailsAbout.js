@@ -25,6 +25,7 @@ const DetailsAbout = ({ author }) => {
 
     setOpenInput(true);
     about.current.focus();
+    
   }
 
   const updateAbout = () => {

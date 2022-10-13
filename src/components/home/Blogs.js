@@ -62,10 +62,10 @@ const Blogs = () => {
 
   
   return (
-    <section className='dark:bg-slate-900 dark:text-white bg-gray-50 min-w-[22.6rem] min-h-[100vh] lg:px-[4.75rem] lg:py-[8rem] px-[1.2rem] py-[6rem]'>
-      <h1 className='md:text-[4.75rem] text-[2.5rem] font-bold text-center font-serif mb-[2rem]'>BLOGS</h1>
+    <section className='dark:bg-slate-900 dark:text-white bg-gray-50 min-w-[22.6rem] min-h-[100vh] '>
+      {/* <h1 className='md:text-[4.75rem] text-[2.5rem] font-bold text-center font-serif mb-[2rem]'>BLOGS</h1> */}
       <div className="flex-container flex items-start justify-between flex-col-reverse md:flex-row md:min-w-[27rem]">
-        <div className="blogs-grid min-h-full md:w-[60%] w-[100%] md:min-w-[21rem]">
+        <div className="blogs min-h-full md:w-[60%] w-[100%] md:min-w-[21rem] lg:px-[4.75rem] lg:py-[5rem] px-[1.2rem] py-[6rem]">
           {
             postLoading === false && blogItems.length === 0 ?
 
@@ -94,7 +94,8 @@ const Blogs = () => {
           }
         </div>
 
-        <div className="blog-topics h-full md:sticky top-[10rem] md:w-[33%] w-[100%] min-w-[18rem] min-h-[10rem] md:mb-0 mb-[3rem]">
+        {/* topics */}
+        <div className="blog-topics h-full self-start md:sticky top-[10rem] md:w-[40%] w-[100%] min-w-[18rem] min-h-[10rem] border-gray-400 border-b-[.08rem] md:border-none md:py-[4rem] py-[2rem] px-[1rem]">
           <div className="blog-topics-title mb-[1.2rem] min-w-[15.5rem]">
             <h1 className="md:text-[1.02rem] text-[0.92rem] font-bold">DISCOVER MORE OF WHAT MATTERS TO YOU</h1>
           </div>
@@ -104,7 +105,7 @@ const Blogs = () => {
             {
               blogsTopic.map((bT, index) => (
                 <Link to={`/topicDetails/${bT.category}/`} key={index}>
-                  <button className='mr-[0.7rem] mb-[.7rem] border-rounded bg-transparent h-[2.7rem] px-[1rem] border-solid border-[1.85px] rounded-[0.3rem] gap-1 border-gray-400 dark:border-white dark:text-white'>                  
+                  <button className='mr-[0.7rem] mb-[.7rem] border-rounded bg-transparent h-[2.4rem] px-[.9rem] border-solid border-[1px] rounded-[0.3rem] border-gray-400 dark:border-white dark:text-white text-gray-500 text-[.8rem] py-[.1rem]'>                  
                     {bT.category}
                   </button>
                 </Link>  
