@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -8,9 +8,13 @@ import formPicture from '../../img/formPicture.png';
 import beauty from '../../img/beauty.jpg';
 import family from '../../img/family.jpg';
 import './HomeStyles.css';
+import { useAuth } from '../../authContext';
+import moment from 'moment';
 
 
 const Carousel = () => {
+
+  const { fetchTrendingPosts, trending } = useAuth();
 
   let settings = {
     dots: false,
@@ -43,6 +47,12 @@ const Carousel = () => {
       ]
   };
 
+  useEffect(() => {
+
+    fetchTrendingPosts();
+
+  }, [])
+
   const blogs = [
     {
       image: form,
@@ -74,22 +84,24 @@ const Carousel = () => {
     }
   ]
 
+  trending && console.log(trending[0]);
+
   return (
     <div className="bg-slate-400 w-full h-96 mt-[4.5rem]">
         <Slider {...settings}>
           {
 
-            blogs.map((blog) => (
+           trending &&  trending.map((blog) => (
 
 
               <Link to={`/details/${blog.id}`} key={blog.id}>
                 <div className="image-card h-96 w-full text-center relative">
-                  <div className="absolute top-0 left-0 opacity-70 h-full w-full bg-gray-900 ">
-                    <img src={ blog.image } alt="girl-glasses" className='w-full h-full object-cover'/>
-                    <div className='absolute top-32 left-3 text-white' styled={{zIndex: '10000'}}>
-                      <h2 className='blog-category mb-4'>{blog.categories}</h2>
+                  <div className="absolute top-0 left-0 opacity-70 h-full w-full bg-yellow-900 text-center flex items-center justify-center flex-col">
+                    {blog.img ? <img src={ blog.img } alt="girl-glasses" className='w-full h-full object-cover relative'/> : <div clsssName="h-full w-full"></div>}
+                    <div className='w-full text-white absolute top-[30%] left-[2%]' style={{zIndex: '10000'}}>
+                      <h2 className='blog-category mb-4'>{blog.category}</h2>
                       <h1 className="hover:underline blog-title font-serif text-3xl mb-4 font-bold">{ blog.title }</h1>
-                      <small>{ blog.date }</small>
+                      <small>{blog.author.name} - {moment(blog.createdAt.toDate().toString()).format('ll')}</small>
                     </div>
                   </div>
                 </div>
