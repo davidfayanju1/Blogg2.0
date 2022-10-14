@@ -5,7 +5,7 @@ import moment from 'moment';
 
 const BlogsCard = ({ blogPost, index }) => {
 
-  const {updateBookmarkList, userData, postLoading, fetchAllPosts, setBlogItems, blogItems, currentUser, updateViews } = useAuth()
+  const {updateBookmarkList, userData, postLoading, fetchAllPosts, setBlogItems, blogItems, currentUser, updateViews, fetchBlogAuthor, author } = useAuth()
 
   const [ bookmark, setBookmark] = useState(false);
   const [activeBlog, setActiveBlog ] = useState(null)
@@ -37,21 +37,28 @@ const BlogsCard = ({ blogPost, index }) => {
     updateViews(++blogPost.view, blogPost.id);
 
   }
+
   
   useEffect(() => {
-
-    if(userData && !userData.bookmarkedUsers.includes(blogPost.id)){
+      
+      if(userData && !userData.bookmarkedUsers.includes(blogPost.id)){
+          
+          setActiveBlog(null);
+          
+        }else {
+            
+            setActiveBlog(blogPost.id)
+            
+        }
         
-        setActiveBlog(null);
         
-    }else {
-        
-        setActiveBlog(blogPost.id)
-                
-    }
-    
-  
     }, [userData]);
+    
+    // useEffect(() => {
+  
+    //   fetchBlogAuthor(blogPost.author.uid);
+
+    // }, []);
 
   return (
     <div>
@@ -66,7 +73,7 @@ const BlogsCard = ({ blogPost, index }) => {
                 </Link>
                 <Link to={`/details/${blogPost.id}`}>
                     <div className="blog-body w-[100%] mb-[1.2rem]">
-                        <h1 className="blog-title md:text-[1.44rem] text-[1.07rem] font-bold">{ blogPost.title }</h1>
+                        <h1 className="blog-title md:text-[1.44rem] text-[1.07rem] font-bold line-clamp-2">{ blogPost.title }</h1>
                         <p className="blog-text text-gray-700 dark:text-gray-200 text-[1.05rem] md:line-clamp-2 hidden">{ blogPost.blog }</p>
                     </div>
                 </Link>

@@ -90,7 +90,6 @@ const Settings = ({toggleTheme, darkTheme}) => {
 
     }else {
       updateBio(bioRef.current.value);
-      bioRef.current.value = ''
       setToggleFieldTwo(false);
       fetchUserData();
     }
@@ -171,7 +170,7 @@ const Settings = ({toggleTheme, darkTheme}) => {
         </div>
         <div className="newblog-controls flex items-center">
           <div className="user cursor-pointer mr-[1rem]">
-              {userData && userData.img ? <img src={userData.img} alt="user" className='w-[2.1rem] h-[2rem] rounded-[100%]' /> : userData && <p className='bg-red-800 w-[2.1rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-white'> { userData.name[0] }</p>}
+              {userData && userData.img ? <img src={userData.img} alt="user" className='w-[2.1rem] h-[2rem] rounded-[100%] object-cover' /> : userData && <p className='bg-red-800 w-[2.1rem] h-[2rem] rounded-[100%] text-[1.3rem] flex items-center justify-center font-semibold text-white'> { userData.name[0] }</p>}
           </div>
           <div className="theme-toggle cursor-pointer text-lg" onClick={toggleTheme}>
               {darkTheme ? <HiSun /> : <BsFillMoonFill />}
@@ -180,7 +179,6 @@ const Settings = ({toggleTheme, darkTheme}) => {
       </nav>
       
       <div className='flex items-start justify-between md:px-[8.5rem] py-[4.5rem] px-[1.2rem]'>
-
         <aside className='sticky top-[3rem] bottom-[0rem] side-nav md:block hidden h-[100vh] w-[28%]'>        
           <h1 className='mb-[1rem] font-bold text-[1.35rem]'>Settings</h1>
           {/* About you, Email, Security */}

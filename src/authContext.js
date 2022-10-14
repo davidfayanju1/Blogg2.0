@@ -89,9 +89,8 @@ export const AuthProvider = ({children}) => {
             setDisplayError('Error! Inavlid Data');  
             console.log(err);         
         }
-
         
-    }
+    }    
 
     const [users , setUsers] = useState([]);
 
@@ -109,6 +108,24 @@ export const AuthProvider = ({children}) => {
         }catch (err){
             setDisplayError('Error! Inavlid Data');  
             console.log(err);         
+        }
+    }
+
+    const [author, setAuthor] = useState(null);
+
+    const fetchBlogAuthor = async(blogAuthorId) => {
+        try {
+
+            const query = await db
+            .collection('users')
+            .where("uid", "==", blogAuthorId)
+            .get();
+            setAuthor(null);
+            const data = query.docs[0].data();
+            setAuthor(data);
+
+        }catch(err) {
+            console.log(err)
         }
     }
 
@@ -450,7 +467,9 @@ export const AuthProvider = ({children}) => {
         updateUserAbout,
         updateViews,
         fetchTrendingPosts,
-        trending
+        trending,
+        fetchBlogAuthor,
+        author
     }
 
     return (
