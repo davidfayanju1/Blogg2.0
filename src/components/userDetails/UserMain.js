@@ -63,7 +63,7 @@ const UserMain = ({id}) => {
               <nav className='mb-[3rem] after:block after:h-[.1rem] after:w-full after:bg-gray-300'>
                 <ul className='flex items-center'>
                   <NavLink to={`/userDetails/${ id }/`} className={({isActive}) => isActive ? 'text-black dark:text-white after:block after:h-[.1rem] after:w-[3rem] after:bg-gray-700 after:dark:h-[.15rem] after:dark:bg-gray-300 mr-[2rem]' : 'mr-[2rem]'}>Home</NavLink>
-                  { author.data().about && <NavLink to={`/userDetails/${ id }/about`} className={({isActive}) => isActive ? 'text-black dark:text-white after:block after:h-[.1rem] after:w-[3rem] after:bg-gray-700 after:dark:h-[.15rem] after:dark:bg-gray-300' : ''}>About</NavLink>}
+                  { currentUser !== null && userData.uid === author.data().uid ? <NavLink to={`/userDetails/${ id }/about`} className={({isActive}) => isActive ? 'text-black dark:text-white after:block after:h-[.1rem] after:w-[3rem] after:bg-gray-700 after:dark:h-[.15rem] after:dark:bg-gray-300' : ''}>About</NavLink> : author.data().about !== '' && <NavLink to={`/userDetails/${ id }/about`} className={({isActive}) => isActive ? 'text-black dark:text-white after:block after:h-[.1rem] after:w-[3rem] after:bg-gray-700 after:dark:h-[.15rem] after:dark:bg-gray-300' : ''}>About</NavLink>}
                 </ul>
               </nav>
               {/* inner routes */}

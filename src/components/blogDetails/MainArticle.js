@@ -93,7 +93,7 @@ const MainArticle = ({ blogItems, userData }) => {
             <div className='blog-author-details flex justify-between items-center mb-[1rem]'>
               <div className="flex items-center">
                 <Link to={`/userDetails/${ blog.author.uid }/`}>
-                  {!blog.author.img ? <p className='bg-red-800 w-[3rem] h-[3rem] rounded-[100%] text-[1.9rem] flex items-center justify-center font-semibold text-gray-200'> { blog.author.name[0] }</p> : <img src={ blog.author.img } alt={ blog.category} className="w-[3rem] h-[3rem] rounded-[100%]"/> }
+                  {!blog.author.img ? <p className='bg-red-800 w-[3rem] h-[3rem] rounded-[100%] text-[1.9rem] flex items-center justify-center font-semibold text-gray-200'> { blog.author.name[0] }</p> : <img src={ blog.author.img } alt={ blog.category} className="w-[3rem] h-[3rem] rounded-[100%] object-cover"/> }
                 </Link>
                 <div className="info ml-[0.8rem]">
                   <p className='text-gray-900 dark:text-gray-200 text-[1.15rem] mb-[.2rem]'>{ blog.author.name }</p>
