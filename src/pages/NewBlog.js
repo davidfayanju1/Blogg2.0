@@ -40,13 +40,20 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
 
     const postBlog = () => {
         // hit the publish button
-        setOpenPostPage(true);
-       
-        setBlogPost({
-            title:titleRef.current.value,
-            body:bodyRef.current.value,
-            img:file
-        })            
+        if(titleRef.current.value === ''){
+            
+        alert('You cannot post a blog without a title')
+        
+    }else {
+
+           setOpenPostPage(true);
+           setBlogPost({
+               title:titleRef.current.value,
+               body:bodyRef.current.value,
+               img:file
+           })
+
+       }
     }
 
     const updatePostBtn = (e) => {
@@ -59,11 +66,12 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
     }
 
     const [ file, setFile ] = useState(null);
+    const [imgLoading, setImgLoading] = useState(false);
 
     const uploadBlogPicture = (e) => {
 
     const blogImage = e.target.files[0]
-    // setShowLoading(false)
+    setImgLoading(true)
     const storage = getStorage()
     const storageRef = ref(storage, `image/${blogImage.name}`)
 
@@ -72,6 +80,7 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
         getDownloadURL(storageRef)
         .then((url) => {
             setFile(url)
+            setImgLoading(false);
         })
         .catch((err)=> {
             console.log(err)
@@ -81,6 +90,8 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
         console.log(err)
     })
     }
+
+    imgLoading && console.log('LOADING');
 
     
     
@@ -124,18 +135,24 @@ const NewBlog = ({toggleTheme, darkTheme}) => {
                         {open && !file &&
                             <label htmlFor='uploadImage'>  
                                 <input type="file" id="uploadImage" className='hidden' onChange={ uploadBlogPicture }/>
-                                <span className='cursor-pointer dark:border-white absolute top-[0%] md:top-[0%] left-[-7%] border-black border-[.02rem] rounded-[100%] flex items-center justify-center md:h-[2rem] md:w-[2rem]'>
+                                <span className='cursor-pointer dark:border-white absolute top-[0%] md:top-[0%] left-[-8%] border-black border-[.02rem] rounded-[100%] flex items-center justify-center md:h-[2rem] md:w-[2rem]'>
                                     <svg className="svgIcon-use dark:fill-white" width="25" height="25"><path d="M20 12h-7V5h-1v7H5v1h7v7h1v-7h7"></path></svg>
                                 </span>
                             </label> 
                         }
                         <>
                             {
+                                imgLoading ?
+                                <div className="container h-[28rem] w-full bg-gray-200 flex items-center justify-center dark:bg-slate-700">
+                                    <p className='font-serif mb-[1rem] dark:text-white text-center text-gray-500'>Uploading image...</p>
+                                </div>
+                                :
                                 file &&
-                                <div className="image-container mb-[.95rem] h-[28rem] w-[100%]">
-                                    <img src={ file } alt="" className='block w-[100%] h-[100%] object-cover' />
+                                <div className="image-container mb-[.95rem] h-[28rem] w-full">
+                                    <img src={ file } alt="" className='block w-full h-full object-cover' />
                                 </div>
                             }
+                            
                         </>
                         <textarea type="text" ref={bodyRef} onChange={(e) => e.target.value ? setOpen(false) : setOpen(true)} name='body' className='resize-none dark:text-gray-200 dark:bg-slate-800 w-[100%] min-h-[70vh] overflow-hidden overflow-y-auto text-gray-700 placeholder:font-serif md:placeholder:text-[1.29rem] placeholder:text-[1.1rem] md:text-[1.29rem] text-[1.1rem] outline-none border-none font-serif' placeholder='Tell your story...'></textarea>
                     </div>

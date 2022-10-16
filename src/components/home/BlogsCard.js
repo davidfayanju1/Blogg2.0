@@ -80,7 +80,7 @@ const BlogsCard = ({ blogPost, index }) => {
                 <div className="blog-date-data flex justify-between items-center">
                     <div className={`flex text-gray-700 dark:text-gray-200 text-[0.9rem] ${currentUser && 'flex-row-reverse'} flex-row`}>
                         {!currentUser && <p className="blog-time  mr-[0.6rem] text-[.85rem]">{ moment(blogPost.createdAt.toDate().toString()).format('ll').substring(0, 6)}</p>}                      
-                        <p className="read-time mr-[0.8rem] text-[.75rem]">
+                        <p className="read-time mr-[0.8rem] text-[.85rem]">
                         {
                             Math.ceil(blogPost.blog.trim().split(/\s+/).length / 200)
                         } min read
