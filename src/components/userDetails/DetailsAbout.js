@@ -68,7 +68,7 @@ const DetailsAbout = ({ author }) => {
          
          ?
 
-         <textarea ref={ about } defaultValue={ author.data().about === undefined ? 'Tell us about yourself' : author.data().about } className="outline-none w-full bg-transparent font-serif min-h-[30vh]" required disabled={ !openInput }></textarea>
+         <textarea ref={ about } defaultValue={ author.data().about === '' ? 'Tell us about yourself' : author.data().about } className="outline-none w-full bg-transparent font-serif min-h-[30vh]" required disabled={ !openInput }></textarea>
 
          :
 
