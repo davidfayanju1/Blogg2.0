@@ -6,7 +6,6 @@ import Signup from './pages/Signup';
 import './index.css'
 import Nav from './components/Nav';
 import { Details } from './pages/Details';
-import Footer from './components/footer/Footer';
 import TopicDetails from './pages/TopicDetails';
 import ScrollToTop from './ScrollToTop';
 import UserDetails from './pages/UserDetails';
@@ -15,6 +14,7 @@ import NewBlog from './pages/NewBlog';
 import TrendingTopics from './components/topicDetails/TrendingTopics';
 import Settings from './pages/Settings';
 import List from './pages/List';
+import PrivateRoutes from './components/PrivateRoutes';
 
 function App() {
 
@@ -47,10 +47,9 @@ function App() {
             <Route path="/details/:id" element={<Details />} />          
             <Route path="/topicDetails/:name/*" element={<TopicDetails />} />
             <Route path="/userDetails/:id/*" element={<UserDetails />} />
-            <Route path="/newBlog" element={ <NewBlog toggleTheme={ toggleTheme } darkTheme={ darkTheme } />} />
-            <Route path='/list' element={ <List /> } />
+            <Route path="/newBlog" element={ <PrivateRoutes><NewBlog toggleTheme={ toggleTheme } darkTheme={ darkTheme } /></PrivateRoutes>} />
+            <Route path='/list' element={<PrivateRoutes><List /></PrivateRoutes>} />
           </Routes>
-          {/* { pathname !== '/login' && pathname !== '/signup' && <Footer />} */}
       </div>
     </AuthProvider>
   );

@@ -17,7 +17,7 @@ const HomeFooter = () => {
             </ul>   
         </div>
         <div className="mt-[1rem]">
-            <p className="text-3">Every creative needs a Space to create. Built by Bayo '22</p>
+            <p className="text-[.9rem]">Every creative needs a Space to create. </p>
         </div>
     </footer>
   )
