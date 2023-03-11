@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Link, NavLink, Routes, Route } from 'react-router-dom';
-import { MdOutlineBookmarkAdd } from 'react-icons/md';
 import { useAuth } from '../../authContext';
 import moment from 'moment';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'

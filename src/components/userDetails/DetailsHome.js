@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import moment from 'moment';
 import BlogsLoader from '../home/BlogsLoader';
 import BlogsCard from '../home/BlogsCard';
 
 const DetailsHome = ({ pageBlogs, loading }) => {
+
   return (
     <div>
         <>
@@ -15,7 +15,6 @@ const DetailsHome = ({ pageBlogs, loading }) => {
             null
           }
         </>
-
         <>
           {
             loading === true && pageBlogs.length === 0 ?

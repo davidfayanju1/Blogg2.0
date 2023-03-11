@@ -67,20 +67,18 @@ const List = () => {
       } 
       </div>
       
-      <div className='dark:text-white md:sticky top-[9rem] md:px-[2rem] py-[2rem] md:block hidden'>
-      
+      <div className='dark:text-white md:sticky top-[9rem] md:px-[2rem] py-[2rem] md:block hidden'>      
       {
       !userData ?
       <UserAsideLoader amount={ 1 }/> 
       :
       <aside className="user-card">
-          <Link to={`/userDetails/${ userData.uid }/`}>
-            {!userData.img ? <p className='bg-red-800 w-[3rem] h-[3rem] rounded-full text-[1.8rem] flex items-center justify-center font-semibold text-gray-200'>{ userData.name[0] }</p> : <img src={ userData.img } alt={ userData.name }  className=" h-[5.5rem] w-[5.6rem] rounded-full mb-[.85rem] object-cover"/> }
-            <p className='author_name font-bold text-[1.23rem]'>{ userData.name }</p>
-          </Link>
-          <p className='post_number text-[1.1rem] text-gray-600 dark:text-gray-300 mb-[1rem]'>{ number.length > 1 ? `${number.length} Posts` : `${number.length} Post` }</p>
-          <p className="author_bio text-gray-600 dark:text-gray-300 mb-[1.2rem]">{ userData.bio }</p>
-          <Link to='/settings' className='text-green-800 dark:text-gray-300'>Edit profile</Link>            
+        <Link to={`/userDetails/${ userData.uid }/`}>
+          {!userData.img ? <p className='bg-red-800 w-[3rem] h-[3rem] rounded-full text-[1.8rem] flex items-center justify-center font-semibold text-gray-200'>{ userData.name[0] }</p> : <img src={ userData.img } alt={ userData.name }  className=" h-[5.5rem] w-[5.6rem] rounded-full mb-[.85rem] object-cover"/> }
+          <p className='author_name font-bold text-[1.23rem]'>{ userData.name }</p>
+        </Link>
+        <p className="author_bio text-gray-600 dark:text-gray-300 mb-[1.2rem]">{ userData.bio }</p>
+        <Link to='/settings' className='text-green-800 dark:text-gray-300'>Edit profile</Link>            
       </aside>
       }
       </div>

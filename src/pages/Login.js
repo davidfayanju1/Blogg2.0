@@ -28,7 +28,6 @@ const Login = () => {
 
   }, [currentUser])
 
-
   return (
       <div className='bg-slate-300  dark:bg-slate-900 min-h-screen flex items-center justify-center flex-col'>
        {
